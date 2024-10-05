@@ -61,4 +61,6 @@ const staffRoutes = [
     {path: "/staff/customer-schedule", component: CustomerSchedule, layout: layoutStaff},
 ];
 
+
+
 export {publicRoutes, adminRoutes, customerRoutes, staffRoutes};
