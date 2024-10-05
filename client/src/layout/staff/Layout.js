@@ -9,54 +9,9 @@ function Header({ children }) {
       import("../staff/layout.scss").then(() => setCssLoaded(true));
     }
   }, [isCssLoaded]);
-  function getDateTime() {
-    const now = new Date();
-    const format = (val) => (val.toString().length === 1 ? "0" + val : val);
-    const year = now.getFullYear();
-    const month = format(now.getMonth() + 1);
-    const day = format(now.getDate());
-    const hour = format(now.getHours());
-    const minute = format(now.getMinutes());
-    const second = format(now.getSeconds());
 
-    return `${year}/${month}/${day} ${hour}:${minute}:${second}`;
-  }
-  setInterval(function () {
-    var currentTime = getDateTime();
-    document.getElementById("digital-clock").innerHTML = currentTime;
-  }, 1000);
 
-  var date = new Date();
 
-  var current_day = date.getDay();
-
-  var day_name = "";
-
-  switch (current_day) {
-    case 0:
-      day_name = "Chủ nhật";
-      break;
-    case 1:
-      day_name = "Thứ hai";
-      break;
-    case 2:
-      day_name = "Thứ ba";
-      break;
-    case 3:
-      day_name = "Thứ tư";
-      break;
-    case 4:
-      day_name = "Thứ năm";
-      break;
-    case 5:
-      day_name = "Thứ sáu";
-      break;
-    case 6:
-      day_name = "Thứ bảy";
-  }
-  if (!isCssLoaded) {
-    return <></>;
-  }
 
   return (
     <>
@@ -77,37 +32,7 @@ function Header({ children }) {
         </div>
       </div>
       <div class="contentadminweb">
-        <div class="headerwebadmin" id="headerwebadmin">
-          <div class="lichheader">
-            <img class="iconlich" src={lich} />
-            <p class="text-gray fst-italic mb-0">
-              <p id="digital-clock"></p>
-            </p>
-          </div>
-          <div class="userheader-admin">
-            <a
-              class="nav-link dropdown-toggle menucha"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <span class="tendangnhap">hieu</span>
-              <img src={avatar} className="userlogo-admin" />
-            </a>
-            <ul
-              class="dropdown-menu listitemtk"
-              aria-labelledby="navbarDropdown"
-            >
-              <li>
-                <a class="dropdown-item" onClick={() => logout()} href="#">
-                  <i class="fa fa-sign-out"></i> Đăng xuất
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+
         <div class="contentmain">{children}</div>
       </div>
     </>

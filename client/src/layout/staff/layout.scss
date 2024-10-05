@@ -1,5 +1,5 @@
 // Colors
-$primary-color: #2b07e8;
+$primary-color: #8c77f4;
 $secondary-color: #f8f9fc;
 $text-color: #333;
 $light-gray: #f4f4f4;
@@ -84,64 +84,9 @@ $box-shadow: 0 4px 6px #00000029;
     margin-bottom: 100px !important;
 }
 
-.headerwebadmin {
-    height: 70px;
-    background-color: $background-color;
-    width: 100%;
-    box-shadow: 0 4px 2px -2px $box-shadow-color;
-    padding-left: 40px;
-    position: fixed;
-    left: 250px;
-    padding-right: 250px;
-    z-index: 1000;
-}
 
-.ctnheader {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
 
-.userheader-admin {
-    position: fixed;
-    right: 30px;
-    height: 70px;
-    display: flex;
-    align-items: center;
 
-    .userlogo-admin {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-left: 10px;
-    }
-
-    .tendangnhap {
-        color: $text-color;
-        font-size: $small-font-size;
-        font-weight: 400;
-        margin-right: 10px;
-    }
-}
-
-.lichheader {
-    position: absolute;
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-
-.iconlich {
-    width: 30px;
-    height: 30px;
-    margin-top: 20px;
-}
-
-.ngayhomnay {
-    margin: 0 15px;
-    line-height: 70px;
-}
 
 #digital-clock {
     line-height: 70px;
