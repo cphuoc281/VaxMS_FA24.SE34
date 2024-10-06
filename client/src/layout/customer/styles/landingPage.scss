@@ -1,0 +1,78 @@
+.landing-page {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+/* About Section */
+.about-section {
+  text-align: left;
+  margin: 40px 0;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.about-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.about-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px; /* Khoảng cách giữa văn bản và ảnh */
+}
+
+.about-text {
+  flex-basis: 50%;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+.about-image {
+  flex-basis: 50%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Nút "Xem thêm" */
+.show-more-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.show-more-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-text,
+  .about-image {
+    flex-basis: 100%;
+  }
+
+  .about-image {
+    margin-top: 20px;
+    max-width: 100%;
+  }
+}

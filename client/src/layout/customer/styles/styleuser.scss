@@ -1,0 +1,119 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+/* General body and header */
+body {
+    font-family: "MyriadPro-Regular";
+}
+
+#headerweb {
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
+}
+
+.top-banner {
+    height: 100px; /* Bạn có thể thay đổi chiều cao khi thêm hình */
+    background-color: #f0f0f0; /* Tạm thời cho nền xám */
+}
+
+.top-bar {
+    background-color: #ffffff;
+    padding: 10px 0;
+}
+
+.working-hours {
+    font-size: 14px;
+}
+
+.imagelogoheader {
+    max-height: 20px; /* Chiều cao của logo */
+    margin-left: 0; /* Sát lề trái để căn đều với Trang chủ */
+}
+
+.search-bar {
+    width: 50%; /* Điều chỉnh kích thước thanh tìm kiếm */
+    display: flex;
+    position: relative;
+    margin-right: 250px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 8px 25px; /* Giảm padding để thanh tìm kiếm gọn hơn */
+    border-radius: 20px;
+    border: 1px solid #ccc;
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.container-web {
+    max-width: 1800px; /* Đặt chiều rộng container để giới hạn lề hai bên */
+    margin: 0 auto; /* Căn giữa container trong trang */
+    padding: 0 15px; /* Đặt padding để tạo khoảng cách hai bên */
+    display: flex;
+    justify-content: space-between; /* Căn đều logo và phần cờ */
+    align-items: center;
+}
+
+.itemheader {
+    color: #2A388F;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.itemheader:hover {
+    background-color: #411277;
+    color: #fff;
+}
+
+.nav-right .itemheader {
+    display: flex;
+    align-items: center; /* Căn giữa icon và chữ theo chiều dọc */
+    justify-content: center; /* Căn giữa toàn bộ mục */
+    text-align: center; /* Căn giữa chữ */
+    gap: 5px; /* Khoảng cách giữa icon và chữ */
+    font-size: 7px !important; /* Điều chỉnh kích thước chữ và sử dụng !important để đảm bảo nó không bị ghi đè */
+}
+
+.nav-right .itemheader i {
+    font-size: 15px; /* Kích thước icon */
+    margin-right: 5px; /* Khoảng cách giữa icon và chữ */
+}
+
+
+.itemheader span {
+    font-size: 14px; /* Kích thước chữ */
+}
+
+.flag-icon {
+    width: 25px;
+    height: 15px;
+    margin-left: 10px; /* Tạo khoảng cách giữa cờ và các phần tử khác */
+}
+
+/* Thanh điều hướng phía dưới */
+.container-bottom-header {
+    max-width: 1200px; /* Giữ nguyên chiều rộng với container trên */
+    margin: 0 auto;
+    padding: 10px 15px; /* Đảm bảo có khoảng cách hai bên cho thanh điều hướng dưới */
+    display: flex;
+    justify-content: space-between;
+}
+
+.hotlineheader {
+    color: #FF7400 !important;
+}
+
+/* Đảm bảo trang không bị tràn ngang */
+html, body {
+    overflow-x: hidden;
+}
