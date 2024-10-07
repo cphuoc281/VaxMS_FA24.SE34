@@ -20,6 +20,8 @@ function App() {
               }/>
             })}
 
+
+
             {customerRoutes.map((route, index) => {
               const Layout = route.layout || DefaultLayout
               const Page = route.component
