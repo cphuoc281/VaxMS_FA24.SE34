@@ -29,7 +29,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.VaxmsApplication.executor": "Run",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "develop-phuochc",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/VaxMS_FA24.SE34/server",
     "node.js.detected.package.eslint": "true",
@@ -62,10 +62,22 @@
       <updated>1728323155121</updated>
       <workItem from="1728323156154" duration="624000" />
       <workItem from="1728324227862" duration="797000" />
+      <workItem from="1728325040053" duration="316000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
