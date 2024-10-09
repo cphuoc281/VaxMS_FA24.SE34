@@ -1,6 +1,6 @@
 import layoutAdmin from '../layout/admin/Layout';
 import layoutLogin from '../layout/customer/loginlayout/login';
-
+// import layoutRegister from '../layout/customer/styles/register'; 
 // Admin components
 import homeAdmin from '../pages/admin/index';
 import userAdmin from '../pages/admin/user';
@@ -9,6 +9,7 @@ import addLichTiemChungAdmin from '../pages/admin/addlichtiemchung';
 
 // Public components
 import login from '../pages/public/login';
+import register from '../pages/public/register';
 import index from '../pages/public/index';
 import LandingPage from '../pages/public/landingPage'; // Import Landing Page
 
@@ -20,6 +21,7 @@ const publicRoutes = [
     { path: "/", component: LandingPage }, // Đặt Landing Page làm trang chính
     { path: "/index", component: index },
     { path: "/login", component: login, layout: layoutLogin },
+    { path: "/register", component: register },
 ];
 
 const customerRoutes = [

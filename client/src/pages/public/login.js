@@ -1,75 +1,93 @@
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import logologin from '../../assest/images/logologin.jpg'
-import {postMethodPayload} from '../../services/request'
-import Swal from 'sweetalert2'
+import { postMethodPayload } from '../../services/request';
+import Swal from 'sweetalert2';
+import '../../layout/customer/styles/login.scss'; // Assuming you created a login.scss file for custom styles.
 
 async function handleLogin(event) {
     event.preventDefault();
     const payload = {
-        email: event.target.elements.username.value,
-        password: event.target.elements.password.value
+      email: event.target.elements.username.value,
+      password: event.target.elements.password.value
     };
     const res = await postMethodPayload('/api/user/login/email', payload);
     
-    var result = await res.json()
+    const result = await res.json();
     console.log(result);
-    if (res.status == 417) {
-        if (result.errorCode == 300) {
-            Swal.fire({
-                title: "Thông báo",
-                text: "Tài khoản chưa được kích hoạt, đi tới kích hoạt tài khoản!",
-                preConfirm: () => {
-                    window.location.href = 'confirm?email=' + event.target.elements.username.value
-                }
-            });
-        } else {
-            toast.warning(result.defaultMessage);
-        }
+  
+    if (res.status === 417) {
+      if (result.errorCode === 300) {
+        Swal.fire({
+          title: "Notification",
+          text: "Your account is not activated, please proceed to activate your account!",
+          preConfirm: () => {
+            window.location.href = `confirm?email=${event.target.elements.username.value}`;
+          }
+        });
+      } else {
+        toast.warning(result.defaultMessage);
+      }
+    } else if (res.status < 300) {
+      toast.success('Login successful!');
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      localStorage.setItem('token', result.token);
+      localStorage.setItem('user', JSON.stringify(result.user));
+  
+      // Redirect based on role
+      const { name } = result.user.authorities;
+      if (name === 'Admin') {
+        window.location.href = '/admin/index';
+      } else if (name === 'Customer') {
+        window.location.href = '/index';
+      } else if (name === 'Doctor' || name === 'Nurse' || name === 'Support Staff') {
+        // Handle other roles accordingly
+      }
     }
-    if(res.status < 300){
-        toast.success('Đăng nhập thành công!');
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        localStorage.setItem("token", result.token);
-        localStorage.setItem("user", JSON.stringify(result.user));
-        if (result.user.authorities.name === "Admin") {
-            window.location.href = 'admin/index';
-        }
-        if (result.user.authorities.name === "Customer") {
-            window.location.href = '/index';
-        }
-        if (result.user.authorities.name === "Doctor") {
-            
-        }
-        if (result.user.authorities.name === "Nurse") {
-
-        }
-        if (result.user.authorities.name === "Support Staff") {
-
-        }
-    }
-};
-
-function login(){
-    return(
-        <div class="contentweb">
-        <div class="container">
-            <div class="dangnhapform">
-                <div class="divctlogin">
-                    <p class="labeldangnhap">Đăng Nhập</p>
-                    <form onSubmit={handleLogin} autocomplete="off">
-                        <label class="lbform">Tên tài khoản</label>
-                        <input required name='username' id="username" class="inputlogin"/>
-                        <label class="lbform">Mật khẩu</label>
-                        <input required name='password' type="password" id="password" class="inputlogin"/>
-                        <button class="btndangnhap">ĐĂNG NHẬP</button>
-                        <button type="button"  onClick={()=>{window.location.href = 'regis'}} class="btndangky">ĐĂNG KÝ</button>
-                    </form>
-                    <a href="forgot" class="lbquenmk">Quên mật khẩu ?</a>
-                </div>
+  }
+  
+  function Login() {
+    return (
+      <div className="login-container">
+        <div className="login-card">
+          <div className="login-header">
+            <h2>Sign in</h2>
+            <button className="register-btn" onClick={() => window.location.href = '/register'}>
+              Register
+            </button>
+          </div>
+          <form onSubmit={handleLogin} autoComplete="off">
+            <div className="form-group">
+              <label htmlFor="username">Email address</label>
+              <input type="email" id="username" name="username" required placeholder="Email" />
             </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <div className="password-wrapper">
+                <input type="password" id="password" name="password" required placeholder="Password" />
+                <i className="password-eye-icon" />
+              </div>
+            </div>
+            <div className="stay-signed-in">
+              <input type="checkbox" id="staySignedIn" />
+              <label htmlFor="staySignedIn">Stay signed in</label>
+            </div>
+            <button type="submit" className="login-btn">Sign in</button>
+            <div className="forgot-password">
+              <a href="/forgot-password">Forgot your password?</a>
+            </div>
+          </form>
+          <div className="or-divider">
+            <span>OR</span>
+          </div>
+          <button className="google-login-btn">
+            <i className="google-icon"></i> Continue with Google
+          </button>
+          <p className="login-footer">
+            By clicking Sign in, Continue with Google, you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+          </p>
         </div>
-    </div>
+      </div>
     );
-}
-export default login;
+  }
+  
+  export default Login;

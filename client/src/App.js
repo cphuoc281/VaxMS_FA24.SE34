@@ -3,6 +3,10 @@ import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import DefaultLayout from './layout/customer/defaultLayout/defaultLayout';
 import AdminLayout from './layout/admin/Layout';
 import { publicRoutes, adminRoutes, customerRoutes } from './router/index';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 function App() {
   return (
