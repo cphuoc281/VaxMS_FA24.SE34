@@ -1,9 +1,12 @@
 package com.web.service;
 
+import com.web.entity.Vaccine;
 import com.web.entity.VaccineSchedule;
 import com.web.exception.MessageException;
 import com.web.repository.CustomerScheduleRepository;
+import com.web.repository.VaccineRepository;
 import com.web.repository.VaccineScheduleRepository;
+import com.web.repository.VaccineScheduleTimeRepository;
 import com.web.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,19 +26,34 @@ public class VaccineScheduleService {
     private VaccineScheduleRepository vaccineScheduleRepository;
 
     @Autowired
+    private VaccineScheduleTimeRepository vaccineScheduleTimeRepository;
+
+    @Autowired
     private CustomerScheduleRepository customerScheduleRepository;
 
     @Autowired
     private UserUtils userUtils;
 
+    @Autowired
+    private VaccineRepository vaccineRepository;
 
     /*
     * api này dùng để thêm lịch tiêm vaccine
     * */
     public VaccineSchedule save(VaccineSchedule vaccineSchedule) {
+        Vaccine vaccine = vaccineRepository.findById(vaccineSchedule.getVaccine().getId()).get();
+        if(vaccine.getInventory() == null){
+            throw new MessageException("Vaccine không đủ số lượng");
+        }
+        if(vaccine.getInventory() < vaccineSchedule.getLimitPeople()){
+            throw new MessageException("Vaccine không đủ số lượng, chỉ còn "+ vaccine.getInventory());
+        }
         vaccineSchedule.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         vaccineSchedule.setUser(userUtils.getUserWithAuthority());
-        return vaccineScheduleRepository.save(vaccineSchedule);
+        vaccineScheduleRepository.save(vaccineSchedule);
+        vaccine.setInventory(vaccine.getInventory() - vaccineSchedule.getLimitPeople());
+        vaccineRepository.save(vaccine);
+        return vaccineSchedule;
     }
 
 
@@ -43,6 +61,13 @@ public class VaccineScheduleService {
      * api này dùng để cập nhật lịch tiêm vaccine
      * */
     public VaccineSchedule update(VaccineSchedule vaccineSchedule) {
+        Vaccine vaccine = vaccineRepository.findById(vaccineSchedule.getVaccine().getId()).get();
+        if(vaccine.getInventory() == null){
+            throw new MessageException("Vaccine không đủ số lượng");
+        }
+        if(vaccine.getInventory() < vaccineSchedule.getLimitPeople()){
+            throw new MessageException("Vaccine không đủ số lượng, chỉ còn "+ vaccine.getInventory());
+        }
         if (vaccineSchedule.getId() == null){
             throw new MessageException("Id không được null");
         }
@@ -50,9 +75,16 @@ public class VaccineScheduleService {
         if (exist.isEmpty()){
             throw new MessageException("Không tìm thấy lịch tiêm có id: "+vaccineSchedule.getId());
         }
+        Long num = vaccineScheduleTimeRepository.quantityBySchedule(vaccineSchedule.getId());
+        if(vaccineScheduleTimeRepository.quantityBySchedule(vaccineSchedule.getId()) > vaccineSchedule.getLimitPeople()){
+            throw new MessageException("Số lượng mũi tiêm đã phát hành là: "+ num+", số mũi tiêm bạn cập nhật không chính xác");
+        }
         vaccineSchedule.setCreatedDate(exist.get().getCreatedDate());
         vaccineSchedule.setUser(exist.get().getUser());
-        return vaccineScheduleRepository.save(vaccineSchedule);
+        vaccineScheduleRepository.save(vaccineSchedule);
+        vaccine.setInventory(vaccine.getInventory() + exist.get().getLimitPeople() - vaccineSchedule.getLimitPeople());
+        vaccineRepository.save(vaccine);
+        return vaccineSchedule;
     }
 
     /*
@@ -60,7 +92,12 @@ public class VaccineScheduleService {
      * */
     public void delete(Long id){
         try {
+            VaccineSchedule vaccineSchedule = vaccineScheduleRepository.findById(id).get();
+            Vaccine vaccine = vaccineSchedule.getVaccine();
+            Integer limitPeople = vaccineSchedule.getLimitPeople();
             vaccineScheduleRepository.deleteById(id);
+            vaccine.setInventory(vaccine.getInventory() + limitPeople);
+            vaccineRepository.save(vaccine);
         }
         catch (Exception e){
             throw new MessageException("Lịch tiêm này đã được đăng ký, không thể xóa");

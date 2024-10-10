@@ -6,15 +6,15 @@ import $ from 'jquery';
 import DataTable from 'datatables.net-dt';
 import Swal from 'sweetalert2'
 import {getMethod, deleteMethod} from '../../services/request';
+import AdminGioTiemChung from './giotiem';
 
-
-var token = localStorage.getItem("token");
 
 
 var size = 10
 const AdminLichTiemChung = ()=>{
     const [items, setItems] = useState([]);
     const [pageCount, setpageCount] = useState(0);
+    const [lichTiem, setLichTiem] = useState(null);
     useEffect(()=>{
         const getLichTiemChung= async() =>{
             var response = await getMethod('/api/vaccine-schedule/all/find-all-page?page=0&size='+size+'&sort=id,desc');
@@ -111,6 +111,7 @@ const AdminLichTiemChung = ()=>{
                                 <td>
                                     <i onClick={()=>deleteLich(item.id)} class="fa fa-trash iconaction"></i>
                                     <i onClick={()=>window.location.href='add-lich-tiem-chung?id='+item.id} class="fa fa-edit iconaction pointer"></i>
+                                    <i onClick={()=>setLichTiem(item)} data-bs-toggle="modal" data-bs-target="#modalGioTiem" class="fa fa-clock iconaction"></i>
                                 </td>
                             </tr>
                          })}
@@ -135,7 +136,7 @@ const AdminLichTiemChung = ()=>{
 
                 </div>
             </div>
-
+            <AdminGioTiemChung lichtiem={lichTiem}/>
         </>
     );
 }

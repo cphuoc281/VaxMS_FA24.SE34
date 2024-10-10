@@ -23,6 +23,7 @@ public class VaccineScheduleApi {
 
     @Autowired
     private VaccineScheduleService vaccineScheduleService;
+
     @PostMapping("/all/find-all")
     public ResponseEntity<?> findAll(){
         return new ResponseEntity<>(vaccineScheduleService.list(), HttpStatus.OK);
