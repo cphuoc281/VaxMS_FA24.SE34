@@ -57,11 +57,9 @@ function Register() {
                 </form>
 
                 <p>OR</p>
-                <button className="google-btn">
-                    <i className="fab fa-google"></i> Continue with Google
-                </button>
+                
 
-                <p>By clicking Sign in, Continue with Google, you agree to our <a href="/terms">Terms of Use</a> and <a href="/privacy">Privacy Policy</a>.</p>
+                <p>By clicking Sign in, you agree to our <a href="/terms">Terms of Use</a> and <a href="/privacy">Privacy Policy</a>.</p>
             </div>
         </div>
     );

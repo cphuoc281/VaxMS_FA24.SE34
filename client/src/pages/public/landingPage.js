@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
+import { useTranslation } from 'react-i18next';
 import aboutImage from '../../assest/images/about-image.jpg';
 import bannerImage1 from '../../assest/images/banner.jpg';
 import bannerImage2 from '../../assest/images/banner1.png';
@@ -89,32 +90,7 @@ const partnerLogos = [
   // { image: partnerLogo5, alt: 'Partner 5' },
   // { image: partnerLogo6, alt: 'Partner 6' },
 ];
-const newsData = [
-  {
-    title: 'Ngăn ngừa các bệnh nguy hiểm do phế cầu khuẩn ở người cao tuổi',
-    date: '19 Th09',
-    author: 'Admin',
-    comments: 3,
-    snippet: 'Tổ chức Y tế Thế giới (WHO) ước tính, mỗi năm thế giới có khoảng 1,6 triệu người tử vong bởi viêm phổi, viêm màng não, nhiễm khuẩn huyết… gây ra do...',
-    image: newsImage1,
-  },
-  {
-    title: 'Ngăn ngừa ung thư cổ tử cung',
-    date: '19 Th09',
-    author: 'Admin',
-    comments: 5,
-    snippet: 'Ung thư cổ tử cung là bệnh ung thư phổ biến và nguy hiểm đứng thứ hai ở phụ nữ, chỉ sau ung thư vú. Mỗi năm, có hàng nghìn phụ nữ trên thế giới mắc...',
-    image: newsImage2,
-  },
-  {
-    title: 'Tiêm sởi mũi 2 cách mũi 1 bao lâu? Vì sao cần tiêm đủ 2 liều?',
-    date: '20 Th09',
-    author: 'Admin',
-    comments: 1,
-    snippet: 'Chuyên gia khuyến cáo, trẻ em từ 9 tháng tuổi, người lớn, phụ nữ có thai, người cao tuổi, người có bệnh nền, sức khỏe yếu cần chủ động tiêm ngừa đầy...',
-    image: newsImage3,
-  },
-];
+
 
 
 // Slider configuration
@@ -135,7 +111,7 @@ const benhHocSettings = {
   slidesToShow: 3,
   slidesToScroll: 1,
   autoplay: true,
-  autoplaySpeed: 3000,
+  autoplaySpeed: 2000,
 };
 
 
@@ -143,6 +119,15 @@ const benhHocSettings = {
 
 const LandingPage = () => {
   const [showMore, setShowMore] = useState(false);
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng) => {
+    console.log(`Changing language to: ${lng}`);
+    i18n.changeLanguage(lng);
+  };
+  useEffect(() => {
+    console.log('Current language:', i18n.language);
+  }, [i18n.language]);
 
   const toggleShowMore = () => {
     setShowMore(!showMore);
@@ -180,7 +165,32 @@ const LandingPage = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
+  const newsData = [
+    {
+      title: 'Ngăn ngừa các bệnh nguy hiểm do phế cầu khuẩn ở người cao tuổi',
+      date: '19 Th09',
+      author: 'Admin',
+      comments: 3,
+      snippet: 'Tổ chức Y tế Thế giới (WHO) ước tính, mỗi năm thế giới có khoảng 1,6 triệu người tử vong bởi viêm phổi, viêm màng não, nhiễm khuẩn huyết… gây ra do...',
+      image: newsImage1,
+    },
+    {
+      title: t('landing.news_2_title'),
+      date: '19 Th09',
+      author: 'Admin',
+      comments: 5,
+      snippet: t('landing.news_2_snippet'),
+      image: newsImage2,
+    },
+    {
+      title: 'Tiêm sởi mũi 2 cách mũi 1 bao lâu? Vì sao cần tiêm đủ 2 liều?',
+      date: '20 Th09',
+      author: 'Admin',
+      comments: 1,
+      snippet: 'Chuyên gia khuyến cáo, trẻ em từ 9 tháng tuổi, người lớn, phụ nữ có thai, người cao tuổi, người có bệnh nền, sức khỏe yếu cần chủ động tiêm ngừa đầy...',
+      image: newsImage3,
+    },
+  ];
   const partnerSettings = {
     dots: true,
     infinite: true,
@@ -227,7 +237,7 @@ const LandingPage = () => {
       {/* About Section */}
       <section className="about-section">
         <div className=" about-container">
-          <h2 className="about-title">GIỚI THIỆU</h2>
+          <h2 className="about-title"><span>{t('landing.introduction')}</span></h2>
           <div className="about-content">
             <div className="about-text">
               <p>

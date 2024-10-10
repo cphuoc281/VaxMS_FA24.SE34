@@ -1,10 +1,6 @@
 /* General body and header */
 body {
     font-family: "MyriadPro-Regular";
-}
-
-body,
-html {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -18,68 +14,89 @@ html {
     /* Full width */
 }
 
+/* Top bar with working hours and hotline */
+.top-bar {
+    background-color: #ffffff;
+    padding: 10px 0;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.working-hours {
+    color: #007bff;
+    font-weight: 600;
+}
+
+.hotlineheader {
+    color: #e3342f;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
 
 /* Top banner */
 .top-banner {
     height: 170px;
     background-color: #f0f0f0;
-    padding: 0;
-    margin: 0;
-    width: 100%;
+
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
 }
 
-.top-banner img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.top-bar {
+/* Main navbar */
+.navbar {
     background-color: #ffffff;
-    padding: 10px 0;
-}
-
-.working-hours {
-    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .imagelogoheader {
-    max-height: 20px;
-    margin-right: 0px;
-    margin-left: 110px;
+    max-height: 25px;
+    margin-right: 400px;
 }
 
 .search-bar {
-    width: 70%;
+    display: flex;
+    align-items: center;
     position: relative;
-    margin-left: 10px;
-    margin-right: 20px;
+    width: 70%;
 }
 
 .search-bar input {
-    width: 100%;
+    flex-grow: 1;
     padding: 8px 45px 8px 25px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+
+    &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
 }
 
 .search-bar button {
     background: none;
     border: none;
-    font-size: 20px;
-    cursor: pointer;
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-}
+    color: #007bff;
+    cursor: pointer;
+    font-size: 18px;
 
-.flag-icon {
-    width: 25px;
-    height: 15px;
-    margin-right: 10px;
-    margin-left: 50px;
+    &:hover {
+        color: #0056b3;
+    }
 }
 
 /* Bottom navigation */
@@ -89,22 +106,28 @@ html {
     display: flex;
     justify-content: space-evenly;
     padding: 0 50px;
+    border-top: 1px solid #ddd;
+    font-weight: 600;
 }
 
 .itemheader {
     color: #2A388F;
     text-transform: uppercase;
     text-decoration: none;
-    padding: 10px 15px;
+    padding: 15px 10px;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-}
+    gap: 5px;
+    font-weight: 600;
+    font-size: 14px; 
 
-.itemheader:hover {
-    background-color: #411277;
-    color: #fff;
-    text-decoration: none;
+    &:hover {
+        background-color: #007bff;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+        padding: 8px 10px;
+    }
 }
 
 /* Responsive styles for smaller screens */
@@ -123,6 +146,59 @@ html {
         font-size: 12px;
     }
 }
+
+
+
+/* Add some custom styling for the dropdown */
+.language-switcher .dropdown-menu {
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    background-color: #f8f9fa;
+}
+.flag-icon {
+    width: 20px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 8px 12px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.btn-light {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+}
+
+.navbar-light {
+    background-color: #ffffff;
+}
+
+.container-bottom-header {
+    border-top: 1px solid #dee2e6;
+}
+
+.itemheader:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+
+
+
+
 
 /* Slider Section */
 .banner-section {
@@ -676,19 +752,24 @@ html {
 
 /* Add padding to the sides for the Bệnh Học section */
 .benh-hoc-section {
-    padding: 40px 20px; /* Add padding around the section */
+    padding: 40px 20px;
+    /* Add padding around the section */
     text-align: center;
-    background-color: #f0f8ff; /* Keep the background matching */
+    background-color: #f0f8ff;
+    /* Keep the background matching */
 }
 
 .benh-hoc-container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 20px; /* Ensure space between the cards */
+    gap: 20px;
+    /* Ensure space between the cards */
     flex-wrap: wrap;
-    max-width: 1200px; /* Set a maximum width */
-    margin: 0 auto; /* Center the content */
+    max-width: 1200px;
+    /* Set a maximum width */
+    margin: 0 auto;
+    /* Center the content */
 }
 
 .benh-hoc-card {
