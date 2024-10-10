@@ -2,10 +2,7 @@ package com.web.service;
 
 import com.web.config.Environment;
 import com.web.constants.LogUtils;
-import com.web.entity.CustomerSchedule;
-import com.web.entity.Payment;
-import com.web.entity.User;
-import com.web.entity.VaccineSchedule;
+import com.web.entity.*;
 import com.web.enums.StatusCustomerSchedule;
 import com.web.enums.UserType;
 import com.web.exception.MessageException;
@@ -17,10 +14,7 @@ import com.web.models.ListCustomerScheduleRequest;
 import com.web.models.ListCustomerScheduleResponse;
 import com.web.models.QueryStatusTransactionResponse;
 import com.web.processor.QueryTransactionStatus;
-import com.web.repository.CustomerScheduleRepository;
-import com.web.repository.PaymentRepository;
-import com.web.repository.UserRepository;
-import com.web.repository.VaccineScheduleRepository;
+import com.web.repository.*;
 import com.web.utils.UserUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -63,6 +57,10 @@ public class CustomerScheduleService {
 
     @Autowired
     private VaccineScheduleRepository vaccineScheduleRepository;
+
+    @Autowired
+    private VaccineScheduleTimeRepository vaccineScheduleTimeRepository;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -89,12 +87,12 @@ public class CustomerScheduleService {
         customerSchedule.setPayStatus(true);
         customerScheduleRepository.save(customerSchedule);
 
-        VaccineSchedule vaccineSchedule = vaccineScheduleRepository.findById(customerSchedule.getVaccineSchedule().getId()).get();
+        VaccineScheduleTime vaccineScheduleTime = vaccineScheduleTimeRepository.findById(customerSchedule.getVaccineScheduleTime().getId()).get();
         Payment payment = new Payment();
         payment.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         payment.setCreatedBy(user);
         payment.setCustomerSchedule(customerSchedule);
-        payment.setAmount(vaccineSchedule.getVaccine().getPrice());
+        payment.setAmount(vaccineScheduleTime.getVaccineSchedule().getVaccine().getPrice());
         payment.setOrderId(orderId);
         payment.setRequestId(requestId);
         paymentRepository.save(payment);
@@ -137,14 +135,14 @@ public class CustomerScheduleService {
         List<ListCustomerScheduleResponse> list = customerSchedulePage.stream().map(e ->
                 {
                     Optional<User> user = userRepository.findById(e.getUser().getId());
-                    Optional<VaccineSchedule> vaccineSchedule = vaccineScheduleRepository.findById(e.getVaccineSchedule().getId());
+                    Optional<VaccineScheduleTime> vaccineScheduleTime = vaccineScheduleTimeRepository.findById(e.getVaccineScheduleTime().getId());
                     return ListCustomerScheduleResponse.builder()
                             .id(e.getId())
                             .payStatus(e.getPayStatus())
                             .status(e.getStatusCustomerSchedule().name())
                             .fullName(e.getFullName())
                             .createdDate(e.getCreatedDate())
-                            .vaccineSchedule(vaccineSchedule.orElse(null))
+                            .vaccineScheduleTime(vaccineScheduleTime.orElse(null))
                             .user(user.orElse(null))
                             .build();
                 }
@@ -188,12 +186,12 @@ public class CustomerScheduleService {
                 .userType(UserType.standard)
                 .build();
         userRepository.save(user);
-        Optional<VaccineSchedule> optionalVaccineSchedule = vaccineScheduleRepository.findById(request.getVaccineScheduleId());
+        Optional<VaccineScheduleTime> optionalVaccineScheduleTime = vaccineScheduleTimeRepository.findById(request.getVaccineScheduleId());
 
         CustomerSchedule customerSchedule = CustomerSchedule.builder()
                 .statusCustomerSchedule(StatusCustomerSchedule.pending)
                 .fullName(request.getFullName())
-                .vaccineSchedule(optionalVaccineSchedule.orElse(null))
+                .vaccineScheduleTime(optionalVaccineScheduleTime.orElse(null))
                 .phone(request.getPhone())
                 .address(request.getAddress())
                 .createdDate(new Timestamp(System.currentTimeMillis()))
@@ -204,7 +202,7 @@ public class CustomerScheduleService {
         sendEmailToCustomer(customerSchedule);
         return CreateScheduleGuestResponse.builder()
                 .payStatus(customerSchedule.getPayStatus())
-                .vaccineSchedule(optionalVaccineSchedule.orElse(null))
+                .vaccineScheduleTime(optionalVaccineScheduleTime.orElse(null))
                 .createdDate(customerSchedule.getCreatedDate())
                 .fullName(customerSchedule.getFullName())
                 .id(customerSchedule.getId())

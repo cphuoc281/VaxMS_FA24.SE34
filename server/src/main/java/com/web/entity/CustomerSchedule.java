@@ -46,6 +46,6 @@ public class CustomerSchedule {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "vaccine_schedule_id")
-    private VaccineSchedule vaccineSchedule;
+    @JoinColumn(name = "vaccine_schedule_time_id")
+    private VaccineScheduleTime vaccineScheduleTime;
 }
