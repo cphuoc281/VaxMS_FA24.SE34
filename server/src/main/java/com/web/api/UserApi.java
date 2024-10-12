@@ -66,14 +66,15 @@ public class UserApi {
     private GoogleOAuth2Service googleOAuth2Service;
 
     @PostMapping("/login/google")
-    public ResponseEntity<?> loginWithGoogle(@RequestBody String credential) throws Exception {
-        GoogleIdToken.Payload payload = googleOAuth2Service.verifyToken(credential);
-        if(payload == null){
-            throw new MessageException("Đăng nhập thất bại");
-        }
-        TokenDto tokenDto = userService.loginWithGoogle(payload);
-        return new ResponseEntity(tokenDto, HttpStatus.OK);
+public ResponseEntity<?> loginWithGoogle(@RequestBody String credential) throws Exception {
+    GoogleIdToken.Payload payload = googleOAuth2Service.verifyToken(credential);
+    if (payload == null) {
+        throw new MessageException("Google Sign-In Failed");
     }
+    TokenDto tokenDto = userService.loginWithGoogle(payload);
+    return new ResponseEntity<>(tokenDto, HttpStatus.OK);
+}
+
 
     @PostMapping("/login/email")
 public ResponseEntity<?> loginWithEmail(@RequestBody LoginDto loginDto) {

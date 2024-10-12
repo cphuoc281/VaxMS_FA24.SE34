@@ -157,3 +157,36 @@
     }
   }
 }
+/* Login modal custom styles */
+.modal-dialog {
+  max-width: 400px; /* Width restriction */
+  margin: 1.75rem auto;
+}
+
+.modal-content {
+  padding: 20px;
+  border-radius: 8px;
+  max-height: 90vh; /* This ensures the modal doesn't exceed 90% of the viewport height */
+  overflow-y: auto; /* Add scroll for longer content if needed */
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: auto; /* Remove fixed height */
+  padding: 20px;
+  background-color: #f7f7f7;
+
+  .login-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px; /* Keep the width consistent */
+    width: 100%;
+    text-align: center;
+  }
+}
+
+

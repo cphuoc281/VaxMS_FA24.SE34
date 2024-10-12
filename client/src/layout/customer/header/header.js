@@ -4,9 +4,11 @@ import { useTranslation } from 'react-i18next';
 import logo from '../../../assest/images/vnvc-logo.png';
 import vietnamFlag from '../../../assest/images/vietnam-flag.png';
 import engFlag from '../../../assest/images/engflag2.jpg'; // English flag
-import '../styles/styleuser.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/styleuser.scss';
 import topbanner from '../../../assest/images/topbanner.png';
+import LoginModal from '../../../pages/public/LoginModal'; // Assuming you create this
+import RegisterModal from '../../../pages/public/RegisterModal'; // Assuming you create this
 
 function Header() {
   const [searchValue, setSearchValue] = useState('');
@@ -14,6 +16,8 @@ function Header() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [currentLang, setCurrentLang] = useState(i18n.language);
   const [user, setUser] = useState(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
@@ -28,6 +32,7 @@ function Header() {
     setUser(null);
     window.location.href = '/';
   };
+
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
     setCurrentLang(lang);
@@ -86,19 +91,20 @@ function Header() {
                 <>
                   <span className="itemheader me-3">{user.email}</span>
                   <button onClick={handleLogout} className="itemheader me-3">
-                    Đăng xuất
+                    {t('header.signout')}
                   </button>
                 </>
               ) : (
                 <>
-                  <Link to="/login" className="itemheader me-3">
+                  <button className="itemheader me-3" onClick={() => setShowLoginModal(true)}>
                     <i className="fa fa-sign-in"></i> <span>{t('header.login')}</span>
-                  </Link>
-                  <Link to="/register" className="itemheader me-3">
+                  </button>
+                  <button className="itemheader me-3" onClick={() => setShowRegisterModal(true)}>
                     <i className="fa fa-user-plus"></i> <span>{t('header.register')}</span>
-                  </Link>
+                  </button>
                 </>
               )}
+
               <div className="language-switcher dropdown">
                 <button
                   className="btn btn-light dropdown-toggle d-flex align-items-center"
@@ -144,6 +150,10 @@ function Header() {
           <Link to="/tin-tuc" className="col itemheader">{t('header.news')}</Link>
         </div>
       </div>
+
+      {/* Login and Register Modals */}
+      <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(false)} />
+      <RegisterModal show={showRegisterModal} onClose={() => setShowRegisterModal(false)} />
     </div>
   );
 }

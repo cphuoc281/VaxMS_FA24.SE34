@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { useLocation } from 'react-router-dom';
 import '../../layout/customer/styles/activateAccount.scss';
-
 function ActivateAccount() {
     const [loading, setLoading] = useState(false);
     const location = useLocation();

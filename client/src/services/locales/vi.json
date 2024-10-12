@@ -14,7 +14,8 @@
         "price_list": "Bảng giá",
         "diseases": "Bệnh học",
         "news": "Tin tức",
-        "search_placeholder": "Tìm kiếm vaccine theo tên, độ tuổi, nhà sản xuất..."
+        "search_placeholder": "Tìm kiếm vaccine theo tên, độ tuổi, nhà sản xuất...",
+        "signout": "Đăng xuất"
     },
     "landing": {
         "introduction": "Giới thiệu",

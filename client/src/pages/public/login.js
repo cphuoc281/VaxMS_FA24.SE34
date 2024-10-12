@@ -1,12 +1,24 @@
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { postMethodPayload } from '../../services/request';
 import Swal from 'sweetalert2';
 import '../../layout/customer/styles/login.scss'; // Assuming you created a login.scss file for custom styles.
-import React, { useState } from 'react';
 
 function Login() {
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    /* Initialize Google SignIn */
+    window.google.accounts.id.initialize({
+      client_id: '950156521822-d34se9kv73udmtsavta0dr9cq9h2ujqc.apps.googleusercontent.com', // Replace with your Google OAuth Client ID
+      callback: handleGoogleLoginResponse,
+    });
+    window.google.accounts.id.renderButton(
+      document.getElementById('googleSignInButton'),
+      { theme: 'outline', size: 'large' }
+    );
+  }, []);
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -21,27 +33,50 @@ function Login() {
       const res = await postMethodPayload('/api/user/login/email', payload);
       if (res.ok) {
         const result = await res.json();
-        // Lưu token và thông tin người dùng vào localStorage
         localStorage.setItem('token', result.token);
         localStorage.setItem('user', JSON.stringify(result.user));
-        // Chuyển hướng đến trang chủ hoặc trang dành cho người dùng
         window.location.href = '/';
       } else {
         const result = await res.json();
         Swal.fire({
           icon: 'error',
-          title: 'Đăng nhập thất bại',
-          text: result.message || 'Email hoặc mật khẩu không đúng',
+          title: 'Login Failed',
+          text: result.message || 'Invalid email or password',
         });
       }
     } catch (error) {
       Swal.fire({
         icon: 'error',
-        title: 'Đăng nhập thất bại',
-        text: 'Không thể kết nối đến server',
+        title: 'Login Failed',
+        text: 'Unable to connect to the server',
       });
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleGoogleLoginResponse(response) {
+    try {
+      const res = await postMethodPayload('/api/user/login/google', response.credential);
+      if (res.ok) {
+        const result = await res.json();
+        localStorage.setItem('token', result.token);
+        localStorage.setItem('user', JSON.stringify(result.user));
+        window.location.href = '/';
+      } else {
+        const result = await res.json();
+        Swal.fire({
+          icon: 'error',
+          title: 'Google Sign-In Failed',
+          text: result.message || 'Unable to log in with Google',
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Google Sign-In Failed',
+        text: 'Unable to connect to the server',
+      });
     }
   }
 
@@ -77,20 +112,16 @@ function Login() {
             <a href="/forgot-password">Forgot your password?</a>
           </div>
         </form>
+
         <div className="or-divider">
           <span>OR</span>
         </div>
-        {/* Google Login Button */}
-        <button className="google-login-btn">
-          <img
-            src={require('../../assest/images/gglogo.png')}
-            alt="Google Icon"
-            className="google-icon"
-          />
-          Continue with Google
-        </button>
+
+        {/* Google Sign-In Button */}
+        <div id="googleSignInButton"></div>
+
         <p className="login-footer">
-          By clicking Sign in, Continue with Google, you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+          By clicking Sign in or Continue with Google, you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
         </p>
       </div>
     </div>
