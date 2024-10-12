@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import layoutAdmin from '../layout/admin/Layout';
 import layoutLogin from '../layout/customer/loginlayout/login';
@@ -39,14 +40,14 @@ const publicRoutes = [
     { path: "/index", component: index },
     { path: "/login", component: login, layout: layoutLogin },
     { path: "/register", component: register },
-    {path: "/tra-cuu-lich-tiem", component: TraCuuLichTiem},
-    {path: "/lich-tiem-da-qua", component: LichTiemDaQua},
+    { path: "/tra-cuu-lich-tiem", component: TraCuuLichTiem },
+    { path: "/lich-tiem-da-qua", component: LichTiemDaQua },
 ];
 
 const customerRoutes = [
-    {path: "/dang-ky-tiem-chung", component: dangkytiemchung},
-    {path: "/tai-khoan", component: taikhoan},
-    {path: "/thong-bao", component: thongbao},
+    { path: "/dang-ky-tiem-chung", component: dangkytiemchung },
+    { path: "/tai-khoan", component: taikhoan },
+    { path: "/thong-bao", component: thongbao },
 ];
 
 const adminRoutes = [
@@ -64,13 +65,13 @@ const adminRoutes = [
     },
 ];
 
-    
+
 
 const staffRoutes = [
-    {path: "/staff/chat", component: StaffChat, layout: layoutStaff},
-    {path: "/staff/vaccine", component: Vaccine, layout: layoutStaff},
-    {path: "/staff/vaccine-inventory", component: VaccineInventory, layout: layoutStaff},
-    {path: "/staff/customer-schedule", component: CustomerSchedule, layout: layoutStaff},
+    { path: "/staff/chat", component: StaffChat, layout: layoutStaff },
+    { path: "/staff/vaccine", component: Vaccine, layout: layoutStaff },
+    { path: "/staff/vaccine-inventory", component: VaccineInventory, layout: layoutStaff },
+    { path: "/staff/customer-schedule", component: CustomerSchedule, layout: layoutStaff },
 ];
 
 const componentRouter = [

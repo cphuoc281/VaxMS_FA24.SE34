@@ -14,7 +14,8 @@
         "price_list": "Price List",
         "diseases": "Diseases",
         "news": "News",
-        "search_placeholder": "Search vaccine by name, age group, manufacturer..."
+        "search_placeholder": "Search vaccine by name, age group, manufacturer...",
+        "signout": "Sign Out"
     },
     "landing": {
         "introduction": "Introduction",
