@@ -1,7 +1,34 @@
 package com.web.api;
 
+<<<<<<< HEAD
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.web.dto.*;
+=======
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.web.dto.SuccessResponse;
+import com.web.dto.ActivateAccountDto;
+import com.web.dto.ErrorResponse;
+import com.web.dto.ForgotPasswordDto;
+import com.web.dto.LoginDto;
+import com.web.dto.PasswordDto;
+import com.web.dto.TokenDto;
+import com.web.dto.UserRequest;
+import com.web.dto.UserUpdate;
+>>>>>>> 60ba9b0 (Initial commit after reconnecting with develop-duclv)
 import com.web.entity.Authority;
 import com.web.entity.User;
 import com.web.exception.MessageException;
@@ -10,6 +37,7 @@ import com.web.repository.AuthorityRepository;
 import com.web.repository.UserRepository;
 import com.web.service.GoogleOAuth2Service;
 import com.web.service.UserService;
+<<<<<<< HEAD
 import com.web.utils.Contains;
 import com.web.utils.MailService;
 import com.web.utils.UserUtils;
@@ -25,6 +53,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 @CrossOrigin
+=======
+import com.web.utils.MailService;
+import com.web.utils.UserUtils;
+
+
+@RestController
+@RequestMapping("/api/user")
+@CrossOrigin// Đảm bảo origin đúng
+>>>>>>> 60ba9b0 (Initial commit after reconnecting with develop-duclv)
 public class UserApi {
 
     private final UserRepository userRepository;
@@ -62,6 +99,7 @@ public class UserApi {
     }
 
     @PostMapping("/login/email")
+<<<<<<< HEAD
     public ResponseEntity<?> loginWithEmail(@RequestBody LoginDto loginDto) throws Exception {
         TokenDto tokenDto = userService.login(loginDto.getEmail(), loginDto.getPassword());
         return new ResponseEntity(tokenDto, HttpStatus.OK);
@@ -78,6 +116,47 @@ public class UserApi {
         userService.activeAccount(key, email);
         return new ResponseEntity<>("kích hoạt thành công", HttpStatus.OK);
     }
+=======
+public ResponseEntity<?> loginWithEmail(@RequestBody LoginDto loginDto) {
+    try {
+        TokenDto tokenDto = userService.login(loginDto.getEmail(), loginDto.getPassword());
+        return new ResponseEntity<>(tokenDto, HttpStatus.OK);
+    } catch (MessageException e) {
+        ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN.value());
+        return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
+    } catch (Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse("Đã xảy ra lỗi", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+
+    
+
+    @PostMapping("/public/register")
+public ResponseEntity<?> registerUser(@RequestBody UserRequest userRequest) {
+    User result = userService.registerUser(userRequest);
+    return new ResponseEntity<>(result, HttpStatus.CREATED);
+}
+
+
+
+
+@PostMapping("/public/active-account")
+    public ResponseEntity<?> activeAccount(@RequestBody ActivateAccountDto activateAccountDto) {
+        try {
+            userService.activeAccount(activateAccountDto.getKey(), activateAccountDto.getEmail());
+            SuccessResponse successResponse = new SuccessResponse("Kích hoạt thành công");
+            return new ResponseEntity<>(successResponse, HttpStatus.OK);
+        } catch (MessageException e) {
+            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), e.getStatus());
+            return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getStatus()));
+        } catch (Exception e) {
+            ErrorResponse errorResponse = new ErrorResponse("Đã xảy ra lỗi", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+>>>>>>> 60ba9b0 (Initial commit after reconnecting with develop-duclv)
 
     @PostMapping("/public/send-request-forgot-password")
     public ResponseEntity<?> quenMatKhau(@RequestBody ForgotPasswordDto forgotPasswordDto){

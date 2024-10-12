@@ -10,6 +10,10 @@ import com.web.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+<<<<<<< HEAD
+=======
+import org.springframework.security.access.prepost.PreAuthorize;
+>>>>>>> 60ba9b0 (Initial commit after reconnecting with develop-duclv)
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -32,13 +36,23 @@ public class ChatApi {
     @Autowired
     private UserUtils userUtils;
 
+<<<<<<< HEAD
     @GetMapping("/customer/my-chat")
+=======
+    
+    @GetMapping("/customer/my-chat")
+    @PreAuthorize("hasAuthority('Customer')")
+>>>>>>> 60ba9b0 (Initial commit after reconnecting with develop-duclv)
     public ResponseEntity<?> myChat(){
         List<Chatting> result = chatRepository.myChat(userUtils.getUserWithAuthority().getId());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/staff/getAllUserChat")
+<<<<<<< HEAD
+=======
+    @PreAuthorize("hasAuthority('Support Staff')")
+>>>>>>> 60ba9b0 (Initial commit after reconnecting with develop-duclv)
     public ResponseEntity<?> getAllUserChat(@RequestParam(value = "search", required = false) String search){
         if(search == null){
             search = "";

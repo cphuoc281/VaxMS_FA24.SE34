@@ -77,10 +77,18 @@
         </dependency>
 
         <dependency>
+<<<<<<< HEAD
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+=======
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.34</version> <!-- Đảm bảo sử dụng phiên bản mới nhất -->
+    <scope>provided</scope>
+</dependency>
+>>>>>>> 60ba9b0 (Initial commit after reconnecting with develop-duclv)
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -246,6 +254,7 @@
     </dependencies>
 
     <build>
+<<<<<<< HEAD
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -261,5 +270,16 @@
             </plugin>
         </plugins>
     </build>
+=======
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <!-- Bạn có thể xóa phần <configuration> nếu không cần thiết -->
+        </plugin>
+    </plugins>
+</build>
+
+>>>>>>> 60ba9b0 (Initial commit after reconnecting with develop-duclv)
 
 </project>
