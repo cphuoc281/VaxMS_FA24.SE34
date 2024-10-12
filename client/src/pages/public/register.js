@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { postMethodPayload } from '../../services/request';
 import Swal from 'sweetalert2';
 import '../../layout/customer/styles/register.scss';
-
 function Register() {
     const [loading, setLoading] = useState(false);
 

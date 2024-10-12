@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import layoutAdmin from '../layout/admin/Layout';
 import layoutLogin from '../layout/customer/loginlayout/login';
 // import layoutRegister from '../layout/customer/styles/register'; 
