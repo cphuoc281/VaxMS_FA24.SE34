@@ -7,6 +7,7 @@ import DataTable from 'datatables.net-dt';
 import Swal from 'sweetalert2'
 import {getMethod, deleteMethod} from '../../services/request';
 import AdminGioTiemChung from './giotiem';
+import AdminBacSiNgayTiem from './doctorinjectdate';
 
 
 
@@ -112,6 +113,7 @@ const AdminLichTiemChung = ()=>{
                                     <i onClick={()=>deleteLich(item.id)} class="fa fa-trash iconaction"></i>
                                     <i onClick={()=>window.location.href='add-lich-tiem-chung?id='+item.id} class="fa fa-edit iconaction pointer"></i>
                                     <i onClick={()=>setLichTiem(item)} data-bs-toggle="modal" data-bs-target="#modalGioTiem" class="fa fa-clock iconaction"></i>
+                                    <i onClick={()=>setLichTiem(item)} data-bs-toggle="modal" data-bs-target="#modalDoctorInjectdate" class="fa fa-users iconaction"></i>
                                 </td>
                             </tr>
                          })}
@@ -137,6 +139,7 @@ const AdminLichTiemChung = ()=>{
                 </div>
             </div>
             <AdminGioTiemChung lichtiem={lichTiem}/>
+            <AdminBacSiNgayTiem lichtiem={lichTiem}/>
         </>
     );
 }
