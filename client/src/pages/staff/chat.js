@@ -206,12 +206,12 @@ const StaffChat = () => {
               </tr>
             </thead>
             <tbody id="listuserchat">
-              {/* {itemUser.map((item, index)=>{
+              {itemUser.map((item, index)=>{
                                 return <tr class="pointer trhoverchat" onClick={()=>loadMessage(item.user)}>
                                     <td class="col45" onClick={()=>loadMessage(item.user)}><img src={avatar} class="imgavatarchat"/></td>
                                     <td onClick={()=>loadMessage(item.user)}>{item.user.email}<span class="timechat">{item.timestamp}</span></td>
                                 </tr>
-                            })} */}
+                            })}
             </tbody>
           </table>
         </div>
