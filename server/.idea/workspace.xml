@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d6866e4-31f4-46cd-8216-552b84457db2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/chat.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/CustomerScheduleApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/CustomerScheduleApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/CustomerScheduleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/CustomerScheduleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/CustomerScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/CustomerScheduleService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,6 +137,8 @@
       <workItem from="1729051388219" duration="788000" />
       <workItem from="1729064567674" duration="8356000" />
       <workItem from="1729172980268" duration="1236000" />
+      <workItem from="1729260770204" duration="1215000" />
+      <workItem from="1729268672308" duration="1652000" />
     </task>
     <servers />
   </component>

@@ -27,6 +27,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -99,9 +100,17 @@ public class CustomerScheduleService {
         return customerSchedule;
     }
 
-    public List<CustomerSchedule> mySchedule() {
+    public Page<CustomerSchedule> mySchedule(Pageable pageable, String search,Date from,Date to) {
         User user = userUtils.getUserWithAuthority();
-        List<CustomerSchedule> list = customerScheduleRepository.findByUser(user.getId());
+        if(search == null){
+            search = "";
+        }
+        search = "%"+search+"%";
+        if(from == null || to == null){
+            from = Date.valueOf("2000-01-01");
+            to = Date.valueOf("2100-01-01");
+        }
+        Page<CustomerSchedule> list = customerScheduleRepository.findByUser(user.getId(), search,from, to, pageable);
         return list;
     }
 
