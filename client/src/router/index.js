@@ -14,18 +14,21 @@ import ActivateAccount from '../pages/components/ActivateAccount';
 import login from '../pages/public/login';
 import register from '../pages/public/register';
 import index from '../pages/public/index';
+import ConfirmRegis from '../pages/public/confirm';
 
 import LandingPage from '../pages/public/landingPage'; // Import Landing Page
 
 // Customer components
 import dangkytiemchung from '../pages/customer/dangkytiemchung';
 import taikhoan from '../pages/customer/taikhoan';
+import { layouts } from 'chart.js';
 
 const publicRoutes = [
     { path: "/", component: LandingPage }, // Đặt Landing Page làm trang chính
     { path: "/index", component: index },
     { path: "/login", component: login, layout: layoutLogin },
     { path: "/register", component: register },
+    { path: "/confirm", component: ConfirmRegis, layout: layoutLogin },
 ];
 
 const customerRoutes = [

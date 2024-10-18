@@ -67,7 +67,7 @@ protected void configure(HttpSecurity http) throws Exception {
         .antMatchers("/api/staff/**").hasAuthority(Contains.ROLE_STAFF)
         .antMatchers("/api/all/**").hasAnyAuthority(Contains.ROLE_ADMIN, Contains.ROLE_DOCTOR,
                 Contains.ROLE_NURSE, Contains.ROLE_CUSTOMER, Contains.ROLE_STAFF)
-        .anyRequest().authenticated()
+        .anyRequest().permitAll()
         .and()
         .apply(securityConfigurerAdapter());
 }

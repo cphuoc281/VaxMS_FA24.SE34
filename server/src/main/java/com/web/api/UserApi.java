@@ -108,8 +108,8 @@ public ResponseEntity<?> registerUser(@RequestBody UserRequest userRequest) {
             SuccessResponse successResponse = new SuccessResponse("Kích hoạt thành công");
             return new ResponseEntity<>(successResponse, HttpStatus.OK);
         } catch (MessageException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), e.getStatus());
-            return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getStatus()));
+//            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), e.getStatus());
+            return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
         } catch (Exception e) {
             ErrorResponse errorResponse = new ErrorResponse("Đã xảy ra lỗi", HttpStatus.INTERNAL_SERVER_ERROR.value());
             return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
