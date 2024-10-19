@@ -40,7 +40,11 @@ function Header({ children }){
         }
         setInterval(function() {
             var currentTime = getDateTime();
-            document.getElementById("digital-clock").innerHTML = currentTime;
+            try {
+                document.getElementById("digital-clock").innerHTML = currentTime;
+            } catch (error) {
+                
+            }
         }, 1000);
         
         var date = new Date();

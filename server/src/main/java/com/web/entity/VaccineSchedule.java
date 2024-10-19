@@ -1,6 +1,7 @@
 package com.web.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,8 +9,10 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "vaccine_schedule")
@@ -24,13 +27,9 @@ public class VaccineSchedule {
     @Column(name = "id")
     private Long id;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime startDate;
+    private Date startDate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime endDate;
+    private Date endDate;
 
     private Integer limitPeople;
 
@@ -50,4 +49,8 @@ public class VaccineSchedule {
 
     @Transient
     private Boolean inStock = false;
+
+    @OneToMany(mappedBy = "vaccineSchedule", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<VaccineScheduleTime> vaccineScheduleTimes;
 }

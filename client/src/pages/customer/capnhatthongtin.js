@@ -27,9 +27,6 @@ async function handleUpdateInfor(event) {
         ward: event.target.elements.ward.value,
         street: event.target.elements.street.value,
         insuranceStatus: document.getElementById("insurance").checked,
-        contactName: event.target.elements.contactfullname.value,
-        contactRelationship: event.target.elements.moiquanhe.value,
-        contactPhone: event.target.elements.phonell.value,
     };
     const res = await postMethodPayload('/api/customer-profile/customer/update-profile', payload);
     if (res.status == 417) {
@@ -66,15 +63,15 @@ function CapNhatThongTin(){
             avatar = result.avatar;
             setBaoHiem(result.insuranceStatus)
 
-            const res = await fetch('https://provinces.open-api.vn/api/?depth=2', {
-            });
-            var province = await res.json();
-            for(var i=0; i< province.length; i++){
-                if(province[i].name == result.city){
-                    setHuyen(province[i].districts)
-                }
-            }
-            setHuyenCs(result.district);
+            // const res = await fetch('https://provinces.open-api.vn/api/?depth=2', {
+            // });
+            // var province = await res.json();
+            // for(var i=0; i< province.length; i++){
+            //     if(province[i].name == result.city){
+            //         setHuyen(province[i].districts)
+            //     }
+            // }
+            // setHuyenCs(result.district);
         };
         getAddress();
         getCustomer();
@@ -111,14 +108,8 @@ function CapNhatThongTin(){
             <div className='col-sm-4'>
                 <label class="lbacc">Họ tên *</label>
                 <input name="fullname" defaultValue={profile!=null?profile.fullName:''} class="form-control" required/>
-                <label class="lbacc">Tên liên hệ *</label>
-                <input name="contactfullname" defaultValue={profile!=null?profile.contactName:''} class="form-control" required/>
-                <label class="lbacc">Mối quan hệ *</label>
-                <input name="moiquanhe" defaultValue={profile!=null?profile.contactRelationship:''} class="form-control" required/>
-                <label class="lbacc">Số điện thoại *</label>
-                <input name="phone" defaultValue={profile!=null?profile.phone:''} class="form-control" required/>
                 <label class="lbacc">Số điện thoại liên lạc *</label>
-                <input name="phonell" defaultValue={profile!=null?profile.contactPhone:''} class="form-control" required/>
+                <input name="phonell" defaultValue={profile!=null?profile.phone:''} class="form-control" required/>
                 <label class="lbacc">Giới tính *</label>
                 <select name="gender" class="form-control">
                     <option value="Male" selected={profile==null?false:(profile.gender =='Male')}>Nam</option>

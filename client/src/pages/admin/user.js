@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
 var token = localStorage.getItem("token");
 
 async function loadUser(role){
-    var url = 'http://localhost:8080/api/admin/get-user-by-role';
+    var url = 'http://localhost:8080/api/user/admin/get-user-by-role';
     if (role != "") {
         url += '?role=' + role
     }
@@ -35,7 +35,7 @@ async function handleAddAccount(event) {
         phone: event.target.elements.phone.value,
         password: event.target.elements.password.value
     };
-    const res = await fetch('http://localhost:8080/api/admin/addaccount', {
+    const res = await fetch('http://localhost:8080/api/user/admin/addaccount', {
         method: 'POST',
         headers: new Headers({
             'Authorization': 'Bearer ' + token,
@@ -89,7 +89,7 @@ const AdminUser = ()=>{
         if (con == false) {
             return;
         }
-        var url = 'http://localhost:8080/api/admin/lockOrUnlockUser?id=' + id;
+        var url = 'http://localhost:8080/api/user/admin/lockOrUnlockUser?id=' + id;
         const response = await fetch(url, {
             method: 'POST',
             headers: new Headers({

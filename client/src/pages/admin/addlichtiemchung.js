@@ -41,7 +41,13 @@ async function addOrUpdateLichTiemChung(event) {
             }
         });
     } else {
-        toast.error("Thêm/ sửa lịch tiêm thất bại");
+        if(res.status == 417){
+            var result = await res.json();
+            toast.warning(result.defaultMessage);
+        }
+        else{
+            toast.error("Thêm/ sửa lịch tiêm thất bại");
+        }
     }
 }
 
@@ -112,10 +118,10 @@ const AdminAddLichTiemChung = ()=>{
             <form className='row' onSubmit={addOrUpdateLichTiemChung} method='post'>
                 <div className='col-sm-4'>
                     <label className='lbadd-admin'>Ngày bắt đầu</label>
-                    <input name='ngaybatdau' defaultValue={item==null?'':item.startDate} type='datetime-local' className='form-control' required/>
+                    <input name='ngaybatdau' defaultValue={item==null?'':item.startDate} type='date' className='form-control' required/>
 
                     <label className='lbadd-admin'>Ngày kết thúc</label>
-                    <input name='ngayketthuc' defaultValue={item==null?'':item.endDate} type='datetime-local' className='form-control' required/>
+                    <input name='ngayketthuc' defaultValue={item==null?'':item.endDate} type='date' className='form-control' required/>
                     
                     <label className='lbadd-admin'>Số người giới hạn</label>
                     <input name='gioihan' defaultValue={item==null?'':item.limitPeople} type='number' className='form-control' required/>

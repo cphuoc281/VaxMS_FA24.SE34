@@ -725,3 +725,10 @@
   cursor: pointer;
   margin-right: 10px;
 }
+.display-block{
+  display: block;
+}
+#noidungtimeschedule{
+  max-height: 80vh;
+  overflow-y: scroll;
+}

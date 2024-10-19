@@ -8,10 +8,13 @@ import com.web.models.ListCustomerScheduleRequest;
 import com.web.service.CustomerScheduleService;
 import com.web.service.VaccineScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -30,8 +33,9 @@ public class CustomerScheduleApi {
     }
 
     @GetMapping("/customer/my-schedule")
-    public ResponseEntity<?> mySchedule() {
-        List<CustomerSchedule> result = customerScheduleService.mySchedule();
+    public ResponseEntity<?> mySchedule(Pageable pageable, @RequestParam(required = false) String search,
+                                        @RequestParam(required = false)Date from,@RequestParam(required = false)Date to ) {
+        Page<CustomerSchedule> result = customerScheduleService.mySchedule(pageable, search, from, to);
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
