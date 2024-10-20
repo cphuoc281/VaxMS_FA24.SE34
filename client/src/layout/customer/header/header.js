@@ -1,69 +1,161 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import logo from '../../../assest/images/vnvc-logo.png';
-import { useState, useEffect } from 'react'
-import {getMethod,getMethodByToken} from '../../../services/request'
-import React, { createContext, useContext } from 'react';
+import vietnamFlag from '../../../assest/images/vietnam-flag.png';
+import engFlag from '../../../assest/images/engflag2.jpg'; // English flag
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/style.scss';
+import topbanner from '../../../assest/images/topbanner.png';
+import LoginModal from '../../../pages/public/LoginModal'; // Assuming you create this
+import RegisterModal from '../../../pages/public/RegisterModal'; // Assuming you create this
 
-export const HeaderContext = createContext();
+function Header() {
+  const [searchValue, setSearchValue] = useState('');
+  const { t, i18n } = useTranslation();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [currentLang, setCurrentLang] = useState(i18n.language);
+  const [user, setUser] = useState(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
 
-var token = localStorage.getItem("token");
-function Header (){
-import('../styles/styleuser.scss');
-var auth = <a href="/login" class="itemheader itemtopheader hotlineheader">Đăng nhập</a>
-if(token != null){
-  auth = <>
-  <a href="/tai-khoan" class="itemheader itemtopheader">Tài khoản</a>
-  <a onClick={()=>logout()} class="itemheader itemtopheader hotlineheader pointer">Đăng xuất</a>
-  </>
-}
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+    window.location.href = '/';
+  };
 
-function logout(){
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-  window.location.replace('login')
-}
-return(
-  <>
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+    setCurrentLang(lang);
+    setShowDropdown(false);
+  };
+
+  const currentLangFlag = i18n.language === 'en' ? engFlag : vietnamFlag;
+  const currentLangText = i18n.language === 'en' ? 'English' : 'Tiếng Việt';
+
+  return (
     <div id="headerweb">
-      <div class="container-web">
-          <nav class="navbar navbar-expand-lg">
-              <div class="container-fluid">
-                <a class="navbar-brand" href="/"><img src={logo} class="imagelogoheader"/></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
+      {/* Top section with working hours and hotline */}
+      <div className="top-bar d-flex justify-content-between align-items-center p-2">
+        <span className="working-hours text-primary ms-4">
+          {t('header.working_hours')}
+        </span>
+        <a href="tel:02871026595" className="hotlineheader text-danger fw-bold me-4">
+          {t('header.hotline')}
+        </a>
+      </div>
+
+      {/* Banner Section */}
+      <div className="top-banner">
+        <img src={topbanner} alt="Top Banner" className="top-banner" />
+      </div>
+
+      {/* Main Header with Logo, Search Bar, and Navigation */}
+      <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div className="container">
+          <div className="row align-items-center w-100">
+            <div className="col-3">
+              <Link to="/" className="navbar-brand">
+                <img src={logo} className="imagelogoheader" alt="VNVC Logo" />
+              </Link>
+            </div>
+            <div className="col-6">
+              <div className="search-bar d-flex align-items-center">
+                <input
+                  type="text"
+                  className="form-control rounded-pill"
+                  placeholder={t('header.search_placeholder')}
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
+                />
+                <button className="btn btn-link" type="submit">
+                  <i className="fa fa-search"></i>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  </ul>
-                  <div class="d-flex">
-                      <a href="" class="itemheader itemtopheader"><i class="fa fa-map-marker"></i> Tìm trung tâm VNVC</a>
-                      <a href="/dang-ky-tiem-chung" class="itemheader itemtopheader"><i class="fa fa-calendar"></i> Đăng ký tiêm</a>
-                      <a href="tel:02871026595" class="itemheader itemtopheader hotlineheader">Hotline: 028 7102 6595</a>
-                      {auth}
-                  </div>
-                </div>
               </div>
-          </nav>
+            </div>
+            <div className="col-3 nav-right d-flex justify-content-end align-items-center">
+              <Link to="/dang-ky-tiem-chung" className="itemheader me-3">
+                <i className="fa fa-calendar"></i> <span>{t('header.register_vaccine')}</span>
+              </Link>
+
+              {user ? (
+                <>
+                  <span className="itemheader me-3">{user.email}</span>
+                  <button onClick={handleLogout} className="itemheader me-3">
+                    {t('header.signout')}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button className="itemheader me-3" onClick={() => setShowLoginModal(true)}>
+                    <i className="fa fa-sign-in"></i> <span>{t('header.login')}</span>
+                  </button>
+                  <button className="itemheader me-3" onClick={() => setShowRegisterModal(true)}>
+                    <i className="fa fa-user-plus"></i> <span>{t('header.register')}</span>
+                  </button>
+                </>
+              )}
+
+              <div className="language-switcher dropdown">
+                <button
+                  className="btn btn-light dropdown-toggle d-flex align-items-center"
+                  type="button"
+                  id="languageDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img src={currentLangFlag} alt="Current Language" className="flag-icon" />
+                  {currentLangText}
+                </button>
+                <ul className="dropdown-menu dropdown-menu-end rounded shadow" aria-labelledby="languageDropdown">
+                  <li>
+                    <button className="dropdown-item d-flex align-items-center" onClick={() => changeLanguage('vi')}>
+                      <img src={vietnamFlag} alt="Vietnam Flag" className="flag-icon me-2" />
+                      Tiếng Việt
+                    </button>
+                  </li>
+                  <li>
+                    <button className="dropdown-item d-flex align-items-center" onClick={() => changeLanguage('en')}>
+                      <img src={engFlag} alt="English Flag" className="flag-icon me-2" />
+                      English
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Bottom Navigation */}
+      <div className="container-fluid container-bottom-header bg-light py-2">
+        <div className="row justify-content-center">
+          <Link to="/" className="col itemheader">{t('header.home')}</Link>
+          <Link to="/gioi-thieu" className="col itemheader">{t('header.introduction')}</Link>
+          <Link to="/vaccine-tre-em" className="col itemheader">{t('header.children_vaccine')}</Link>
+          <Link to="/vaccine-nguoi-lon" className="col itemheader">{t('header.adult_vaccine')}</Link>
+          <Link to="/goi-vaccine" className="col itemheader">{t('header.vaccine_packages')}</Link>
+          <Link to="/cam-nang" className="col itemheader">{t('header.vaccine_schedule')}</Link>
+          <Link to="/bang-gia" className="col itemheader">{t('header.price_list')}</Link>
+          <Link to="/benh-hoc" className="col itemheader">{t('header.diseases')}</Link>
+          <Link to="/tin-tuc" className="col itemheader">{t('header.news')}</Link>
+        </div>
       </div>
-      <hr className='hrheader-web'/>
-      <div class="container-web container-bottom-header">
-          <a href="" class="itemheader">Trang chủ</a>
-          <a href="" class="itemheader">Giới thiệu</a>
-          <a href="" class="itemheader">Vắc xin trẻ em</a>
-          <a href="" class="itemheader">Vắc xin người lớn</a>
-          <a href="" class="itemheader">Gói vắc xin</a>
-          <a href="tra-cuu-lich-tiem" class="itemheader">Tra cứu lịch tiêm</a>
-          <a href="" class="itemheader">Bảng giá</a>
-          <a href="" class="itemheader">Bệnh học</a>
-          <a href="" class="itemheader">Tin tức</a>
-      </div>
+
+      {/* Login and Register Modals */}
+      <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(false)} />
+      <RegisterModal show={showRegisterModal} onClose={() => setShowRegisterModal(false)} />
     </div>
-    
-  </>
-
-);
-
-    
+  );
 }
 
 export default Header;

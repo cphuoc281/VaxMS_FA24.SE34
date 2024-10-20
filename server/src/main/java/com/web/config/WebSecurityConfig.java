@@ -1,11 +1,5 @@
 package com.web.config;
 
-import com.web.jwt.JWTConfigurer;
-import com.web.jwt.JwtTokenProvider;
-import com.web.repository.UserRepository;
-import com.web.utils.Contains;
-import com.web.utils.UserUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +11,11 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.web.jwt.JWTConfigurer;
+import com.web.jwt.JwtTokenProvider;
+import com.web.repository.UserRepository;
+import com.web.utils.Contains;
 
 @EnableWebSecurity
 @Configuration
@@ -49,38 +48,42 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http
-                .csrf()
-                .disable()
+                .csrf().disable()
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
                 .and()
                 .headers()
                 .and()
                 .authorizeRequests()
-                .antMatchers("**").permitAll()
-                .antMatchers("/api/*/public/**").permitAll()
-                .antMatchers("/api/*/admin/**").hasAuthority(Contains.ROLE_ADMIN)
-                .antMatchers("/api/*/doctor/**").hasAuthority(Contains.ROLE_DOCTOR)
-                .antMatchers("/api/*/nurse/**").hasAuthority(Contains.ROLE_NURSE)
-                .antMatchers("/api/*/customer/**").hasAuthority(Contains.ROLE_CUSTOMER)
-                .antMatchers("/api/*/staff/**").hasAuthority(Contains.ROLE_STAFF)
-                .antMatchers("/api/*/all/**").hasAnyAuthority(Contains.ROLE_ADMIN, Contains.ROLE_DOCTOR,
+                .antMatchers("/api/public/**").permitAll()
+                .antMatchers("/api/**/public/**").permitAll()
+                .antMatchers("/api/authority/**").permitAll()
+                .antMatchers("/api/user/login/email").permitAll() // Thêm dòng này để cho phép công khai endpoint login bằng email
+                .antMatchers("/api/admin/**").hasAuthority(Contains.ROLE_ADMIN)
+                .antMatchers("/api/doctor/**").hasAuthority(Contains.ROLE_DOCTOR)
+                .antMatchers("/api/nurse/**").hasAuthority(Contains.ROLE_NURSE)
+                .antMatchers("/api/customer/**").hasAuthority(Contains.ROLE_CUSTOMER)
+                .antMatchers("/api/staff/**").hasAuthority(Contains.ROLE_STAFF)
+                .antMatchers("/api/all/**").hasAnyAuthority(Contains.ROLE_ADMIN, Contains.ROLE_DOCTOR,
                         Contains.ROLE_NURSE, Contains.ROLE_CUSTOMER, Contains.ROLE_STAFF)
                 .anyRequest().permitAll()
                 .and()
-//                .logout().logoutUrl("/logout").logoutSuccessUrl("/login").and()
                 .apply(securityConfigurerAdapter());
     }
 
+
+
     @Override
     public void configure(WebSecurity web) throws Exception {
-
+        web.ignoring().antMatchers(
+                "/api/public/**",
+                "/api/**/public/**",
+                "/api/authority/**"
+        );
     }
     private JWTConfigurer securityConfigurerAdapter() {
         return new JWTConfigurer(tokenProvider, userRepository);
     }
 
 }
-

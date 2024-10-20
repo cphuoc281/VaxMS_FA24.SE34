@@ -1,7 +1,29 @@
 package com.web.api;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
-import com.web.dto.*;
+import com.web.dto.SuccessResponse;
+import com.web.dto.ActivateAccountDto;
+import com.web.dto.ErrorResponse;
+import com.web.dto.ForgotPasswordDto;
+import com.web.dto.LoginDto;
+import com.web.dto.PasswordDto;
+import com.web.dto.TokenDto;
+import com.web.dto.UserRequest;
+import com.web.dto.UserUpdate;
 import com.web.entity.Authority;
 import com.web.entity.User;
 import com.web.exception.MessageException;
@@ -10,21 +32,13 @@ import com.web.repository.AuthorityRepository;
 import com.web.repository.UserRepository;
 import com.web.service.GoogleOAuth2Service;
 import com.web.service.UserService;
-import com.web.utils.Contains;
 import com.web.utils.MailService;
 import com.web.utils.UserUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin
+@CrossOrigin// Đảm bảo origin đúng
 public class UserApi {
 
     private final UserRepository userRepository;
@@ -54,30 +68,54 @@ public class UserApi {
     @PostMapping("/login/google")
     public ResponseEntity<?> loginWithGoogle(@RequestBody String credential) throws Exception {
         GoogleIdToken.Payload payload = googleOAuth2Service.verifyToken(credential);
-        if(payload == null){
-            throw new MessageException("Đăng nhập thất bại");
+        if (payload == null) {
+            throw new MessageException("Google Sign-In Failed");
         }
         TokenDto tokenDto = userService.loginWithGoogle(payload);
-        return new ResponseEntity(tokenDto, HttpStatus.OK);
+        return new ResponseEntity<>(tokenDto, HttpStatus.OK);
     }
+
 
     @PostMapping("/login/email")
-    public ResponseEntity<?> loginWithEmail(@RequestBody LoginDto loginDto) throws Exception {
-        TokenDto tokenDto = userService.login(loginDto.getEmail(), loginDto.getPassword());
-        return new ResponseEntity(tokenDto, HttpStatus.OK);
+    public ResponseEntity<?> loginWithEmail(@RequestBody LoginDto loginDto) {
+        try {
+            TokenDto tokenDto = userService.login(loginDto.getEmail(), loginDto.getPassword());
+            return new ResponseEntity<>(tokenDto, HttpStatus.OK);
+        } catch (MessageException e) {
+            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN.value());
+            return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
+        } catch (Exception e) {
+            ErrorResponse errorResponse = new ErrorResponse("Đã xảy ra lỗi", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @PostMapping("/public/regis")
-    public ResponseEntity<?> regisUser(@RequestBody UserRequest userRequest) {
-        User result= userService.regisUser(userRequest);
-        return new ResponseEntity(result, HttpStatus.OK);
+
+
+    @PostMapping("/public/register")
+    public ResponseEntity<?> registerUser(@RequestBody UserRequest userRequest) {
+        User result = userService.registerUser(userRequest);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
+
+
+
 
     @PostMapping("/public/active-account")
-    public ResponseEntity<?> activeAccount(@RequestParam String email, @RequestParam String key) {
-        userService.activeAccount(key, email);
-        return new ResponseEntity<>("kích hoạt thành công", HttpStatus.OK);
+    public ResponseEntity<?> activeAccount(@RequestBody ActivateAccountDto activateAccountDto) {
+        try {
+            userService.activeAccount(activateAccountDto.getKey(), activateAccountDto.getEmail());
+            SuccessResponse successResponse = new SuccessResponse("Kích hoạt thành công");
+            return new ResponseEntity<>(successResponse, HttpStatus.OK);
+        } catch (MessageException e) {
+//            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), e.getStatus());
+            return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+        } catch (Exception e) {
+            ErrorResponse errorResponse = new ErrorResponse("Đã xảy ra lỗi", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @PostMapping("/public/send-request-forgot-password")
     public ResponseEntity<?> quenMatKhau(@RequestBody ForgotPasswordDto forgotPasswordDto){
