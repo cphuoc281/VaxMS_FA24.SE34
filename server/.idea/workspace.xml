@@ -4,34 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d6866e4-31f4-46cd-8216-552b84457db2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/.idea/easycode.ignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/.idea/sonarlint/issuestore/0/5/05dc69393f11c15b01b3283d5d501694c999875c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/.idea/sonarlint/issuestore/c/6/c693c4eeaeeb8ffe66e0d11f08ded3996af414a6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/.idea/sonarlint/issuestore/c/a/caa1a967838ec659c2662c7040422d4d5fcd628e" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/.idea/sonarlint/securityhotspotstore/0/5/05dc69393f11c15b01b3283d5d501694c999875c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/.idea/sonarlint/securityhotspotstore/c/6/c693c4eeaeeb8ffe66e0d11f08ded3996af414a6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/.idea/sonarlint/securityhotspotstore/c/a/caa1a967838ec659c2662c7040422d4d5fcd628e" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/vaccine/modal/modalHandle.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/vaccine/modal/modalHandle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/vaccine/vaccine.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/vaccine/vaccine.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/vaccineInventory/VaccineInventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/vaccineInventory/VaccineInventory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/models/CreateVaccineRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/models/CreateVaccineRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/models/ListVaccineRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/models/ListVaccineRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/CenterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/CenterRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/WebSecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/CreateVaccineRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/CreateVaccineRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/ListVaccineRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/ListVaccineRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/CenterRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/CenterRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService.class" afterDir="false" />
-    </list>
+    <list default="true" id="1d6866e4-31f4-46cd-8216-552b84457db2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -130,7 +103,7 @@
       <workItem from="1729411896749" duration="681000" />
       <workItem from="1729481746796" duration="868000" />
       <workItem from="1729483868374" duration="3835000" />
-      <workItem from="1729559990771" duration="2086000" />
+      <workItem from="1729559990771" duration="2439000" />
     </task>
     <servers />
   </component>
