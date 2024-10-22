@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface CenterRepository extends JpaRepository<Center, Long> {
 
     Optional<Center> findByCenterName(String id);
+
+    Optional<Center> findByCity (String city);
 }

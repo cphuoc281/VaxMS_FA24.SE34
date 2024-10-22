@@ -212,9 +212,18 @@ const VaccineInventory = () => {
       align: "center",
       render: (text) => {
         return (
-          <Tag color={text === "ACTIVE" && "green"}>
-            {text === "ACTIVE" && "Kinh doanh"}
-          </Tag>
+            <Tag
+                className={"tag-status"}
+                color={
+                  text === "ACTIVE" ? "green" : text === "INACTIVE" ? "gold" : "red"
+                }
+            >
+              {text === "ACTIVE"
+                  ? "Kinh doanh"
+                  : text === "INACTIVE"
+                      ? "Ngừng kinh doanh"
+                      : "Đã xóa"}
+            </Tag>
         );
       },
     },

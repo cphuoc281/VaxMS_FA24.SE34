@@ -1,0 +1,9 @@
+
+javascript:S1481Y"ARemove the declaration of the unused 'handleFileChange' variable.(ˆñ¦‘şÿÿÿÿ8¢°„ª2J$552ebb04-9a81-4420-a644-a0a38f6e3b59
+Œjavascript:S1854Y">Remove this useless assignment to variable "handleFileChange".(ˆñ¦‘şÿÿÿÿ8£°„ª2J$3141a0b1-d435-4408-a7cf-cd049ae64227
+‰javascript:S1481p"@Remove the declaration of the unused 'handleIconClick' variable.(Ü¨¿±8£°„ª2J$28b88562-dbf9-484e-9607-7245b8d2aa69
+†javascript:S1854p"=Remove this useless assignment to variable "handleIconClick".(Ü¨¿±8£°„ª2J$6cb4eb5c-a990-4ba1-8cc6-71b75ebc43e7
+‹javascript:S1481u"=Remove the declaration of the unused 'handleExport' variable.(Œ±õÁüÿÿÿÿ8£°„ª2J$8ae70560-6313-4c13-9818-332c7fed9de1
+ˆjavascript:S1854u":Remove this useless assignment to variable "handleExport".(Œ±õÁüÿÿÿÿ8£°„ª2J$8d5828c3-e801-49a8-8588-2330d293942a
+“javascript:S3358à"DExtract this nested ternary operation into an independent statement.(«Î«Ÿúÿÿÿÿ8£°„ª2J$75f7c5fe-b475-4a09-a079-fd231469afea
+“javascript:S3358å"DExtract this nested ternary operation into an independent statement.(»Àˆüÿÿÿÿ8£°„ª2J$93130b63-bc2e-43b0-b9af-62fae1840ccc

@@ -56,6 +56,7 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
             formHandle.price &&
             formHandle.vaccineTypeId &&
             formHandle.manufacturerId &&
+            formHandle.quantity &&
             formHandle.ageGroupId;
 
         if (!isValid) {
@@ -65,6 +66,7 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
                 vaccineTypeId: !formHandle.vaccineTypeId ? "Trường bắt buộc" : "",
                 manufacturerId: !formHandle.manufacturerId ? "Trường bắt buộc" : "",
                 ageGroupId: !formHandle.ageGroupId ? "Trường bắt buộc" : "",
+                quantity: !formHandle.quantity ? "Trường bắt buộc" : "",
             };
             await setFormErrors(errors);
             return;
@@ -161,6 +163,23 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
                             value={formHandle["price"] || ""}
                             onChange={(e) => {
                                 handleInputChange("price", e.target.value);
+                            }}
+                            type="number"
+                            min={1}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label="So Lượng"
+                        validateStatus={formErrors["quantity"] ? "error" : ""}
+                        help={formErrors["quantity"] || ""}
+                    >
+                        <Input
+                            className=""
+                            name="quantity"
+                            placeholder="Số Lượng"
+                            value={formHandle["quantity"] || ""}
+                            onChange={(e) => {
+                                handleInputChange("quantity", e.target.value);
                             }}
                             type="number"
                             min={1}
