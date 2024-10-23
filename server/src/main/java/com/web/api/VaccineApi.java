@@ -40,6 +40,11 @@ public class VaccineApi {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/public/search")
+    public ResponseEntity<?> searchVaccines(@RequestParam("keyword") String keyword){
+        List<Vaccine> vaccines = vaccineService.searchVaccines(keyword);
+        return new ResponseEntity<>(vaccines, HttpStatus.OK);
+    }
     @GetMapping("/public/vaccine-type")
     public ResponseEntity<?> findByType(){
         List<VaccineTypeResponse> result = vaccineService.allVaccinType();

@@ -46,7 +46,7 @@ public class User{
 
     private String rememberKey;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "authority_id")
     private Authority authorities;
 }

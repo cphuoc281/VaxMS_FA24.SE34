@@ -27,7 +27,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserRepository userRepository;
     private final CorsFilter corsFilter;
 
-
     public WebSecurityConfig(JwtTokenProvider tokenProvider, UserRepository userRepository, CorsFilter corsFilter) {
         this.tokenProvider = tokenProvider;
         this.userRepository = userRepository;
@@ -43,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
+        // Cấu hình xác thực
     }
 
     @Override
@@ -59,20 +58,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/public/**").permitAll()
                 .antMatchers("/api/**/public/**").permitAll()
                 .antMatchers("/api/authority/**").permitAll()
-                .antMatchers("/api/user/login/email").permitAll() // Thêm dòng này để cho phép công khai endpoint login bằng email
-                .antMatchers("/api/admin/**").hasAuthority(Contains.ROLE_ADMIN)
-                .antMatchers("/api/doctor/**").hasAuthority(Contains.ROLE_DOCTOR)
-                .antMatchers("/api/nurse/**").hasAuthority(Contains.ROLE_NURSE)
-                .antMatchers("/api/customer/**").hasAuthority(Contains.ROLE_CUSTOMER)
-                .antMatchers("/api/staff/**").hasAuthority(Contains.ROLE_STAFF)
-                .antMatchers("/api/all/**").hasAnyAuthority(Contains.ROLE_ADMIN, Contains.ROLE_DOCTOR,
-                        Contains.ROLE_NURSE, Contains.ROLE_CUSTOMER, Contains.ROLE_STAFF)
+                .antMatchers("/api/user/login/email").permitAll()
+                .antMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/api/doctor/**").hasAuthority("ROLE_DOCTOR")
+                .antMatchers("/api/nurse/**").hasAuthority("ROLE_NURSE")
+                .antMatchers("/api/customer/**").hasAuthority("ROLE_CUSTOMER")
+                .antMatchers("/api/staff/**").hasAuthority("ROLE_STAFF")
+                .antMatchers("/api/all/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_CUSTOMER", "ROLE_STAFF")
                 .anyRequest().permitAll()
                 .and()
                 .apply(securityConfigurerAdapter());
     }
-
-
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -82,8 +78,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/api/authority/**"
         );
     }
+
     private JWTConfigurer securityConfigurerAdapter() {
         return new JWTConfigurer(tokenProvider, userRepository);
     }
-
 }
+

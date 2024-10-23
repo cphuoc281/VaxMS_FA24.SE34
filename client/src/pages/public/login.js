@@ -23,28 +23,45 @@ function Login() {
   async function handleLogin(event) {
     event.preventDefault();
     setLoading(true);
-
+  
     const payload = {
       email: event.target.elements.email.value.trim(),
       password: event.target.elements.password.value,
     };
-
+  
     try {
       const res = await postMethodPayload('/api/user/login/email', payload);
+  
+      let result;
+      try {
+        result = await res.json(); // Luôn gọi res.json() để lấy phản hồi
+      } catch (e) {
+        result = null;
+      }
+  
       if (res.ok) {
-        const result = await res.json();
         localStorage.setItem('token', result.token);
         localStorage.setItem('user', JSON.stringify(result.user));
-        window.location.href = '/';
+        const userRole = result.user.authority.name;
+        console.log('Token nhận được từ server:', result.token);
+  
+        if (userRole === 'Admin') {
+          window.location.href = '/admin/index';
+        } else if (userRole === 'Customer') {
+          window.location.href = '/';
+        } else if (userRole === 'Staff' || userRole === 'Doctor' || userRole === 'Nurse') {
+          window.location.href = '/staff/vaccine/vaccine';
+        }
       } else {
-        const result = await res.json();
+        console.error('Lỗi khi đăng nhập:', result ? result.message : 'Không thể kết nối đến server');
         Swal.fire({
           icon: 'error',
           title: 'Login Failed',
-          text: result.message || 'Invalid email or password',
+          text: result ? result.message : 'Unable to connect to the server',
         });
       }
     } catch (error) {
+      console.error('Lỗi khi gọi API đăng nhập:', error);
       Swal.fire({
         icon: 'error',
         title: 'Login Failed',
@@ -54,17 +71,28 @@ function Login() {
       setLoading(false);
     }
   }
+  
+  
 
   async function handleGoogleLoginResponse(response) {
     try {
+      console.log('Google credential nhận được:', response.credential);
       const res = await postMethodPayload('/api/user/login/google', response.credential);
       if (res.ok) {
         const result = await res.json();
         localStorage.setItem('token', result.token);
         localStorage.setItem('user', JSON.stringify(result.user));
-        window.location.href = '/';
+        const userRole = result.user.authority.name;
+        if (userRole === 'Admin') {
+          window.location.href = '/admin/index';
+        } else if (userRole === 'Customer') {
+          window.location.href = '/';
+        } else if (userRole === 'Staff' || userRole === 'Doctor' || userRole === 'Nurse') {
+          window.location.href = '/staff/vaccine/vaccine';
+        }
       } else {
         const result = await res.json();
+        console.error('Lỗi khi đăng nhập bằng Google:', result.message);
         Swal.fire({
           icon: 'error',
           title: 'Google Sign-In Failed',
@@ -72,6 +100,7 @@ function Login() {
         });
       }
     } catch (error) {
+      console.error('Lỗi khi gọi API đăng nhập Google:', error);
       Swal.fire({
         icon: 'error',
         title: 'Google Sign-In Failed',
@@ -79,6 +108,7 @@ function Login() {
       });
     }
   }
+  
 
   return (
     <div className="login-container">

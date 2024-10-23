@@ -34,50 +34,69 @@ async function uploadMultipleFile(listFile) {
     }
 }
 
-var token = localStorage.getItem("token");
 async function getMethod(url) {
-    if(url.includes(firstUrl) == false){
-        url = firstUrl + url;
+    const token = localStorage.getItem("token");
+    if (url.includes(firstUrl) == false) {
+      url = firstUrl + url;
+    }
+    let headers = new Headers();
+    if (token) {
+      headers.append('Authorization', `Bearer ${token}`);
     }
     const response = await fetch(url, {
-        method: 'GET',
-        headers: new Headers({
-            'Authorization': 'Bearer ' + token
-        })
+      method: 'GET',
+      headers: headers
     });
-    return response
-}
-
-async function postMethod(url) {
-    if(url.includes(firstUrl) == false){
-        url = firstUrl + url;
+    return response;
+  }
+  
+  async function postMethod(url) {
+    const token = localStorage.getItem("token");
+    if (url.includes(firstUrl) == false) {
+      url = firstUrl + url;
+    }
+    let headers = new Headers();
+    if (token) {
+      headers.append('Authorization', `Bearer ${token}`);
     }
     const response = await fetch(url, {
-        method: 'POST',
-        headers: new Headers({
-            'Authorization': 'Bearer ' + token
-        })
+      method: 'POST',
+      headers: headers
     });
-    return response
-}
+    return response;
+  }
+  
 
 async function postMethodPayload(url, payload) {
-    if(url.includes(firstUrl) == false){
-        url = firstUrl + url;
+    const token = localStorage.getItem("token");
+    console.log('Token sử dụng:', token); // Log token để kiểm tra
+    if (url.includes(firstUrl) == false) {
+      url = firstUrl + url;
     }
-    const response = await fetch(url, {
+    try {
+      let headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+      if (token) {
+        headers.append('Authorization', `Bearer ${token}`);
+      }
+      const response = await fetch(url, {
         method: 'POST',
-        headers: new Headers({
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-        }),
+        headers: headers,
         body: JSON.stringify(payload)
-    });
-    return response
-}
+      });
+      return response;
+    } catch (error) {
+      console.error('Lỗi khi gọi API:', error); // Log lỗi để debug
+      throw error;
+    }
+  }
+  
+  
 
 async function deleteMethod(url) {
-    if(url.includes(firstUrl) == false){
+    const token = localStorage.getItem("token");
+    if (url.includes(firstUrl) == false) {
         url = firstUrl + url;
     }
     const response = await fetch(url, {
@@ -86,9 +105,8 @@ async function deleteMethod(url) {
             'Authorization': 'Bearer ' + token
         })
     });
-    return response
+    return response;
 }
-
 
 
 export {getMethod,postMethod, uploadSingleFile,uploadMultipleFile,postMethodPayload,deleteMethod}

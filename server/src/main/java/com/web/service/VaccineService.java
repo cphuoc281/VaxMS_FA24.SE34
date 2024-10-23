@@ -62,6 +62,7 @@ public class VaccineService {
     private final VaccineTypeRepository vaccineTypeRepository;
     private final VaccineInventoryRepository vaccineInventoryRepository;
 
+
     public List<Vaccine> findAll() {
         return vaccineRepository.findAll();
     }
@@ -83,6 +84,9 @@ public class VaccineService {
         return list;
     }
 
+    public List<Vaccine> searchVaccines(String keyword) {
+        return vaccineRepository.searchVaccines(keyword);
+    }
     public Page<ListVaccineResponse> listVaccine(ListVaccineRequest requestBody) {
         if (ObjectUtils.isEmpty(requestBody)) {
             throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi");

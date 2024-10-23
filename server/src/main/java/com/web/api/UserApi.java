@@ -77,18 +77,19 @@ public class UserApi {
 
 
     @PostMapping("/login/email")
-    public ResponseEntity<?> loginWithEmail(@RequestBody LoginDto loginDto) {
-        try {
-            TokenDto tokenDto = userService.login(loginDto.getEmail(), loginDto.getPassword());
-            return new ResponseEntity<>(tokenDto, HttpStatus.OK);
-        } catch (MessageException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN.value());
-            return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
-        } catch (Exception e) {
-            ErrorResponse errorResponse = new ErrorResponse("Đã xảy ra lỗi", HttpStatus.INTERNAL_SERVER_ERROR.value());
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+public ResponseEntity<?> loginWithEmail(@RequestBody LoginDto loginDto) {
+    try {
+        TokenDto tokenDto = userService.login(loginDto.getEmail(), loginDto.getPassword());
+        return new ResponseEntity<>(tokenDto, HttpStatus.OK);
+    } catch (MessageException e) {
+        ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN.value());
+        return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
+    } catch (Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse("Đã xảy ra lỗi", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+}
+
 
 
 
@@ -117,19 +118,31 @@ public class UserApi {
     }
 
 
-    @PostMapping("/public/send-request-forgot-password")
-    public ResponseEntity<?> quenMatKhau(@RequestBody ForgotPasswordDto forgotPasswordDto){
-        userService.guiYeuCauQuenMatKhau(forgotPasswordDto.getEmail(), forgotPasswordDto.getUrl());
+//    @PostMapping("/public/send-request-forgot-password")
+//    public ResponseEntity<?> quenMatKhau(@RequestBody ForgotPasswordDto forgotPasswordDto){
+//        userService.guiYeuCauQuenMatKhau(forgotPasswordDto.getEmail(), forgotPasswordDto.getUrl());
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+//
+//    @PostMapping("/public/complete-forgot-password")
+//    public ResponseEntity<?> datLaiMatKhau(@RequestParam String email, @RequestParam String key,
+//                                           @RequestParam String password) {
+//        userService.xacNhanDatLaiMatKhau(email, password, key);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
+    @PostMapping("/public/send-forgot-password-request")
+    public ResponseEntity<?> sendForgotPasswordRequest(@RequestBody ForgotPasswordDto forgotPasswordDto){
+        userService.sendForgotPasswordRequest(forgotPasswordDto.getEmail(), forgotPasswordDto.getUrl());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/public/complete-forgot-password")
-    public ResponseEntity<?> datLaiMatKhau(@RequestParam String email, @RequestParam String key,
-                                           @RequestParam String password) {
-        userService.xacNhanDatLaiMatKhau(email, password, key);
+    @PostMapping("/public/confirm-reset-password")
+    public ResponseEntity<?> confirmResetPassword(@RequestParam String email, @RequestParam String key,
+                                                  @RequestParam String password) {
+        userService.confirmResetPassword(email, password, key);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
     @PostMapping("/all/user-logged")
     public ResponseEntity<?> inforLogged()  {
         return new ResponseEntity<>(userUtils.getUserWithAuthority(),HttpStatus.OK);
@@ -198,7 +211,21 @@ public class UserApi {
 
     @GetMapping("/employee/check-role-employee")
     public void checkRoleEmp(){
-        System.out.println("user");
+        System.out.println("employee");
     }
 
+    @GetMapping("/employee/check-role-staff")
+    public void checkRoleStaff(){
+        System.out.println("staff");
+    }
+
+    @GetMapping("/employee/check-role-doctor")
+    public void checkRoleDoctor(){
+        System.out.println("doctor");
+    }
+
+    @GetMapping("/employee/check-role-nurse")
+    public void checkRoleNurse(){
+        System.out.println("nurse");
+    }
 }

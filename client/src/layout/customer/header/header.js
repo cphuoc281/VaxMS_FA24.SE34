@@ -18,6 +18,7 @@ function Header() {
   const [user, setUser] = useState(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [keyword, setKeyword] = useState('');
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
@@ -31,8 +32,12 @@ function Header() {
     localStorage.removeItem('user');
     setUser(null);
     window.location.href = '/';
-  };
+};
 
+
+  const handleSearch = () => {
+    window.location.href = `/search?keyword=${encodeURIComponent(keyword)}`;
+  };
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
     setCurrentLang(lang);
@@ -74,10 +79,10 @@ function Header() {
                   type="text"
                   className="form-control rounded-pill"
                   placeholder={t('header.search_placeholder')}
-                  value={searchValue}
-                  onChange={(e) => setSearchValue(e.target.value)}
+                  value={keyword}
+                  onChange={(e) => setKeyword(e.target.value)}
                 />
-                <button className="btn btn-link" type="submit">
+                <button onClick={handleSearch} className="btn btn-link" type="submit">
                   <i className="fa fa-search"></i>
                 </button>
               </div>

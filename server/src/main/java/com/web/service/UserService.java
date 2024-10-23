@@ -178,6 +178,51 @@ logger.info("User đã được kích hoạt thành công: {}", email);
     }
 
 
+    public void sendForgotPasswordRequest(String email, String url) {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            if (user.getUserType().equals(UserType.google)) {
+                throw new MessageException("Tài khoản đăng nhập bằng Google, không thể thực hiện chức năng này");
+            }
+
+            // Kiểm tra trạng thái của người dùng (ví dụ: đã kích hoạt hay chưa)
+            checkUser(user);
+
+            String resetKey = userUtils.randomKey();
+            user.setRememberKey(resetKey);
+            userRepository.save(user);
+
+            String resetLink = url + "?email=" + email + "&key=" + resetKey;
+            String content = "Cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi:<br>" +
+                    "Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu của bạn.<br>" +
+                    "Hãy nhấp vào liên kết dưới đây để đặt lại mật khẩu mới của bạn:<br><br>" +
+                    "<a href='" + resetLink + "' style=\"background-color: #2f5fad; padding: 10px; color: #fff; font-size: 18px; font-weight: bold;\">Đặt lại mật khẩu</a>";
+
+            mailService.sendEmail(email, "Đặt lại mật khẩu", content, false, true);
+        } else {
+            throw new MessageException("Email không tồn tại", 404);
+        }
+    }
+
+    public void confirmResetPassword(String email, String password, String key) {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            checkUser(user);
+            if (user.getRememberKey().equals(key)) {
+                user.setPassword(passwordEncoder.encode(password));
+                user.setRememberKey(null); // Xóa key sau khi sử dụng
+                userRepository.save(user);
+            } else {
+                throw new MessageException("Mã xác thực không chính xác");
+            }
+        } else {
+            throw new MessageException("Email không tồn tại", 404);
+        }
+    }
+
     public void guiYeuCauQuenMatKhau(String email, String url) {
         Optional<User> optionalUser = userRepository.findByEmail(email);
         if (optionalUser.isPresent()) {
@@ -229,17 +274,16 @@ logger.info("User đã được kích hoạt thành công: {}", email);
     public void changePass(String oldPass, String newPass) {
         User user = userUtils.getUserWithAuthority();
         if (user.getUserType().equals(UserType.google)) {
-            throw new MessageException("Xin lỗi, chức năng này không hỗ trợ đăng nhập bằng google");
+            throw new MessageException("Xin lỗi, chức năng này không hỗ trợ đăng nhập bằng Google");
         }
-//        if (passwordEncoder.matches(oldPass, user.getPassword())) {
-        if (oldPass.equals(user.getPassword())) {
-            user.setPassword(newPass);
+        if (passwordEncoder.matches(oldPass, user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(newPass));
             userRepository.save(user);
-        }
-        else {
+        } else {
             throw new MessageException("Mật khẩu cũ không chính xác", 500);
         }
     }
+    
 
     public List<User> getUserByRole(String role) {
         if (role == null) {

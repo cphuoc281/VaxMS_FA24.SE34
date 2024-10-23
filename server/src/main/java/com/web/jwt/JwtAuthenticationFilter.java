@@ -35,16 +35,20 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         this.tokenProvider = tokenProvider;
         this.userRepository = userRepository;
     }
-
-
     private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
-        // Kiểm tra xem header Authorization có chứa thông tin jwt không
+        System.out.println("Authorization header: " + bearerToken);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
+            String token = bearerToken.substring(7);
+            if ("null".equals(token)) {
+                return null;
+            }
+            return token;
         }
         return null;
     }
+    
+
 
 
     @Override
@@ -61,6 +65,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         try {
             // Lấy jwt từ request
             String jwt = getJwtFromRequest(httpRequest);
+            System.out.println("JWT Token nhận được: " + jwt);
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
                 Authentication authentication = tokenProvider.getAuthentication(jwt);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -76,19 +81,5 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
                 || requestURI.contains("/public/")
                 || requestURI.startsWith("/api/authority/")
                 || requestURI.contains("/api/user/public/");
-    }
-    public Authentication getAuthentication(String token, Long userId) {
-        com.web.entity.User u = userRepository.findById(userId).get();
-
-        String authol = u.getAuthorities().getName();
-        System.out.println("role: "+authol);
-        Collection<? extends GrantedAuthority> authorities = Arrays
-                .stream(authol.split(","))
-                .filter(auth -> !auth.trim().isEmpty())
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
-
-        User principal = new User(userId.toString(), "", authorities);
-        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 }
