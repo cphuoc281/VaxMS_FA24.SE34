@@ -1,16 +1,25 @@
 package com.web.entity;
 
-import com.nimbusds.openid.connect.sdk.claims.Gender;
+import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import com.web.enums.UserType;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "account")
@@ -46,8 +55,7 @@ public class User{
 
     private String rememberKey;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "authority_id")
     private Authority authorities;
 }
-

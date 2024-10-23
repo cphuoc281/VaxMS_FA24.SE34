@@ -14,21 +14,21 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 
-    @Query("select u from User u join fetch u.authorities where u.email = ?1")
+    @Query(value = "select u from User u where u.email = ?1")
     Optional<User> findByUsername(String username);
 
-    @Query("select u from User u join fetch u.authorities where u.email = ?1")
+    @Query(value = "select u from User u where u.email = ?1")
     Optional<User> findByEmail(String email);
     Optional<User> findByPhoneNumber(String phone);
 
-    @Query("select u from User u join fetch u.authorities where u.id = ?1")
+    @Query(value = "select u.* from account u where u.account_id = ?1", nativeQuery = true)
     Optional<User> findById(Long id);
 
 
-    @Query("select u from User u join fetch u.authorities where u.activationKey = ?1 and u.email = ?2")
+    @Query(value = "select u from User u where u.activationKey = ?1 and u.email = ?2")
     Optional<User> getUserByActivationKeyAndEmail(String key, String email);
 
-    @Query("select u from User u join fetch u.authorities where u.authorities.name = ?1")
+    @Query("select u from User u where u.authorities.name = ?1")
     List<User> getUserByRole(String role);
 
 }

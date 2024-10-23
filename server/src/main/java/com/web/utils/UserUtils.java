@@ -25,17 +25,19 @@ public class UserUtils implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException(username));
-        return new CustomUserDetails(user);
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.get() == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return new CustomUserDetails(user.get());
     }
 
-    public User getUserWithAuthority() {
+    public User getUserWithAuthority(){
         try {
-            Long id = Long.valueOf(SecurityUtils.getCurrentUserLogin().get());
-            return userRepository.findById(id)
-                    .orElseThrow(() -> new MessageException("User not found", 404));
-        } catch (Exception e) {
+            Long id =Long.valueOf(SecurityUtils.getCurrentUserLogin().get());
+            return userRepository.findById(id).get();
+        }
+        catch (Exception e){
             return null;
         }
     }
@@ -51,4 +53,3 @@ public class UserUtils implements UserDetailsService {
         return String.valueOf(stringBuilder);
     }
 }
-

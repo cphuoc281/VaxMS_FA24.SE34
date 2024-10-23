@@ -25,6 +25,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 
 @Component
+
 public class JwtTokenProvider {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
     private final String JWT_SECRET = "abcdefgh";
@@ -32,6 +33,8 @@ public class JwtTokenProvider {
     private static final String AUTHORITIES_KEY = "roles";
 
     private final long JWT_EXPIRATION = 604800000L;
+
+
 
     // Tạo ra jwt từ thông tin user
     public String generateToken(CustomUserDetails userDetails) {
@@ -57,6 +60,7 @@ public class JwtTokenProvider {
                 .setSigningKey(JWT_SECRET)
                 .parseClaimsJws(token)
                 .getBody();
+        Date date = claims.getExpiration();
         return Long.parseLong(claims.getSubject());
     }
 
@@ -98,4 +102,3 @@ public class JwtTokenProvider {
     }
 
 }
-

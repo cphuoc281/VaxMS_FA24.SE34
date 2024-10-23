@@ -77,19 +77,18 @@ public class UserApi {
 
 
     @PostMapping("/login/email")
-public ResponseEntity<?> loginWithEmail(@RequestBody LoginDto loginDto) {
-    try {
-        TokenDto tokenDto = userService.login(loginDto.getEmail(), loginDto.getPassword());
-        return new ResponseEntity<>(tokenDto, HttpStatus.OK);
-    } catch (MessageException e) {
-        ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN.value());
-        return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
-    } catch (Exception e) {
-        ErrorResponse errorResponse = new ErrorResponse("Đã xảy ra lỗi", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<?> loginWithEmail(@RequestBody LoginDto loginDto) {
+        try {
+            TokenDto tokenDto = userService.login(loginDto.getEmail(), loginDto.getPassword());
+            return new ResponseEntity<>(tokenDto, HttpStatus.OK);
+        } catch (MessageException e) {
+            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN.value());
+            return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
+        } catch (Exception e) {
+            ErrorResponse errorResponse = new ErrorResponse("Đã xảy ra lỗi", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-}
-
 
 
 
@@ -198,8 +197,8 @@ public ResponseEntity<?> loginWithEmail(@RequestBody LoginDto loginDto) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-    @GetMapping("/admin/check-role-admin")
+    @GetMapping("/admin/check-role-admin"
+)
     public void checkRoleAdmin(){
         System.out.println("admin");
     }
