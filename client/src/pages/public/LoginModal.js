@@ -8,6 +8,7 @@ function LoginModal({ show, onClose }) {
             show={show}
             onHide={onClose}
             className="login-modal"
+            size='xl'
             dialogClassName="modal-dialog-centered" /* Center the modal */
         >
             <Modal.Header closeButton>

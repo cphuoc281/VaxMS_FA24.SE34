@@ -84,6 +84,7 @@ public class VaccineService {
         return list;
     }
 
+
     public List<Vaccine> searchVaccines(String keyword) {
         return vaccineRepository.searchVaccines(keyword);
     }
@@ -407,5 +408,14 @@ public class VaccineService {
             }
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
+    }
+
+    public Page<Vaccine> findByParam(String search, Pageable pageable) {
+        if(search == null){
+            search = "";
+        }
+        search = "%"+search+"%";
+        Page<Vaccine> list = vaccineRepository.findByParam(search, pageable);
+        return list;
     }
 }

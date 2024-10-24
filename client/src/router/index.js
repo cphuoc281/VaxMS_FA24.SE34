@@ -17,6 +17,9 @@ import index from "../pages/public/index";
 import register from '../pages/public/register';
 import TraCuuLichTiem from "../pages/public/tracuulichtiem";
 import LichTiemDaQua from "../pages/public/lichtiemdaqua";
+import TimKiemVacxin from "../pages/public/timkiemvacxin";
+import QuenMatKhau from "../pages/public/quenmatkhau";
+import DatLaiMatKhau from "../pages/public/datlaimatkhau";
 // import ConfirmRegis from '../pages/public/confirm';
 
 import LandingPage from '../pages/public/landingPage'; // Import Landing Page
@@ -35,11 +38,14 @@ import CustomerSchedule from "../pages/staff/customerSchedule/CustomerSchedule";
 
 const publicRoutes = [
     { path: "/", component: LandingPage },
+    { path: "/tim-kiem-vaccine", component: TimKiemVacxin },
     {path: "/index", component: index},
     {path: "/login", component: login},
     {path: "/tra-cuu-lich-tiem", component: TraCuuLichTiem},
     {path: "/lich-tiem-da-qua", component: LichTiemDaQua},
     { path: "/register", component: register },
+    { path: "/quenmatkhau", component: QuenMatKhau },
+    { path: "/datlaimatkhau", component: DatLaiMatKhau },
     // { path: "/confirm", component: ConfirmRegis, layout: layoutLogin },
 ];
 

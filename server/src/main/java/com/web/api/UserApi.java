@@ -68,29 +68,26 @@ public class UserApi {
     @PostMapping("/login/google")
     public ResponseEntity<?> loginWithGoogle(@RequestBody String credential) throws Exception {
         GoogleIdToken.Payload payload = googleOAuth2Service.verifyToken(credential);
-        if (payload == null) {
-            throw new MessageException("Google Sign-In Failed");
+        if(payload == null){
+            throw new MessageException("Đăng nhập thất bại");
         }
         TokenDto tokenDto = userService.loginWithGoogle(payload);
-        return new ResponseEntity<>(tokenDto, HttpStatus.OK);
+        return new ResponseEntity(tokenDto, HttpStatus.OK);
     }
 
 
     @PostMapping("/login/email")
-    public ResponseEntity<?> loginWithEmail(@RequestBody LoginDto loginDto) {
-        try {
-            TokenDto tokenDto = userService.login(loginDto.getEmail(), loginDto.getPassword());
-            return new ResponseEntity<>(tokenDto, HttpStatus.OK);
-        } catch (MessageException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN.value());
-            return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
-        } catch (Exception e) {
-            ErrorResponse errorResponse = new ErrorResponse("Đã xảy ra lỗi", HttpStatus.INTERNAL_SERVER_ERROR.value());
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<?> loginWithEmail(@RequestBody LoginDto loginDto) throws Exception {
+        TokenDto tokenDto = userService.login(loginDto.getEmail(), loginDto.getPassword());
+        System.out.println("login email");
+        return new ResponseEntity(tokenDto, HttpStatus.OK);
     }
 
-
+    @PostMapping("/admin/update-role")
+    public ResponseEntity<?> updateRole(@RequestParam Long userId, @RequestParam Long authorityId) throws Exception {
+        userService.updateRole(userId, authorityId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
     @PostMapping("/public/register")
     public ResponseEntity<?> registerUser(@RequestBody UserRequest userRequest) {

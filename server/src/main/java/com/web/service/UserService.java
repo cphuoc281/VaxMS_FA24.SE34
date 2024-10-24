@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.web.entity.Authority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,24 +48,22 @@ public class UserService {
     private JwtTokenProvider jwtTokenProvider;
 
     public TokenDto login(String email, String password) throws Exception {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new MessageException("Không tìm thấy tài khoản", 404));
-
-        // Kiểm tra loại tài khoản
-        if (user.getUserType().equals(UserType.google)) {
-            throw new MessageException("Hãy đăng nhập bằng Google");
+        Optional<User> users = userRepository.findByEmail(email);
+        if (users.isPresent()) {
+            if (users.get().getUserType().equals(UserType.google)) {
+                throw new MessageException("Hãy đăng nhập bằng google");
+            }
         }
-
-        // Kiểm tra trạng thái tài khoản
-        checkUser(user);
-
-        // Kiểm tra mật khẩu
-        if (passwordEncoder.matches(password, user.getPassword())) {
-            CustomUserDetails customUserDetails = new CustomUserDetails(user);
+        // check infor user
+        System.out.println(email);
+//        checkUser(users.get());
+//        if(passwordEncoder.matches(password, users.get().getPassword())){
+        if (password.equalsIgnoreCase(users.get().getPassword())) {
+            CustomUserDetails customUserDetails = new CustomUserDetails(users.get());
             String token = jwtTokenProvider.generateToken(customUserDetails);
             TokenDto tokenDto = new TokenDto();
             tokenDto.setToken(token);
-            tokenDto.setUser(user);
+            tokenDto.setUser(users.get());
             return tokenDto;
         } else {
             throw new MessageException("Mật khẩu không chính xác", 400);
@@ -217,7 +216,8 @@ public class UserService {
             User user = optionalUser.get();
             checkUser(user);
             if (user.getRememberKey().equals(key)) {
-                user.setPassword(passwordEncoder.encode(password));
+//                user.setPassword(passwordEncoder.encode(password));
+                user.setPassword(password);
                 user.setRememberKey(null); // Xóa key sau khi sử dụng
                 userRepository.save(user);
             } else {
@@ -295,5 +295,12 @@ public class UserService {
             return userRepository.findAll();
         }
         return userRepository.getUserByRole(role);
+    }
+
+    public void updateRole(Long userId, Long authorityId) {
+        User user = userRepository.findById(userId).get();
+        Authority authority = authorityRepository.findById(authorityId).get();
+        user.setAuthorities(authority);
+        userRepository.save(user);
     }
 }

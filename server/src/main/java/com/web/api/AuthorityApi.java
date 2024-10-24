@@ -20,7 +20,9 @@ public class AuthorityApi {
 
     @GetMapping("/admin/all")
     public List<Authority> findAll(){
-        return authorityRepository.findAll();
+        List<Authority> list = authorityRepository.findAll();
+        System.out.println("num au: "+list.size());
+        return list;
     }
 
 

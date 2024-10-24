@@ -28,4 +28,7 @@ public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
     Optional<Vaccine> findByName(String name);
 
     Page<Vaccine> findAll( Specification<Vaccine> spec,Pageable pageable);
+
+    @Query("select v from Vaccine v where v.name like ?1 ")
+    Page<Vaccine> findByParam(String search, Pageable pageable);
 }

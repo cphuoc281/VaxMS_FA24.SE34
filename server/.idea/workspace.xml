@@ -6,21 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="1d6866e4-31f4-46cd-8216-552b84457db2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/layout/customer/header/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/customer/header/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/layout/customer/styles/styleuser.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/customer/styles/styleuser.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/admin/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/admin/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/pages/public/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/public/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/services/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/services/request.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/AuthorityApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/AuthorityApi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/UserApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/UserApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/dto/CustomUserDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/dto/CustomUserDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/jwt/JWTConfigurer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/jwt/JWTConfigurer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/jwt/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/jwt/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/jwt/JwtTokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/jwt/JwtTokenProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/VaccineApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/VaccineApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/AuthorityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/AuthorityRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/VaccineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/VaccineRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/utils/UserUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/utils/UserUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/VaxmsApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/VaxmsApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/AgeGroupApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/AgeGroupApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/AuthorityApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/AuthorityApi.class" afterDir="false" />
@@ -53,6 +52,7 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/ConfigApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/ConfigApp.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/CorsFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/CorsFilter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/DatabaseConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/DatabaseConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/Environment$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/Environment$EnvTarget.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/Environment$EnvTarget.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/Environment$ProcessType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/Environment$ProcessType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/Environment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/Environment.class" afterDir="false" />
@@ -218,11 +218,10 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/NewsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/NewsService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/NurseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/NurseService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineInventoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineInventoryService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleDoctorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleDoctorService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleNurseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleNurseService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleTimeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleTimeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineTypeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineTypeService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/utils/CloudinaryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/utils/CloudinaryService.class" afterDir="false" />
@@ -230,8 +229,6 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/utils/CommonPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/utils/CommonPage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/utils/Contains.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/utils/Contains.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/utils/MailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/utils/MailService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/utils/UserUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/utils/UserUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vaxms.iml" beforeDir="false" afterPath="$PROJECT_DIR$/vaxms.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,35 +265,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.VaxmsApplication.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in vaxms.executor&quot;: &quot;Debug&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.VaxmsApplication.executor&quot;: &quot;Run&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;703eb523&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/DEV/Code/VaxMS/VaxMS_FA24.SE34/server&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;cf1e8c14e54505f60aa10ceb8d5d8ab3&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.VaxmsApplication.executor": "Run",
+    "JUnit.All in vaxms.executor": "Debug",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.VaxmsApplication.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "194d0250",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/DEV/Code/VaxMS/VaxMS_FA24.SE34/server",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "spring.configuration.checksum": "cf1e8c14e54505f60aa10ceb8d5d8ab3",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Administrator\Desktop\vaxms-full\VaxMS_FA24.SE34\server\src\main\java\com\web\config" />

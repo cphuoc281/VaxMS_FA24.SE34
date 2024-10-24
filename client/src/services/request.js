@@ -67,26 +67,22 @@ async function getMethod(url) {
     return response;
 }
   
-
-  async function postMethodPayload(url, payload) {
-    if (!url.includes(firstUrl)) {
+var token = localStorage.getItem("token");
+async function postMethodPayload(url, payload) {
+    if(url.includes(firstUrl) == false){
         url = firstUrl + url;
-    }
-    const token = localStorage.getItem("token");
-    const headers = {
-        'Content-Type': 'application/json'
-    };
-    if (token) {
-        headers['Authorization'] = 'Bearer ' + token;
     }
     const response = await fetch(url, {
         method: 'POST',
-        headers: headers,
+        headers: new Headers({
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        }),
         body: JSON.stringify(payload)
     });
-    return response;
+    return response
 }
-  
+
   
 
   async function deleteMethod(url) {

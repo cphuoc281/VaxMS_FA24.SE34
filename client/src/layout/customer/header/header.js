@@ -74,9 +74,10 @@ function Header() {
               </Link>
             </div>
             <div className="col-6">
-              <div className="search-bar d-flex align-items-center">
+              <form action='tim-kiem-vaccine' className="search-bar d-flex align-items-center">
                 <input
                   type="text"
+                  name='search'
                   className="form-control rounded-pill"
                   placeholder={t('header.search_placeholder')}
                   value={keyword}
@@ -85,7 +86,7 @@ function Header() {
                 <button onClick={handleSearch} className="btn btn-link" type="submit">
                   <i className="fa fa-search"></i>
                 </button>
-              </div>
+              </form>
             </div>
             <div className="col-3 nav-right d-flex justify-content-end align-items-center">
               <Link to="/dang-ky-tiem-chung" className="itemheader me-3">

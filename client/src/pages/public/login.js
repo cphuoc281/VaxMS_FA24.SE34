@@ -4,81 +4,93 @@ import 'react-toastify/dist/ReactToastify.css';
 import { postMethodPayload } from '../../services/request';
 import Swal from 'sweetalert2';
 import '../../layout/customer/styles/login.scss'; // Assuming you created a login.scss file for custom styles.
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+
+
+
 
 function Login() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    /* Initialize Google SignIn */
-    window.google.accounts.id.initialize({
-      client_id: '950156521822-d34se9kv73udmtsavta0dr9cq9h2ujqc.apps.googleusercontent.com', // Replace with your Google OAuth Client ID
-      callback: handleGoogleLoginResponse,
-    });
-    window.google.accounts.id.renderButton(
-      document.getElementById('googleSignInButton'),
-      { theme: 'outline', size: 'large' }
-    );
+   
   }, []);
 
   async function handleLogin(event) {
     event.preventDefault();
-    setLoading(true);
-
     const payload = {
-      email: event.target.elements.email.value.trim(),
-      password: event.target.elements.password.value,
+        email: event.target.elements.email.value,
+        password: event.target.elements.password.value
     };
-
-    try {
-      const res = await postMethodPayload('/api/user/login/email', payload);
-      if (res.ok) {
-        const result = await res.json();
-        localStorage.setItem('token', result.token);
-        localStorage.setItem('user', JSON.stringify(result.user));
-        window.location.href = '/';
-      } else {
-        const result = await res.json();
-        Swal.fire({
-          icon: 'error',
-          title: 'Login Failed',
-          text: result.message || 'Invalid email or password',
-        });
-      }
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Login Failed',
-        text: 'Unable to connect to the server',
-      });
-    } finally {
-      setLoading(false);
+    console.log(payload);
+    
+    const res = await postMethodPayload('/api/user/login/email', payload);
+    
+    var result = await res.json()
+    console.log(result);
+    if (res.status == 417) {
+        if (result.errorCode == 300) {
+            Swal.fire({
+                title: "Thông báo",
+                text: "Tài khoản chưa được kích hoạt, đi tới kích hoạt tài khoản!",
+                preConfirm: () => {
+                    window.location.href = 'confirm?email=' + event.target.elements.username.value
+                }
+            });
+        } else {
+            toast.warning(result.defaultMessage);
+        }
     }
-  }
-
-  async function handleGoogleLoginResponse(response) {
-    try {
-      const res = await postMethodPayload('/api/user/login/google', response.credential);
-      if (res.ok) {
-        const result = await res.json();
-        localStorage.setItem('token', result.token);
-        localStorage.setItem('user', JSON.stringify(result.user));
-        window.location.href = '/';
-      } else {
-        const result = await res.json();
-        Swal.fire({
-          icon: 'error',
-          title: 'Google Sign-In Failed',
-          text: result.message || 'Unable to log in with Google',
-        });
-      }
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Google Sign-In Failed',
-        text: 'Unable to connect to the server',
-      });
+    if(res.status < 300){
+        processLogin(result.user, result.token)
     }
+};
+
+const handleLoginSuccess = async (accessToken) => {
+    console.log(accessToken);
+    
+    var response = await fetch('http://localhost:8080/api/user/login/google', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        body: accessToken.credential
+    })
+    var result = await response.json();
+    if (response.status < 300) {
+        processLogin(result.user, result.token)
+    }
+    if (response.status == 417) {
+        toast.warning(result.defaultMessage);
+    }
+};
+
+async function processLogin(user, token) {
+  toast.success('Đăng nhập thành công!');
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  localStorage.setItem("token", token);
+  localStorage.setItem("user", JSON.stringify(user));
+  if (user.authorities.name === "Admin") {
+      window.location.href = 'admin/index';
   }
+  if (user.authorities.name === "Customer") {
+      window.location.href = '/index';
+  }
+  if (user.authorities.name === "Doctor") {
+      
+  }
+  if (user.authorities.name === "Nurse") {
+      window.location.href = 'staff/vaccine';
+  }
+  if (user.authorities.name === "Support Staff") {
+      window.location.href = '/staff/chat';
+  }
+}
+
+const handleLoginError = () => {
+    toast.error("Đăng nhập google thất bại")
+};
   
 
   return (
@@ -110,7 +122,7 @@ function Login() {
             {loading ? 'Loading...' : 'Sign in'}
           </button>
           <div className="forgot-password">
-            <a href="/forgot-password">Forgot your password?</a>
+            <a href="/quenmatkhau">Forgot your password?</a>
           </div>
         </form>
 
@@ -119,7 +131,14 @@ function Login() {
         </div>
 
         {/* Google Sign-In Button */}
-        <div id="googleSignInButton"></div>
+        <GoogleOAuthProvider clientId="663646080535-l004tgn5o5cpspqdglrl3ckgjr3u8nbf.apps.googleusercontent.com">
+            <div className='divcenter' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <GoogleLogin
+                onSuccess={handleLoginSuccess}
+                onError={handleLoginError}
+            />
+            </div>
+          </GoogleOAuthProvider>
 
         <p className="login-footer">
           By clicking Sign in or Continue with Google, you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
