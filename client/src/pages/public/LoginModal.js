@@ -12,7 +12,6 @@ function LoginModal({ show, onClose }) {
             dialogClassName="modal-dialog-centered" /* Center the modal */
         >
             <Modal.Header closeButton>
-                <Modal.Title>Login</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Login /> {/* Assuming this is your login form component */}

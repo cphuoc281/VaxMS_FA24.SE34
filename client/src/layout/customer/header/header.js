@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import logo from '../../../assest/images/vnvc-logo.png';
+import logo from '../../../assest/images/vaxmslogo.png';
 import vietnamFlag from '../../../assest/images/vietnam-flag.png';
-import engFlag from '../../../assest/images/engflag2.jpg'; // English flag
+import engFlag from '../../../assest/images/engflag2.jpg';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/style.scss';
+import './header.scss';
 import topbanner from '../../../assest/images/topbanner.png';
-import LoginModal from '../../../pages/public/LoginModal'; // Assuming you create this
-import RegisterModal from '../../../pages/public/RegisterModal'; // Assuming you create this
+import LoginModal from '../../../pages/public/LoginModal';
+import RegisterModal from '../../../pages/public/RegisterModal';
 
 function Header() {
   const [searchValue, setSearchValue] = useState('');
@@ -32,7 +32,7 @@ function Header() {
     localStorage.removeItem('user');
     setUser(null);
     window.location.href = '/';
-};
+  };
 
 
   const handleSearch = () => {
@@ -67,95 +67,123 @@ function Header() {
       {/* Main Header with Logo, Search Bar, and Navigation */}
       <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div className="container">
-          <div className="row align-items-center w-100">
-            <div className="col-3">
-              <Link to="/" className="navbar-brand">
-                <img src={logo} className="imagelogoheader" alt="VNVC Logo" />
-              </Link>
-            </div>
-            <div className="col-6">
-              <form action='tim-kiem-vaccine' className="search-bar d-flex align-items-center">
-                <input
-                  type="text"
-                  name='search'
-                  className="form-control rounded-pill"
-                  placeholder={t('header.search_placeholder')}
-                  value={keyword}
-                  onChange={(e) => setKeyword(e.target.value)}
-                />
-                <button onClick={handleSearch} className="btn btn-link" type="submit">
-                  <i className="fa fa-search"></i>
-                </button>
-              </form>
-            </div>
-            <div className="col-3 nav-right d-flex justify-content-end align-items-center">
-              <Link to="/dang-ky-tiem-chung" className="itemheader me-3">
-                <i className="fa fa-calendar"></i> <span>{t('header.register_vaccine')}</span>
-              </Link>
+          <Link to="/" className="navbar-brand d-flex align-items-center">
+            <img src={logo} className="imagelogoheader" alt="Vaxms" />
+          </Link>
 
-              {user ? (
-                <>
-                  <span className="itemheader me-3">{user.email}</span>
-                  <button onClick={handleLogout} className="itemheader me-3">
-                    {t('header.signout')}
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button className="itemheader me-3" onClick={() => setShowLoginModal(true)}>
-                    <i className="fa fa-sign-in"></i> <span>{t('header.login')}</span>
-                  </button>
-                  <button className="itemheader me-3" onClick={() => setShowRegisterModal(true)}>
-                    <i className="fa fa-user-plus"></i> <span>{t('header.register')}</span>
-                  </button>
-                </>
-              )}
+          <div className="search-bar flex-grow-1 me-5 position-relative">
+            <form action='tim-kiem-vaccine'>
+              <input
+                type="text"
+                name='search'
+                className="form-control rounded-pill"
+                placeholder={t('header.search_placeholder')}
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                style={{ paddingRight: '50px' }} // Thêm khoảng trống bên phải cho nút
+              />
+              <button onClick={handleSearch} className="btn btn-primary search-button" type="submit">
+                <i className="fa fa-search"></i>
+              </button>
+            </form>
+          </div>
 
-              <div className="language-switcher dropdown">
-                <button
-                  className="btn btn-light dropdown-toggle d-flex align-items-center"
-                  type="button"
-                  id="languageDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <img src={currentLangFlag} alt="Current Language" className="flag-icon" />
-                  {currentLangText}
+          <div className="nav-right d-flex align-items-center">
+            <Link to="/dang-ky-tiem-chung" className="btn btn-outline-primary me-2">
+              <i className="fa fa-calendar"></i> <span>{t('header.register_vaccine')}</span>
+            </Link>
+
+            {user ? (
+              <>
+                <span className="itemheader me-2">{user.email}</span>
+                <button onClick={handleLogout} className="btn btn-outline-danger me-2">
+                  {t('header.signout')}
                 </button>
-                <ul className="dropdown-menu dropdown-menu-end rounded shadow" aria-labelledby="languageDropdown">
-                  <li>
-                    <button className="dropdown-item d-flex align-items-center" onClick={() => changeLanguage('vi')}>
-                      <img src={vietnamFlag} alt="Vietnam Flag" className="flag-icon me-2" />
-                      Tiếng Việt
-                    </button>
-                  </li>
-                  <li>
-                    <button className="dropdown-item d-flex align-items-center" onClick={() => changeLanguage('en')}>
-                      <img src={engFlag} alt="English Flag" className="flag-icon me-2" />
-                      English
-                    </button>
-                  </li>
-                </ul>
-              </div>
+              </>
+            ) : (
+              <>
+                <button className="btn btn-outline-primary me-2" onClick={() => setShowLoginModal(true)}>
+                  <i className="fa fa-sign-in"></i> <span>{t('header.login')}</span>
+                </button>
+                <button className="btn btn-primary me-2" onClick={() => setShowRegisterModal(true)}>
+                  <i className="fa fa-user-plus"></i> <span>{t('header.register')}</span>
+                </button>
+              </>
+            )}
+
+
+            <div className="language-switcher dropdown">
+              <button
+                className="btn btn-light dropdown-toggle d-flex align-items-center"
+                type="button"
+                id="languageDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img src={currentLangFlag} alt="Current Language" className="flag-icon me-1" />
+                {currentLangText}
+              </button>
+              <ul className="dropdown-menu dropdown-menu-end rounded shadow" aria-labelledby="languageDropdown">
+                <li>
+                  <button className="dropdown-item d-flex align-items-center" onClick={() => changeLanguage('vi')}>
+                    <img src={vietnamFlag} alt="Vietnam Flag" className="flag-icon me-2" />
+                    Tiếng Việt
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item d-flex align-items-center" onClick={() => changeLanguage('en')}>
+                    <img src={engFlag} alt="English Flag" className="flag-icon me-2" />
+                    English
+                  </button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </nav>
 
       {/* Bottom Navigation */}
-      <div className="container-fluid container-bottom-header bg-light py-2">
-        <div className="row justify-content-center">
-          <Link to="/" className="col itemheader">{t('header.home')}</Link>
-          <Link to="/gioi-thieu" className="col itemheader">{t('header.introduction')}</Link>
-          <Link to="/vaccine-tre-em" className="col itemheader">{t('header.children_vaccine')}</Link>
-          <Link to="/vaccine-nguoi-lon" className="col itemheader">{t('header.adult_vaccine')}</Link>
-          <Link to="/goi-vaccine" className="col itemheader">{t('header.vaccine_packages')}</Link>
-          <Link to="/cam-nang" className="col itemheader">{t('header.vaccine_schedule')}</Link>
-          <Link to="/bang-gia" className="col itemheader">{t('header.price_list')}</Link>
-          <Link to="/benh-hoc" className="col itemheader">{t('header.diseases')}</Link>
-          <Link to="/tin-tuc" className="col itemheader">{t('header.news')}</Link>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container">
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#bottomNavbar"
+            aria-controls="bottomNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="bottomNavbar">
+            <ul className="navbar-nav mx-auto">
+              <li className="nav-item">
+                <Link to="/" className="nav-link itemheader">{t('header.home')}</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/intro" className="nav-link itemheader">{t('header.introduction')}</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/vaccine" className="nav-link itemheader">{t('header.vaccine_packages')}</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/guide" className="nav-link itemheader">{t('header.guide')}</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/price" className="nav-link itemheader">{t('header.price_list')}</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/diseases" className="nav-link itemheader">{t('header.diseases')}</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/news" className="nav-link itemheader">{t('header.news')}</Link>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </nav>
+
 
       {/* Login and Register Modals */}
       <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(false)} />

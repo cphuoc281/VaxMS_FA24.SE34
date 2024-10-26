@@ -5,35 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d6866e4-31f4-46cd-8216-552b84457db2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/layout/customer/header/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/customer/header/header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/layout/customer/styles/styleuser.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/customer/styles/styleuser.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/admin/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/admin/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/public/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/public/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/services/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/services/request.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/AuthorityApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/AuthorityApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/UserApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/UserApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/VaccineApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/VaccineApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/AuthorityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/AuthorityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/VaccineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/VaccineRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/VaxmsApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/VaxmsApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/AgeGroupApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/AgeGroupApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/AuthorityApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/AuthorityApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/CenterApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/CenterApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/ChatApi$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/ChatApi$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/ChatApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/ChatApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/CustomerProfileApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/CustomerProfileApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/CustomerScheduleApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/CustomerScheduleApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/DoctorApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/DoctorApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/FeedBackApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/FeedBackApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/ManufacturerApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/ManufacturerApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/MomoApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/MomoApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/NewsApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/NewsApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/NurseApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/NurseApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/UploadApi$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/UploadApi$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/UploadApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/UploadApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/UserApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/UserApi.class" afterDir="false" />
@@ -43,35 +23,26 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/VaccineScheduleDoctorApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/VaccineScheduleDoctorApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/VaccineScheduleNurseApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/VaccineScheduleNurseApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/VaccineScheduleTimeApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/VaccineScheduleTimeApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/VaccineTypeApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/VaccineTypeApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/chat/MessageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/chat/MessageController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/chat/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/chat/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/chat/UserInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/chat/UserInterceptor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/chat/WebSocketConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/chat/WebSocketConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/CloudConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/CloudConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/ConfigApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/ConfigApp.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/CorsFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/CorsFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/DatabaseConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/DatabaseConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/Environment$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/Environment$EnvTarget.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/Environment$EnvTarget.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/Environment$ProcessType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/Environment$ProcessType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/Environment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/Environment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/MailSenderConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/MailSenderConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/MoMoEndpoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/MoMoEndpoint.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/PartnerInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/PartnerInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/PasswordConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/PasswordConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/SecurityUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/SecurityUtils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/SqlTimeDeserializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/SqlTimeDeserializer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/WebConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/WebConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/config/WebSecurityConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/constants/ConfirmRequestType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/constants/ConfirmRequestType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/constants/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/constants/Constants.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/constants/Encoder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/constants/Encoder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/constants/Execute.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/constants/Execute.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/constants/Language.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/constants/Language.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/constants/LogUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/constants/LogUtils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/constants/MoMoException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/constants/MoMoException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/constants/Parameter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/constants/Parameter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/constants/RequestType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/constants/RequestType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/dto/ActivateAccountDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/dto/ActivateAccountDto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/dto/ChatDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/dto/ChatDto.class" afterDir="false" />
@@ -138,14 +109,12 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/CbTokenInquiryRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/CbTokenInquiryRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/CbTokenInquiryResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/CbTokenInquiryResponse.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/ConfirmRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/ConfirmRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/ConfirmResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/ConfirmResponse.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/CreateScheduleGuestRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/CreateScheduleGuestRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/CreateScheduleGuestResponse$CreateScheduleGuestResponseBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/CreateScheduleGuestResponse$CreateScheduleGuestResponseBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/CreateScheduleGuestResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/CreateScheduleGuestResponse.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/CreateVaccineRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/CreateVaccineRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/CreateVaccineResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/CreateVaccineResponse.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/DeleteTokenRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/DeleteTokenRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/DeleteTokenResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/DeleteTokenResponse.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/DeleteVaccineInventoryRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/DeleteVaccineInventoryRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/DeleteVaccineRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/DeleteVaccineRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/DetailVaccineRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/DetailVaccineRequest.class" afterDir="false" />
@@ -172,7 +141,6 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/QueryStatusTransactionResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/QueryStatusTransactionResponse.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/RefundMoMoRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/RefundMoMoRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/RefundMoMoResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/RefundMoMoResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/RefundOfQueryStatusTransaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/RefundOfQueryStatusTransaction.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/Request.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/Request.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/Response.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/Response.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/UpdateVaccineRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/UpdateVaccineRequest.class" afterDir="false" />
@@ -192,11 +160,8 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/ChatRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/ChatRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/CustomerProfileRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/CustomerProfileRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/CustomerScheduleRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/CustomerScheduleRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/DoctorRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/DoctorRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/FeedbackRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/FeedbackRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/ManufacturerRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/ManufacturerRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/NewsRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/NewsRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/NurseRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/NurseRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/PaymentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/PaymentRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/UserRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/VaccineInventoryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/VaccineInventoryRepository.class" afterDir="false" />
@@ -206,29 +171,25 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/VaccineScheduleRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/VaccineScheduleRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/VaccineScheduleTimeRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/VaccineScheduleTimeRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/VaccineTypeRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/VaccineTypeRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/AgeGroupService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/AgeGroupService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/CenterService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/CenterService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/CustomerProfileService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/CustomerProfileService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/CustomerScheduleService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/CustomerScheduleService$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/CustomerScheduleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/CustomerScheduleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/DoctorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/DoctorService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/FeedBackService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/FeedBackService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/GoogleOAuth2Service.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/GoogleOAuth2Service.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/ManufacturerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/ManufacturerService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/NewsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/NewsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/NurseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/NurseService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineInventoryService$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineInventoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineInventoryService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleDoctorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleDoctorService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleNurseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleNurseService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleTimeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleTimeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineTypeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineTypeService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/utils/CloudinaryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/utils/CloudinaryService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/utils/CommonPage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/utils/CommonPage$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/utils/CommonPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/utils/CommonPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/utils/Contains.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/utils/Contains.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/utils/MailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/utils/MailService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/web/utils/UserUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/utils/UserUtils.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,7 +238,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.VaxmsApplication.executor": "Run",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "194d0250",
+    "git-widget-placeholder": "develop-ducanhlv",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/DEV/Code/VaxMS/VaxMS_FA24.SE34/server",

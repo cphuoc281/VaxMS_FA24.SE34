@@ -75,7 +75,7 @@ async function processLogin(user, token) {
       window.location.href = 'admin/index';
   }
   if (user.authorities.name === "Customer") {
-      window.location.href = '/index';
+      window.location.href = '/';
   }
   if (user.authorities.name === "Doctor") {
       

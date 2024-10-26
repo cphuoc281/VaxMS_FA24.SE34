@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import { useTranslation } from 'react-i18next';
+import '../../layout/customer/styles/styleuser.scss';
 import aboutImage from '../../assest/images/about-image.jpg';
 import bannerImage1 from '../../assest/images/banner.jpg';
 import bannerImage2 from '../../assest/images/banner1.png';

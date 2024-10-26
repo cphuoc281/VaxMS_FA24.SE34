@@ -52,7 +52,9 @@ function TimKiemVacxin(){
                     <img src={item.image} className='imgvaccine'/>
                     <div className='divcntvaccine'>
                         <a href='#' className='tenvaccinesearch'>{item.name}</a>
+                        <span className='motavaccinesearch'>{item.description}</span>
                         <span className='nhomtuoivc'>Nhóm tuổi: {item.ageGroup.ageRange}</span>
+                        
                         <a target='_blank' href={'dang-ky-tiem-chung?vaccine='+item.id} className='btn btn-primary'>Đặt</a>
                     </div>
                 </div>

@@ -1,7 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 body{
     font-family: 'Poppins', sans-serif;
 }
-
+#headerweb{
+    position: fixed;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    height: 100px;
+    
+}
 .container-web{
     width: 80%;
     margin-left: 10%;
@@ -33,7 +42,9 @@ body{
 .hrheader-web{
     padding:0; margin-bottom: 2px;margin-top: 0px;
 }
-
+.main-content-web{
+    padding-top: 100px;
+}
 .section-content-web{
     background-color: #f2f2f2;
     padding: 1.5em 1.5em;
@@ -501,23 +512,8 @@ body{
     display: flex;
     flex-direction: column;
 }
-.mychat{
-    background-color: #0084ff;
-    color: #fff;
-    max-width: 70%;
-    padding: 3px 7px;
-    border-radius: 10px;
-    display: inline-block;
-    align-self: flex-end;
-}
-.adminchat{
-    background-color: #f0f0f0;
-    max-width: 70%;
-    padding: 3px 7px;
-    border-radius: 10px;
-    display: inline-block;
-    align-self: flex-start;
-}
+
+
 
 
 #thanhcong{

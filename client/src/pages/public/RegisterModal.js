@@ -11,7 +11,6 @@ function RegisterModal({ show, onClose }) {
       dialogClassName="modal-dialog-centered"
     >
       <Modal.Header closeButton>
-        <Modal.Title>Register</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Register /> {/* Assuming this is your register form component */}
