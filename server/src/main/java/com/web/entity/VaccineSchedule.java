@@ -18,8 +18,6 @@ import java.util.List;
 @Table(name = "vaccine_schedule")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class VaccineSchedule {
 
     @Id

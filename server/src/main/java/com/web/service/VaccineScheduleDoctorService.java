@@ -30,8 +30,8 @@ public class VaccineScheduleDoctorService {
 
     public void save(List<Long> doctorId, List<Long> nurseId, Date injectDate, Long vaccineScheduleId){
         try {
-            vaccineScheduleDoctorRepository.deleteByVaccineSchedule(vaccineScheduleId);
-            vaccineScheduleNUrseRepository.deleteByVaccineSchedule(vaccineScheduleId);
+            vaccineScheduleDoctorRepository.deleteByVaccineSchedule(vaccineScheduleId, injectDate);
+            vaccineScheduleNUrseRepository.deleteByVaccineSchedule(vaccineScheduleId, injectDate);
         }
         catch (Exception e){
             throw new MessageException("Không thể thay đổi bác sĩ hoặc y tá");

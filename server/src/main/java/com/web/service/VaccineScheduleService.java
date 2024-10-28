@@ -1,5 +1,6 @@
 package com.web.service;
 
+import com.web.entity.Center;
 import com.web.entity.Vaccine;
 import com.web.entity.VaccineSchedule;
 import com.web.exception.MessageException;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,7 +79,10 @@ public class VaccineScheduleService {
             throw new MessageException("Không tìm thấy lịch tiêm có id: "+vaccineSchedule.getId());
         }
         Long num = vaccineScheduleTimeRepository.quantityBySchedule(vaccineSchedule.getId());
-        if(vaccineScheduleTimeRepository.quantityBySchedule(vaccineSchedule.getId()) > vaccineSchedule.getLimitPeople()){
+        if(num == null){
+            num = 0L;
+        }
+        if(num > vaccineSchedule.getLimitPeople()){
             throw new MessageException("Số lượng mũi tiêm đã phát hành là: "+ num+", số mũi tiêm bạn cập nhật không chính xác");
         }
         vaccineSchedule.setCreatedDate(exist.get().getCreatedDate());
@@ -162,4 +168,15 @@ public class VaccineScheduleService {
     }
 
 
+    public List<VaccineSchedule> getCenter(Date start, Long vaccineId) {
+        List<VaccineSchedule> list = new ArrayList<>();
+        if(start == null){
+            start = new Date(System.currentTimeMillis());
+        }
+        if(start.toLocalDate().isBefore(LocalDate.now())){
+            throw new MessageException("Thời gian tối thiểu phải bắt đầu từ ngày hiện tại");
+        }
+        list = vaccineScheduleRepository.getCenter(start, vaccineId);
+        return list;
+    }
 }
