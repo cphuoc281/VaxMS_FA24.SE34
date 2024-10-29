@@ -1,5 +1,6 @@
 package com.web.entity;
 
+import com.web.enums.PayType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +25,9 @@ public class Payment {
     private String requestId;
 
     private String orderId;
+
+    @Enumerated(EnumType.STRING)
+    private PayType payType;
 
     @ManyToOne
     @JoinColumn(name = "customer_schedule_id")

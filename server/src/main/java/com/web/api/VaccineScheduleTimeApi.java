@@ -65,4 +65,10 @@ public class VaccineScheduleTimeApi {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/public/find-by-id")
+    public ResponseEntity<?> findById(@RequestParam Long id){
+        VaccineScheduleTime result = vaccineScheduleTimeService.findById(id);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 }

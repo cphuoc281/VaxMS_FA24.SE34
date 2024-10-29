@@ -1,5 +1,6 @@
 package com.web.entity;
 
+import com.web.enums.CustomerSchedulePay;
 import com.web.enums.StatusCustomerSchedule;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +28,6 @@ public class CustomerSchedule {
 
     private Timestamp createdDate;
 
-    private Boolean payStatus;
-
     private String fullName;
 
     private Date dob;
@@ -36,6 +35,9 @@ public class CustomerSchedule {
     private String phone;
 
     private String address;
+
+    @Enumerated(EnumType.STRING)
+    private CustomerSchedulePay customerSchedulePay;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -48,4 +50,5 @@ public class CustomerSchedule {
     @ManyToOne
     @JoinColumn(name = "vaccine_schedule_time_id")
     private VaccineScheduleTime vaccineScheduleTime;
+
 }

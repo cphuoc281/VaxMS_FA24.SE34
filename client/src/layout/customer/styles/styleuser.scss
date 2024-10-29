@@ -653,3 +653,93 @@ body{
     display: block;
     margin-top: 8px !important;
 }
+.tablexacnhandki th, td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.momopay {
+    width: 30px;
+}
+
+.tablepay {
+    border: 1px solid #e0e0d1;
+    /* border-collapse:separate; 
+    border-spacing: 0 1em; */
+}
+
+.tablepay td {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+}
+
+.paycode {
+    font-size: 28px;
+    color: #fcaf17;
+}
+.momopay {
+    width: 60px;
+}
+
+.radiocustom {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.radiocustom p{
+    margin-left: 30px;
+}
+.radiocustom input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.radiocustom:hover input~.checkmark {
+    background-color: #828282;
+}
+
+.radiocustom input~.checkmark {
+    background-color: #828282;
+}
+
+.radiocustom input:checked~.checkmark {
+    background-color: #fcaf17;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+.radiocustom input:checked~.checkmark:after {
+    display: block;
+}
+
+.radiocustom .checkmark:after {
+    top: 6px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}

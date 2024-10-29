@@ -18,6 +18,8 @@ import LichTiemDaQua from "../pages/public/lichtiemdaqua";
 import dangkytiemchung from "../pages/customer/dangkytiemchung";
 import taikhoan from "../pages/customer/taikhoan";
 import thongbao from "../pages/customer/thongbao";
+import XacNhanDangky from "../pages/customer/xacnhandangky";
+import ThanhCong from "../pages/customer/thanhcong";
 
 //staff
 import StaffChat from "../pages/staff/chat";
@@ -37,6 +39,8 @@ const customerRoutes = [
     {path: "/dang-ky-tiem-chung", component: dangkytiemchung},
     {path: "/tai-khoan", component: taikhoan},
     {path: "/thong-bao", component: thongbao},
+    {path: "/xac-nhan-dang-ky", component: XacNhanDangky},
+    {path: "/thanh-cong", component: ThanhCong},
 ];
 
 const adminRoutes = [

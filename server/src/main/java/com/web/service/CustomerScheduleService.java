@@ -2,7 +2,11 @@ package com.web.service;
 
 import com.web.config.Environment;
 import com.web.constants.LogUtils;
+import com.web.dto.CustomerScheduleVnpay;
+import com.web.dto.PaymentRequest;
 import com.web.entity.*;
+import com.web.enums.CustomerSchedulePay;
+import com.web.enums.PayType;
 import com.web.enums.StatusCustomerSchedule;
 import com.web.enums.UserType;
 import com.web.exception.MessageException;
@@ -16,6 +20,7 @@ import com.web.models.QueryStatusTransactionResponse;
 import com.web.processor.QueryTransactionStatus;
 import com.web.repository.*;
 import com.web.utils.UserUtils;
+import com.web.vnpay.VNPayService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +70,9 @@ public class CustomerScheduleService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private VNPayService vnPayService;
+
     public CustomerSchedule create(CustomerSchedule customerSchedule, String orderId, String requestId) {
         LogUtils.init();
         if (paymentRepository.findByOrderIdAndRequestId(orderId, requestId).isPresent()) {
@@ -85,7 +93,6 @@ public class CustomerScheduleService {
         customerSchedule.setUser(user);
         customerSchedule.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         customerSchedule.setStatusCustomerSchedule(StatusCustomerSchedule.pending);
-        customerSchedule.setPayStatus(true);
         customerScheduleRepository.save(customerSchedule);
 
         VaccineScheduleTime vaccineScheduleTime = vaccineScheduleTimeRepository.findById(customerSchedule.getVaccineScheduleTime().getId()).get();
@@ -122,9 +129,6 @@ public class CustomerScheduleService {
         if (customerSchedule.get().getUser().getId() != userUtils.getUserWithAuthority().getId()) {
             throw new MessageException("Bạn không đủ quyền");
         }
-        if (customerSchedule.get().getPayStatus() == true) {
-            throw new MessageException("Đã thanh toán, không thể hoãn");
-        }
         if (customerSchedule.get().getStatusCustomerSchedule().equals(StatusCustomerSchedule.cancelled)) {
             throw new MessageException("Không được lặp lại hành động");
         }
@@ -147,7 +151,6 @@ public class CustomerScheduleService {
                     Optional<VaccineScheduleTime> vaccineScheduleTime = vaccineScheduleTimeRepository.findById(e.getVaccineScheduleTime().getId());
                     return ListCustomerScheduleResponse.builder()
                             .id(e.getId())
-                            .payStatus(e.getPayStatus())
                             .status(e.getStatusCustomerSchedule().name())
                             .fullName(e.getFullName())
                             .createdDate(e.getCreatedDate())
@@ -204,13 +207,11 @@ public class CustomerScheduleService {
                 .phone(request.getPhone())
                 .address(request.getAddress())
                 .createdDate(new Timestamp(System.currentTimeMillis()))
-                .payStatus(false)
                 .user(user)
                 .build();
         customerScheduleRepository.save(customerSchedule);
         sendEmailToCustomer(customerSchedule);
         return CreateScheduleGuestResponse.builder()
-                .payStatus(customerSchedule.getPayStatus())
                 .vaccineScheduleTime(optionalVaccineScheduleTime.orElse(null))
                 .createdDate(customerSchedule.getCreatedDate())
                 .fullName(customerSchedule.getFullName())
@@ -267,5 +268,116 @@ public class CustomerScheduleService {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public CustomerSchedule createNotPay(CustomerSchedule customerSchedule) {
+        CustomerSchedule result = save(customerSchedule, null, null);
+        return result;
+    }
+
+    public CustomerSchedule createVnPay(CustomerScheduleVnpay customerScheduleVnpay) {
+        if(paymentRepository.findByOrderIdAndRequestId(customerScheduleVnpay.getVnpOrderInfo(),customerScheduleVnpay.getVnpOrderInfo()).isPresent()){
+            throw new MessageException("Lịch đặt đã được thanh toán");
+        }
+        int paymentStatus = vnPayService.orderReturnByUrl(customerScheduleVnpay.getVnpayUrl());
+        if(paymentStatus != 1){
+            throw new MessageException("Thanh toán thất bại");
+        }
+        CustomerSchedule result = save(customerScheduleVnpay.getCustomerSchedule(), PayType.VNPAY, customerScheduleVnpay.getVnpOrderInfo());
+        return result;
+    }
+
+    public CustomerSchedule createMomo(CustomerSchedule customerSchedule,String orderId,String requestId) {
+        LogUtils.init();
+        if (paymentRepository.findByOrderIdAndRequestId(orderId, requestId).isPresent()) {
+            throw new MessageException("Không được thực hiện hành động này");
+        }
+        Environment environment = Environment.selectEnv("dev");
+        try {
+            QueryStatusTransactionResponse queryStatusTransactionResponse = QueryTransactionStatus.process(environment, orderId, requestId);
+            System.out.println("qqqq-----------------------------------------------------------" + queryStatusTransactionResponse.getMessage());
+            if (queryStatusTransactionResponse.getResultCode() != 0) {
+                throw new MessageException("Chưa được thanh toán");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new MessageException("Chưa được thanh toán");
+        }
+        CustomerSchedule result = save(customerSchedule, PayType.MOMO, orderId);
+
+        return result;
+    }
+
+    public CustomerSchedule save(CustomerSchedule customerSchedule, PayType payType, String orderId){
+        VaccineScheduleTime vaccineScheduleTime = vaccineScheduleTimeRepository.findById(customerSchedule.getVaccineScheduleTime().getId()).get();
+        Long count = customerScheduleRepository.countBySchedule(vaccineScheduleTime.getId());
+        if (count == null){
+            count = 0L;
+        }
+        if(count + 1 > vaccineScheduleTime.getLimitPeople()){
+            throw new MessageException("Ca tiêm này đã đủ");
+        }
+        User user = userUtils.getUserWithAuthority();
+        customerSchedule.setUser(user);
+        customerSchedule.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+        customerSchedule.setStatusCustomerSchedule(StatusCustomerSchedule.pending);
+        customerSchedule.setCustomerSchedulePay(CustomerSchedulePay.CHUA_THANH_TOAN);
+        if(payType != null){
+            if(payType.equals(PayType.VNPAY)){
+                customerSchedule.setCustomerSchedulePay(CustomerSchedulePay.THANH_TOAN_VNPAY);
+            }
+            if(payType.equals(PayType.MOMO)){
+                customerSchedule.setCustomerSchedulePay(CustomerSchedulePay.THANH_TOAN_MOMO);
+            }
+        }
+        customerScheduleRepository.save(customerSchedule);
+
+        if(payType != null){
+            Payment payment = new Payment();
+            payment.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+            payment.setCreatedBy(user);
+            payment.setCustomerSchedule(customerSchedule);
+            payment.setPayType(payType);
+            payment.setOrderId(orderId);
+            payment.setRequestId(orderId);
+            payment.setAmount(vaccineScheduleTime.getVaccineSchedule().getVaccine().getPrice());
+            paymentRepository.save(payment);
+        }
+        return customerSchedule;
+    }
+
+    public void finishPayment(Long id, PaymentRequest paymentRequest) {
+        CustomerSchedule customerSchedule = customerScheduleRepository.findById(id).get();
+        if(!customerSchedule.getCustomerSchedulePay().equals(CustomerSchedulePay.CHUA_THANH_TOAN)){
+            throw new MessageException("Lịch này đã được thanh toán");
+        }
+        String orderId = null;
+        if(paymentRequest.getPayType().equals(PayType.MOMO)){
+            LogUtils.init();
+            orderId = paymentRequest.getOrderId();
+            Environment environment = Environment.selectEnv("dev");
+            try {
+                QueryStatusTransactionResponse queryStatusTransactionResponse = QueryTransactionStatus.process(environment, orderId, paymentRequest.getRequestId());
+                if (queryStatusTransactionResponse.getResultCode() != 0) {
+                    throw new MessageException("Chưa được thanh toán");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new MessageException("Chưa được thanh toán");
+            }
+            customerSchedule.setCustomerSchedulePay(CustomerSchedulePay.THANH_TOAN_MOMO);
+        }
+        if(paymentRequest.getPayType().equals(PayType.VNPAY)){
+            orderId = paymentRequest.getVnpOrderInfo();
+            int paymentStatus = vnPayService.orderReturnByUrl(paymentRequest.getVnpayUrl());
+            if(paymentStatus != 1){
+                throw new MessageException("Thanh toán thất bại");
+            }
+            customerSchedule.setCustomerSchedulePay(CustomerSchedulePay.THANH_TOAN_VNPAY);
+        }
+        if(paymentRepository.findByOrderIdAndRequestId(orderId,orderId).isPresent()){
+            throw new MessageException("Không hợp lệ");
+        }
+        customerScheduleRepository.save(customerSchedule);
     }
 }

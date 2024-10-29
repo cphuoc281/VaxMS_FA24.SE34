@@ -157,6 +157,10 @@ public class VaccineScheduleTimeService {
         return vaccineScheduleTimeRepository.findTimeBySchedule(idSchedule, date);
     }
 
+    public VaccineScheduleTime findById(Long id) {
+        return vaccineScheduleTimeRepository.findById(id).get();
+    }
+
 
 //    public static void main(String[] args) {
 //        Time startTime = Time.valueOf("08:00:00");

@@ -5,9 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum PayType {
+public enum CustomerSchedulePay {
 
-    TIEN_MAT,
-    MOMO,
-    VNPAY
+    THANH_TOAN_MOMO, THANH_TOAN_VNPAY, CHUA_THANH_TOAN
 }

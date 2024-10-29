@@ -20,4 +20,7 @@ public interface CustomerScheduleRepository extends JpaRepository<CustomerSchedu
     Long countRegis(Long vaccineScheduleId);
 
     Page<CustomerSchedule> findAll(Specification<CustomerSchedule> spec, Pageable pageable);
+
+    @Query("select count(c.id) from CustomerSchedule c where c.vaccineScheduleTime.id = ?1")
+    Long countBySchedule(Long id);
 }
