@@ -1,5 +1,6 @@
 package com.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.web.enums.CustomerSchedulePay;
 import com.web.enums.StatusCustomerSchedule;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ public class CustomerSchedule {
     @Column(name = "id")
     private Long id;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "GMT+7")
     private Timestamp createdDate;
 
     private String fullName;

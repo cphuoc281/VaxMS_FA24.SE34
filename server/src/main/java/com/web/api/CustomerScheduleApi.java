@@ -50,6 +50,9 @@ public class CustomerScheduleApi {
     public ResponseEntity<?> mySchedule(Pageable pageable, @RequestParam(required = false) String search,
                                         @RequestParam(required = false)Date from,@RequestParam(required = false)Date to ) {
         Page<CustomerSchedule> result = customerScheduleService.mySchedule(pageable, search, from, to);
+        result.forEach(p->{
+            System.out.println(p.getCreatedDate());
+        });
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
@@ -75,6 +78,12 @@ public class CustomerScheduleApi {
     @PostMapping("/customer/finish-payment")
     public ResponseEntity<?> finishPayment(@RequestParam Long id, @RequestBody PaymentRequest paymentRequest) {
         customerScheduleService.finishPayment(id, paymentRequest);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/customer/change-schedule")
+    public ResponseEntity<?> change(@RequestParam Long id, @RequestParam Long timeId) {
+        customerScheduleService.change(id, timeId);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

@@ -1,13 +1,16 @@
 package com.web.repository;
 
 import com.web.entity.CustomerSchedule;
+import com.web.enums.CustomerSchedulePay;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface CustomerScheduleRepository extends JpaRepository<CustomerSchedule, Long> {
@@ -23,4 +26,7 @@ public interface CustomerScheduleRepository extends JpaRepository<CustomerSchedu
 
     @Query("select count(c.id) from CustomerSchedule c where c.vaccineScheduleTime.id = ?1")
     Long countBySchedule(Long id);
+
+    @Query("SELECT c FROM CustomerSchedule c WHERE c.createdDate > ?1 and c.customerSchedulePay = ?2")
+    List<CustomerSchedule> findByCreatedDateAfter(Timestamp createdDate, CustomerSchedulePay customerSchedulePay);
 }

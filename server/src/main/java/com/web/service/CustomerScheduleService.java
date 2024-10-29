@@ -19,6 +19,7 @@ import com.web.models.ListCustomerScheduleResponse;
 import com.web.models.QueryStatusTransactionResponse;
 import com.web.processor.QueryTransactionStatus;
 import com.web.repository.*;
+import com.web.utils.MailService;
 import com.web.utils.UserUtils;
 import com.web.vnpay.VNPayService;
 import org.apache.commons.lang3.ObjectUtils;
@@ -30,6 +31,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,6 +47,8 @@ import javax.mail.internet.MimeMessage;
 import javax.persistence.criteria.Predicate;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -378,6 +383,23 @@ public class CustomerScheduleService {
         if(paymentRepository.findByOrderIdAndRequestId(orderId,orderId).isPresent()){
             throw new MessageException("Không hợp lệ");
         }
+        customerScheduleRepository.save(customerSchedule);
+    }
+
+
+    public void change(Long id, Long timeId) {
+        CustomerSchedule customerSchedule = customerScheduleRepository.findById(id).get();
+        VaccineScheduleTime vaccineScheduleTime = vaccineScheduleTimeRepository.findById(timeId).get();
+
+        // kiểm tra customerSchedule đã đăng ký sau 24 giờ chưa
+        Instant createdDate = customerSchedule.getCreatedDate().toInstant();
+        Instant now = Instant.now();
+
+        if (Duration.between(createdDate, now).toHours() > 24) {
+            throw new MessageException("Đã quá "+Duration.between(createdDate, now).toHours()+"h, không thể đổi được lịch tiêm");
+        }
+
+        customerSchedule.setVaccineScheduleTime(vaccineScheduleTime);
         customerScheduleRepository.save(customerSchedule);
     }
 }

@@ -14,8 +14,8 @@ public interface VaccineScheduleTimeRepository extends JpaRepository<VaccineSche
     @Query("select v from VaccineScheduleTime v where v.vaccineSchedule.id = ?1")
     public List<VaccineScheduleTime> findByVaccineSchedule(Long vaccineSchedule);
 
-    @Query("select v.injectDate from VaccineScheduleTime v where v.vaccineSchedule.id = ?1 order by v.injectDate asc")
-    public Set<Date> findDateByVaccineSchedule(Long vaccineSchedule);
+    @Query("select v.injectDate from VaccineScheduleTime v where v.vaccineSchedule.id = ?1 and v.injectDate >= ?2  order by v.injectDate asc")
+    public Set<Date> findDateByVaccineSchedule(Long vaccineSchedule, Date date);
 
     @Query("select sum(v.limitPeople) from VaccineScheduleTime v where v.vaccineSchedule.id = ?1")
     public Long quantityBySchedule(Long scheduleId);

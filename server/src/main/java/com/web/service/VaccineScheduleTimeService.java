@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -127,7 +128,9 @@ public class VaccineScheduleTimeService {
     }
 
     public Set<Date> findDateBySchedule(Long scheduleId){
-        return vaccineScheduleTimeRepository.findDateByVaccineSchedule(scheduleId);
+        LocalDate localDate = LocalDate.now();
+        Date sqlDate = Date.valueOf(localDate);
+        return vaccineScheduleTimeRepository.findDateByVaccineSchedule(scheduleId, sqlDate);
     }
 
     public VaccineScheduleTime update(VaccineScheduleTime vaccineScheduleTime){

@@ -11,6 +11,7 @@ import StarRating from './star';
 import momo from '../../assest/images/momo.webp';
 import vnpay from '../../assest/images/vnpay.jpg';
 import { formatMoney } from '../../services/money';
+import DoiLich from './doilich'
 
 
 var size = 3
@@ -31,6 +32,7 @@ function LichDaDangKy(){
             var result = await response.json();
             
             setCustomerSchedule(result.content)
+            
             setpageCount(result.totalPages)
             url = '/api/customer-schedule/customer/my-schedule?&size='+size+'&sort=id,desc&page='
         };
@@ -262,7 +264,7 @@ function LichDaDangKy(){
                                     {
                                     item.customerSchedulePay == 'CHUA_THANH_TOAN'?
                                     <button onClick={()=>setItem(item)} data-bs-toggle="modal" data-bs-target="#modelthanhtoan" className='btn btn-primary btncommont'>Thanh toán</button>:
-                                    <button onClick={()=>hoanTiem(item.id)} className='btn btn-primary btncommont'>Đổi lịch</button>
+                                    <button onClick={()=>setItem(item)} data-bs-toggle="modal" data-bs-target="#modeldoilich" className='btn btn-primary btncommont'>Đổi lịch</button>
                                     }
                                 </td>
                                 <td>
@@ -361,6 +363,7 @@ function LichDaDangKy(){
                         </div>
                     </div>
                 </div>
+                <DoiLich customerSchedule={item}/>
             </div>
         </>
     );

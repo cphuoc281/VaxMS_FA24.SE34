@@ -5,30 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d6866e4-31f4-46cd-8216-552b84457db2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/src/layout/customer/styles/styleuser.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/customer/styles/styleuser.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/CustomerScheduleApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/CustomerScheduleApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/MomoApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/MomoApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/VaccineScheduleTimeApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/VaccineScheduleTimeApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/VnpayApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/VnpayApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/dto/PaymentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/dto/PaymentDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/web/entity/CustomerSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/entity/CustomerSchedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/entity/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/entity/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/enums/PayType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/enums/PayType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/CustomerScheduleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/CustomerScheduleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/VaccineScheduleTimeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/VaccineScheduleTimeRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/CustomerScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/CustomerScheduleService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineScheduleTimeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineScheduleTimeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/CustomerScheduleApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/CustomerScheduleApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/api/VaccineScheduleTimeApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/api/VaccineScheduleTimeApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/entity/CustomerSchedule$CustomerScheduleBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/entity/CustomerSchedule$CustomerScheduleBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/entity/CustomerSchedule.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/entity/CustomerSchedule.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/entity/Payment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/entity/Payment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/enums/PayType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/enums/PayType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/CustomerScheduleRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/CustomerScheduleRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/CustomerScheduleService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/CustomerScheduleService$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/CustomerScheduleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/CustomerScheduleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleTimeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineScheduleTimeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/utils/MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/utils/MailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +152,8 @@
       <workItem from="1730083299882" duration="2666000" />
       <workItem from="1730088364730" duration="1484000" />
       <workItem from="1730099569675" duration="12578000" />
-      <workItem from="1730159222101" duration="7649000" />
+      <workItem from="1730159222101" duration="7743000" />
+      <workItem from="1730187996753" duration="7202000" />
     </task>
     <servers />
   </component>
