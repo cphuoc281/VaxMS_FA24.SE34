@@ -33,6 +33,10 @@ public class VaccineSchedule {
 
     private Timestamp createdDate;
 
+    private Long idPreSchedule;
+
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "vaccine_id")
     private Vaccine vaccine;

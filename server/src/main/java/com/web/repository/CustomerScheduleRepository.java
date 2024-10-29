@@ -29,4 +29,7 @@ public interface CustomerScheduleRepository extends JpaRepository<CustomerSchedu
 
     @Query("SELECT c FROM CustomerSchedule c WHERE c.createdDate > ?1 and c.customerSchedulePay = ?2")
     List<CustomerSchedule> findByCreatedDateAfter(Timestamp createdDate, CustomerSchedulePay customerSchedulePay);
+
+    @Query("select c from CustomerSchedule c where c.vaccineScheduleTime.vaccineSchedule.id = ?1")
+    List<CustomerSchedule> findByVaccineSchedule(Long id);
 }

@@ -21,6 +21,8 @@ async function addOrUpdateLichTiemChung(event) {
         "startDate": event.target.elements.ngaybatdau.value,
         "endDate": event.target.elements.ngayketthuc.value,
         "limitPeople": event.target.elements.gioihan.value,
+        "idPreSchedule": event.target.elements.idPreSchedule.value,
+        "description": event.target.elements.description.value,
         "center": {"id":event.target.elements.centerselect.value},
         "vaccine": {"id":event.target.elements.vacxinselect.value},
     }
@@ -125,6 +127,9 @@ const AdminAddLichTiemChung = ()=>{
                     
                     <label className='lbadd-admin'>Số người giới hạn</label>
                     <input name='gioihan' defaultValue={item==null?'':item.limitPeople} type='number' className='form-control' required/>
+                    
+                    <label className='lbadd-admin'>Id lịch tiêm trước đó</label>
+                    <input name='idPreSchedule' defaultValue={item==null?'':item.idPreSchedule} type='number' className='form-control'/>
                 </div>
                 <div className='col-sm-4'>
                     <label className='lbadd-admin'>Tên vacxin</label>
@@ -151,7 +156,8 @@ const AdminAddLichTiemChung = ()=>{
                         name='centerselect'
                         isSearchable={true} 
                     />
-
+                    <label className='lbadd-admin'>Mô tả</label>
+                    <textarea defaultValue={item==null?'':item.description} className='form-control' name="description"></textarea>
                     <label className='lbadd-admin' dangerouslySetInnerHTML={{__html:'&ThinSpace;'}}></label>
                     <button className='btn btn-primary form-control'>{textButton}</button>
                 </div>
