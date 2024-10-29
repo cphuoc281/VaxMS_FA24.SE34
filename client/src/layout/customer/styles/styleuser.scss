@@ -743,3 +743,33 @@ body{
     border-radius: 50%;
     background: white;
 }
+.imgvaccine{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.listvaccinesearch{
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+.divcntvaccine{
+    padding: 10px;
+    text-align: center;
+}
+.tenvaccinesearch{
+    color: #000;
+    text-decoration: none;
+}
+.singlevcsearch{
+    -webkit-box-shadow: 0 0 10px #c2c2c2;
+        box-shadow: 0 0 10px #c2c2c2;
+    cursor: pointer;
+}
+.nhomtuoivc{
+    display: block;
+    margin-top: 10px;
+}
+.motavaccinesearch{
+    display: block;
+    margin-top: 10px;
+}

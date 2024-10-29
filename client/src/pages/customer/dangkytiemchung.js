@@ -20,27 +20,32 @@ function DangKyTiem() {
   const [indexTime, setIndexTime] = useState(null);
   const [selectedSchedule, setSelectedSchedule] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedType, setSelectedType] = useState(null);
 
   useEffect(() => {
     const today = new Date().toISOString().split('T')[0];
     setCurrentDate(today);
     const fetchData = async () => {
-      try {
-        const [typeResponse, customerResponse] = await Promise.all([
-          getMethod('/api/vaccine-type/find-all'),
-          getMethod('/api/customer-profile/customer/find-by-user')
-        ]);
-        setVacxinType(await typeResponse.json());
-        setCustomer(await customerResponse.json());
-      } catch (error) {
-        console.error('Lỗi khi tải dữ liệu', error);
+      var res = await getMethod('/api/vaccine-type/find-all');
+      var result = await res.json();
+      setVacxinType(result);
+
+      var uls = new URL(document.URL)
+      var vaccine = uls.searchParams.get("vaccine");
+      if(vaccine != null){
+        var res = await getMethod('/api/vaccine/public/find-by-id?id='+vaccine);
+        var result = await res.json();
+        setSelectedType(result.vaccineType)
+        handleChonLoai(result.vaccineType)
+        setCurrentVaccine(result)
       }
     };
     fetchData();
   }, []);
 
   const handleChonLoai = async (option) => {
-    const response = await getMethod(`/api/vaccine/all/find-by-type?typeId=${option.value}`);
+    setSelectedType(option)
+    const response = await getMethod(`/api/vaccine/all/find-by-type?typeId=${option.id}`);
     setVacxin(await response.json());
     setVacxinChoose(null);
   };
@@ -56,7 +61,7 @@ function DangKyTiem() {
       toast.warning("Hãy chọn vaccine");
       return;
     }
-    const response = await getMethod(`/api/vaccine-schedule/public/get-center?start=${start}&vaccineId=${currentVaccine.value}`);
+    const response = await getMethod(`/api/vaccine-schedule/public/get-center?start=${start}&vaccineId=${currentVaccine.id}`);
     var result = await response.json()
     if(response.status == 417){
       toast.error(result.defaultMessage)
@@ -146,10 +151,10 @@ function DangKyTiem() {
                   <div className='col-sm-6'>
                     <label className='lb-form-dky-tiem'><span>*</span> Loại vắc xin muốn đăng ký</label>
                     <Select
-                        options={vacxinType.map((item) => ({
-                          label: item.typeName,
-                          value: item.id,
-                        }))}
+                        options={vacxinType}
+                        getOptionLabel={(option) => option.typeName}
+                        getOptionValue={(option) => option.id}
+                        value={selectedType}
                         onChange={handleChonLoai}
                         placeholder="Chọn loại vacxin"
                         isSearchable={true}
@@ -158,10 +163,9 @@ function DangKyTiem() {
                   <div className='col-sm-6'>
                     <label className='lb-form-dky-tiem'><span>*</span> Tên vacxin</label>
                     <Select
-                        options={vacxin.map((item) => ({
-                          label: item.name,
-                          value: item.id,
-                        }))}
+                        options={vacxin}
+                        getOptionLabel={(option)=>option.name}
+                        getOptionValue={(option)=>option.id}
                         onChange={setCurrentVaccine}
                         value={currentVaccine}
                         id='vaccine'

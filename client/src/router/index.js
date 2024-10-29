@@ -13,6 +13,7 @@ import login from "../pages/public/login";
 import index from "../pages/public/index";
 import TraCuuLichTiem from "../pages/public/tracuulichtiem";
 import LichTiemDaQua from "../pages/public/lichtiemdaqua";
+import TimKiemVacxin from "../pages/public/timkiemvaccine";
 
 //customer
 import dangkytiemchung from "../pages/customer/dangkytiemchung";
@@ -29,6 +30,7 @@ import CustomerSchedule from "../pages/staff/customerSchedule/CustomerSchedule";
 
 const publicRoutes = [
     {path: "/", component: index},
+    { path: "/tim-kiem-vaccine", component: TimKiemVacxin },
     {path: "/index", component: index},
     {path: "/login", component: login, layout: layoutLogin},
     {path: "/tra-cuu-lich-tiem", component: TraCuuLichTiem},
