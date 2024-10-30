@@ -1,5 +1,7 @@
 package com.web.api;
 
+import com.web.dto.CustomerScheduleVnpay;
+import com.web.dto.PaymentRequest;
 import com.web.entity.CustomerSchedule;
 import com.web.entity.VaccineSchedule;
 import com.web.models.ApproveCustomerScheduleRequest;
@@ -25,10 +27,22 @@ public class CustomerScheduleApi {
     @Autowired
     private CustomerScheduleService customerScheduleService;
 
-    @PostMapping("/customer/create")
-    public ResponseEntity<?> create(@RequestBody CustomerSchedule customerSchedule,
-                                    @RequestParam String orderId, @RequestParam String requestId) {
-        CustomerSchedule result = customerScheduleService.create(customerSchedule, orderId, requestId);
+    @PostMapping("/customer/create-not-pay")
+    public ResponseEntity<?> createNotPay(@RequestBody CustomerSchedule customerSchedule) {
+        CustomerSchedule result = customerScheduleService.createNotPay(customerSchedule);
+        return new ResponseEntity(result, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/customer/create-vnpay")
+    public ResponseEntity<?> createVnPay(@RequestBody CustomerScheduleVnpay customerScheduleVnpay) {
+        CustomerSchedule result = customerScheduleService.createVnPay(customerScheduleVnpay);
+        return new ResponseEntity(result, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/customer/create-momo")
+    public ResponseEntity<?> createMomo(@RequestBody CustomerSchedule customerSchedule, @RequestParam String orderId,
+                                        @RequestParam String requestId) {
+        CustomerSchedule result = customerScheduleService.createMomo(customerSchedule, orderId, requestId);
         return new ResponseEntity(result, HttpStatus.CREATED);
     }
 
@@ -36,6 +50,9 @@ public class CustomerScheduleApi {
     public ResponseEntity<?> mySchedule(Pageable pageable, @RequestParam(required = false) String search,
                                         @RequestParam(required = false)Date from,@RequestParam(required = false)Date to ) {
         Page<CustomerSchedule> result = customerScheduleService.mySchedule(pageable, search, from, to);
+        result.forEach(p->{
+            System.out.println(p.getCreatedDate());
+        });
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
@@ -56,5 +73,17 @@ public class CustomerScheduleApi {
     @PostMapping("/customer/list")
     public ResponseEntity<?> list(@RequestBody ListCustomerScheduleRequest request) {
         return new ResponseEntity<>(customerScheduleService.listCustomerSchedule(request),HttpStatus.OK);
+    }
+
+    @PostMapping("/customer/finish-payment")
+    public ResponseEntity<?> finishPayment(@RequestParam Long id, @RequestBody PaymentRequest paymentRequest) {
+        customerScheduleService.finishPayment(id, paymentRequest);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/customer/change-schedule")
+    public ResponseEntity<?> change(@RequestParam Long id, @RequestParam Long timeId) {
+        customerScheduleService.change(id, timeId);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

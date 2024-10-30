@@ -1,6 +1,7 @@
 package com.web.api;
 
 import com.web.dto.ScheduleTimeDto;
+import com.web.dto.VaccineScheduleTimeResponse;
 import com.web.entity.VaccineSchedule;
 import com.web.entity.VaccineScheduleTime;
 import com.web.service.VaccineScheduleService;
@@ -10,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/vaccine-schedule-time")
@@ -48,4 +51,24 @@ public class VaccineScheduleTimeApi {
     public void delete(@RequestParam("id") Long id){
         vaccineScheduleTimeService.delete(id);
     }
+
+
+    @GetMapping("/public/find-date-by-vaccine-schedule")
+    public ResponseEntity<?> getDate(@RequestParam Long idSchedule){
+        Set<Date> result = vaccineScheduleTimeService.findDateBySchedule(idSchedule);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/public/find-time-by-vaccine-schedule")
+    public ResponseEntity<?> getTime(@RequestParam Long idSchedule, @RequestParam Date date){
+        List<VaccineScheduleTimeResponse> result = vaccineScheduleTimeService.findTimeBySchedule(idSchedule,date);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/public/find-by-id")
+    public ResponseEntity<?> findById(@RequestParam Long id){
+        VaccineScheduleTime result = vaccineScheduleTimeService.findById(id);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 }

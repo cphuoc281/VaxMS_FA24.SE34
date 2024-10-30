@@ -1,6 +1,7 @@
 package com.web.service;
 
 import com.web.dto.ScheduleTimeDto;
+import com.web.dto.VaccineScheduleTimeResponse;
 import com.web.entity.VaccineSchedule;
 import com.web.entity.VaccineScheduleTime;
 import com.web.exception.MessageException;
@@ -9,10 +10,13 @@ import com.web.repository.VaccineScheduleTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -109,6 +113,9 @@ public class VaccineScheduleTimeService {
             tong += v.getLimitPeople();
         }
         Long count = vaccineScheduleTimeRepository.quantityBySchedule(dto.getScheduleId());
+        if(count == null){
+            count = 0L;
+        }
         if(vaccineSchedule.getLimitPeople() < count + tong){
             throw new MessageException("Số lượng mũi tiêm hiện tại đang phát hành là: "+count+" chỉ được phát hành thêm: "+(vaccineSchedule.getLimitPeople() - count)+" mũi tiêm");
         }
@@ -118,6 +125,12 @@ public class VaccineScheduleTimeService {
 
     public List<VaccineScheduleTime> findBySchedule(Long scheduleId){
         return vaccineScheduleTimeRepository.findByVaccineSchedule(scheduleId);
+    }
+
+    public Set<Date> findDateBySchedule(Long scheduleId){
+        LocalDate localDate = LocalDate.now();
+        Date sqlDate = Date.valueOf(localDate);
+        return vaccineScheduleTimeRepository.findDateByVaccineSchedule(scheduleId, sqlDate);
     }
 
     public VaccineScheduleTime update(VaccineScheduleTime vaccineScheduleTime){
@@ -141,6 +154,14 @@ public class VaccineScheduleTimeService {
 
     public void delete(Long id) {
         vaccineScheduleTimeRepository.deleteById(id);
+    }
+
+    public List<VaccineScheduleTimeResponse> findTimeBySchedule(Long idSchedule, Date date) {
+        return vaccineScheduleTimeRepository.findTimeBySchedule(idSchedule, date);
+    }
+
+    public VaccineScheduleTime findById(Long id) {
+        return vaccineScheduleTimeRepository.findById(id).get();
     }
 
 

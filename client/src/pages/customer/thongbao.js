@@ -10,22 +10,33 @@ import Swal from 'sweetalert2'
 
 
 function ThongBao(){
-    const [vacxinType, setVacxinType] = useState([]);
-    const [vacxin, setVacxin] = useState([]);
-    const [vacxinSchedule, setVacxinSchedule] = useState([]);
-    const [vacxinScheduleChoose, setVacxinScheduleChoose] = useState(null);
-    const [activeIndex, setActiveIndex] = useState(null);
-    const [customer, setCustomer] = useState(null);
 
 
     useEffect(()=>{
         const checkPayment= async() =>{
-            var lichtiem = JSON.parse(localStorage.getItem("lichtiem"));
+            var thongtindangky = JSON.parse(localStorage.getItem("thongtindangky"));
             var uls = new URL(document.URL)
             var orderId = uls.searchParams.get("orderId");
             var requestId = uls.searchParams.get("requestId");
-
-            var res = await postMethodPayload('/api/customer-schedule/customer/create?orderId='+orderId+'&requestId='+requestId, lichtiem)
+            var vnpOrderInfo = uls.searchParams.get("vnp_OrderInfo");
+            var url = ''
+            var payload = null;
+            if(orderId != null && requestId != null){
+                url = '/api/customer-schedule/customer/create-momo?orderId='+orderId+'&requestId='+requestId;
+                payload = thongtindangky;
+            }
+            if(vnpOrderInfo != null){
+                url = '/api/customer-schedule/customer/create-vnpay';
+                const currentUrl = window.location.href;
+                const parsedUrl = new URL(currentUrl);
+                const queryStringWithoutQuestionMark = parsedUrl.search.substring(1);
+                payload = {
+                    customerSchedule: thongtindangky,
+                    vnpOrderInfo: vnpOrderInfo,
+                    vnpayUrl: queryStringWithoutQuestionMark
+                }
+            }
+            var res = await postMethodPayload(url, payload)
             if (res.status < 300) {
                 document.getElementById("thanhcong").style.display = 'block'
                 document.getElementById("thatbai").style.display = 'none'

@@ -1,15 +1,19 @@
 package com.web.repository;
 
+import com.web.entity.Center;
 import com.web.entity.VaccineSchedule;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
+@Repository
 public interface VaccineScheduleRepository extends JpaRepository<VaccineSchedule, Long> {
 
     @Query(value = "select * from vaccine_schedule v where DATE(v.start_date) >= ?1 and DATE(v.end_date) <= ?2", nativeQuery = true)
@@ -25,4 +29,8 @@ public interface VaccineScheduleRepository extends JpaRepository<VaccineSchedule
 
     @Query("select v from VaccineSchedule v where v.vaccine.name like ?1 and v.endDate <= ?2")
     public Page<VaccineSchedule> preFindByParam(String param, LocalDateTime now, Pageable pageable);
+
+    @Query("select v from VaccineSchedule v where v.endDate >= ?1 and v.startDate <= ?1 and v.vaccine.id = ?2")
+    List<VaccineSchedule> getCenter(Date start, Long vaccineId);
+
 }

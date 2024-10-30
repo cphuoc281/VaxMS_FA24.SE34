@@ -8,6 +8,10 @@ import Select from 'react-select';
 import {getMethod, postMethod, postMethodPayload} from '../../services/request';
 import Swal from 'sweetalert2'
 import StarRating from './star';
+import momo from '../../assest/images/momo.webp';
+import vnpay from '../../assest/images/vnpay.jpg';
+import { formatMoney } from '../../services/money';
+import DoiLich from './doilich'
 
 
 var size = 3
@@ -20,6 +24,7 @@ function LichDaDangKy(){
     const [nurses, setNurses] = useState([]);
     const [pageCount, setpageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
+    const [item, setItem] = useState(null);
 
     useEffect(()=>{
         const getItem= async() =>{
@@ -27,6 +32,7 @@ function LichDaDangKy(){
             var result = await response.json();
             
             setCustomerSchedule(result.content)
+            
             setpageCount(result.totalPages)
             url = '/api/customer-schedule/customer/my-schedule?&size='+size+'&sort=id,desc&page='
         };
@@ -144,6 +150,62 @@ function LichDaDangKy(){
         document.getElementById("from").value = ""
         document.getElementById("to").value = "";
     }
+
+    
+    function momoClick(){
+        document.getElementById("momo").click()
+    }
+
+    function vnpayClick(){
+        document.getElementById("vnpay").click()
+    }
+
+    async function dangKyTiem(event) {
+        event.preventDefault();
+        var con = window.confirm("Xác nhận thanh toán lịch tiêm");
+        if(con == false){
+            return;
+        }
+        var paytype = event.target.elements.paytype.value
+        if (paytype == "momo") {
+            requestPayMent(event,"momo")
+        }
+        if (paytype == "vnpay") {
+            requestPayMent(event,"vnpay")
+        }
+    };
+
+    async function requestPayMent(event, type) {
+        event.preventDefault();
+        const hostname = window.location.hostname;
+        const port = window.location.port;         
+        const protocol = window.location.protocol;
+        const urlmain = `${protocol}//${hostname}:${port}`;
+        var returnurl = urlmain+'/thanh-cong';
+        var paymentDto = {
+            "content": "Thanh toán",
+            "returnUrl": returnurl,
+            "notifyUrl": returnurl,
+            "idScheduleTime": item.vaccineScheduleTime.id,
+        }
+        localStorage.setItem("customerschedule", item.id);
+        var url = '/api/vnpay/urlpayment';
+        if(type == "momo"){
+            url = '/api/momo/create-url-payment';
+        }
+        const res = await postMethodPayload(url, paymentDto)
+        var result = await res.json();
+        if (res.status < 300) {
+            window.open(result.url, '_blank');
+        }
+        if (res.status == 417) {
+            toast.warning(result.defaultMessage);
+        }
+    
+    }
+
+
+
     
     return(
         <>
@@ -184,7 +246,7 @@ function LichDaDangKy(){
                                 <th>Ngày tiêm</th>
                                 <th>Thanh toán</th>
                                 <th>Trạng thái</th>
-                                <th>Hoãn tiêm</th>
+                                <th>Chức năng</th>
                                 <th>Phản hồi</th>
                             </tr>
                         </thead>
@@ -196,13 +258,13 @@ function LichDaDangKy(){
                                 <td>{item.vaccineScheduleTime.vaccineSchedule.center.centerName}</td>
                                 <td>{item.createdDate.split(".")[0]}</td>
                                 <td>{item.vaccineScheduleTime.start} - {item.vaccineScheduleTime.end}<br/>Ngày tiêm: {item.vaccineScheduleTime.injectDate}</td>
-                                <td>{item.payStatus == false?'Chưa thanh toán':'Đã thanh toán'}</td>
+                                <td>{item.customerSchedulePay == 'CHUA_THANH_TOAN'?'Chưa thanh toán':'Đã thanh toán'}</td>
                                 <td>{item.statusCustomerSchedule}</td>
                                 <td>
                                     {
-                                    item.payStatus == false && 
-                                    (item.statusCustomerSchedule == 'pending' || item.statusCustomerSchedule == 'confirmed')?
-                                    <button onClick={()=>hoanTiem(item.id)} className='btn btn-primary btncommont'>xác nhận</button>:<></>
+                                    item.customerSchedulePay == 'CHUA_THANH_TOAN'?
+                                    <button onClick={()=>setItem(item)} data-bs-toggle="modal" data-bs-target="#modelthanhtoan" className='btn btn-primary btncommont'>Thanh toán</button>:
+                                    <button onClick={()=>setItem(item)} data-bs-toggle="modal" data-bs-target="#modeldoilich" className='btn btn-primary btncommont'>Đổi lịch</button>
                                     }
                                 </td>
                                 <td>
@@ -272,6 +334,36 @@ function LichDaDangKy(){
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="modelthanhtoan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thanh toán {formatMoney(item?.vaccineScheduleTime.vaccineSchedule.vaccine.price)}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form onSubmit={dangKyTiem}  class="modal-body">
+                            <table class="table tablepay">
+                                <tr onClick={momoClick}>
+                                    <td><label class="radiocustom">	<p>Thanh toán qua Ví MoMo</p>
+                                            <input value="momo" id="momo" type="radio" name="paytype"/>
+                                            <span class="checkmark"></span></label></td>
+                                    <td><img src={momo} class="momopay"/></td>
+                                </tr>
+                                <tr onClick={vnpayClick}>
+                                    <td><label class="radiocustom">	<p>Thanh toán qua Ví Vnpay</p>
+                                            <input value="vnpay" id="vnpay" type="radio" name="paytype"/>
+                                            <span class="checkmark"></span></label></td>
+                                    <td><img src={vnpay} class="momopay"/></td>
+                                </tr>
+
+                            </table>
+                            <button className='btn btn-primary form-control'>Thanh toán</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+                <DoiLich customerSchedule={item}/>
             </div>
         </>
     );

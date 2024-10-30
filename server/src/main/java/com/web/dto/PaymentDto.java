@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 public class PaymentDto {
 //    private Long amount;
-    private Long idSchedule;
+    private Long idScheduleTime;
     private String content;
     private String returnUrl;
     private String notifyUrl;

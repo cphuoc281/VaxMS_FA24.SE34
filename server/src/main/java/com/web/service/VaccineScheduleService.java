@@ -1,5 +1,7 @@
 package com.web.service;
 
+import com.web.entity.Center;
+import com.web.entity.CustomerSchedule;
 import com.web.entity.Vaccine;
 import com.web.entity.VaccineSchedule;
 import com.web.exception.MessageException;
@@ -7,6 +9,7 @@ import com.web.repository.CustomerScheduleRepository;
 import com.web.repository.VaccineRepository;
 import com.web.repository.VaccineScheduleRepository;
 import com.web.repository.VaccineScheduleTimeRepository;
+import com.web.utils.MailService;
 import com.web.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +18,9 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +42,9 @@ public class VaccineScheduleService {
     @Autowired
     private VaccineRepository vaccineRepository;
 
+    @Autowired
+    private MailService mailService;
+
     /*
     * api này dùng để thêm lịch tiêm vaccine
     * */
@@ -53,6 +61,20 @@ public class VaccineScheduleService {
         vaccineScheduleRepository.save(vaccineSchedule);
         vaccine.setInventory(vaccine.getInventory() - vaccineSchedule.getLimitPeople());
         vaccineRepository.save(vaccine);
+
+        if(vaccineSchedule.getIdPreSchedule() != null){
+            Optional<VaccineSchedule> vc = vaccineScheduleRepository.findById(vaccineSchedule.getIdPreSchedule());
+            if(vc.isPresent()){
+                List<CustomerSchedule> list = customerScheduleRepository.findByVaccineSchedule(vc.get().getId());
+                for(CustomerSchedule c : list){
+                    mailService.sendEmail(c.getUser().getEmail(),"Thông báo mũi tiêm tiếp theo",
+                            "Mũi tiêm "+c.getVaccineScheduleTime().getVaccineSchedule().getVaccine().getName()+" đã có lịch tiêm tiếp theo<br>"+
+                            "Thời gian tiêm mũi tiếp theo từ ngày: "+vaccineSchedule.getStartDate()+" đến ngày: "+vaccineSchedule.getEndDate()+"<br>"+
+                            vaccineSchedule.getDescription()
+                            , false, true);
+                }
+            }
+        }
         return vaccineSchedule;
     }
 
@@ -76,7 +98,10 @@ public class VaccineScheduleService {
             throw new MessageException("Không tìm thấy lịch tiêm có id: "+vaccineSchedule.getId());
         }
         Long num = vaccineScheduleTimeRepository.quantityBySchedule(vaccineSchedule.getId());
-        if(vaccineScheduleTimeRepository.quantityBySchedule(vaccineSchedule.getId()) > vaccineSchedule.getLimitPeople()){
+        if(num == null){
+            num = 0L;
+        }
+        if(num > vaccineSchedule.getLimitPeople()){
             throw new MessageException("Số lượng mũi tiêm đã phát hành là: "+ num+", số mũi tiêm bạn cập nhật không chính xác");
         }
         vaccineSchedule.setCreatedDate(exist.get().getCreatedDate());
@@ -162,4 +187,15 @@ public class VaccineScheduleService {
     }
 
 
+    public List<VaccineSchedule> getCenter(Date start, Long vaccineId) {
+        List<VaccineSchedule> list = new ArrayList<>();
+        if(start == null){
+            start = new Date(System.currentTimeMillis());
+        }
+        if(start.toLocalDate().isBefore(LocalDate.now())){
+            throw new MessageException("Thời gian tối thiểu phải bắt đầu từ ngày hiện tại");
+        }
+        list = vaccineScheduleRepository.getCenter(start, vaccineId);
+        return list;
+    }
 }

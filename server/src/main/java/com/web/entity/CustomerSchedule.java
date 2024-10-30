@@ -1,5 +1,7 @@
 package com.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.web.enums.CustomerSchedulePay;
 import com.web.enums.StatusCustomerSchedule;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,9 +27,8 @@ public class CustomerSchedule {
     @Column(name = "id")
     private Long id;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "GMT+7")
     private Timestamp createdDate;
-
-    private Boolean payStatus;
 
     private String fullName;
 
@@ -36,6 +37,9 @@ public class CustomerSchedule {
     private String phone;
 
     private String address;
+
+    @Enumerated(EnumType.STRING)
+    private CustomerSchedulePay customerSchedulePay;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -48,4 +52,5 @@ public class CustomerSchedule {
     @ManyToOne
     @JoinColumn(name = "vaccine_schedule_time_id")
     private VaccineScheduleTime vaccineScheduleTime;
+
 }

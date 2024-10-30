@@ -13,11 +13,14 @@ import login from "../pages/public/login";
 import index from "../pages/public/index";
 import TraCuuLichTiem from "../pages/public/tracuulichtiem";
 import LichTiemDaQua from "../pages/public/lichtiemdaqua";
+import TimKiemVacxin from "../pages/public/timkiemvaccine";
 
 //customer
 import dangkytiemchung from "../pages/customer/dangkytiemchung";
 import taikhoan from "../pages/customer/taikhoan";
 import thongbao from "../pages/customer/thongbao";
+import XacNhanDangky from "../pages/customer/xacnhandangky";
+import ThanhCong from "../pages/customer/thanhcong";
 
 //staff
 import StaffChat from "../pages/staff/chat";
@@ -27,6 +30,7 @@ import CustomerSchedule from "../pages/staff/customerSchedule/CustomerSchedule";
 
 const publicRoutes = [
     {path: "/", component: index},
+    { path: "/tim-kiem-vaccine", component: TimKiemVacxin },
     {path: "/index", component: index},
     {path: "/login", component: login, layout: layoutLogin},
     {path: "/tra-cuu-lich-tiem", component: TraCuuLichTiem},
@@ -37,6 +41,8 @@ const customerRoutes = [
     {path: "/dang-ky-tiem-chung", component: dangkytiemchung},
     {path: "/tai-khoan", component: taikhoan},
     {path: "/thong-bao", component: thongbao},
+    {path: "/xac-nhan-dang-ky", component: XacNhanDangky},
+    {path: "/thanh-cong", component: ThanhCong},
 ];
 
 const adminRoutes = [

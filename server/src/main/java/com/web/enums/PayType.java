@@ -9,4 +9,5 @@ public enum PayType {
 
     TIEN_MAT,
     MOMO,
+    VNPAY
 }

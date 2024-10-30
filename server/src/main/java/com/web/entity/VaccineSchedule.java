@@ -18,8 +18,6 @@ import java.util.List;
 @Table(name = "vaccine_schedule")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class VaccineSchedule {
 
     @Id
@@ -34,6 +32,10 @@ public class VaccineSchedule {
     private Integer limitPeople;
 
     private Timestamp createdDate;
+
+    private Long idPreSchedule;
+
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "vaccine_id")

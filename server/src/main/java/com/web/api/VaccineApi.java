@@ -12,6 +12,8 @@ import com.web.models.UpdateVaccineRequest;
 import com.web.service.CenterService;
 import com.web.service.VaccineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -72,5 +74,17 @@ public class VaccineApi {
     @PostMapping("/plus")
     public ResponseEntity<?> importVaccine(@RequestBody PlusVaccineRequest request) {
         return new ResponseEntity<>(vaccineService.plusVaccine(request), HttpStatus.OK);
+    }
+
+    @GetMapping("/public/search-by-param")
+    public ResponseEntity<?> findByParam(@RequestParam(required = false) String search, Pageable pageable){
+        Page<Vaccine> result = vaccineService.findByParam(search, pageable);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/public/find-by-id")
+    public ResponseEntity<?> findById(@RequestParam Long id){
+        Vaccine result = vaccineService.findById(id);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

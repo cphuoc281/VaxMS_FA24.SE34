@@ -41,6 +41,9 @@ return(
                       <a href="tel:02871026595" class="itemheader itemtopheader hotlineheader">Hotline: 028 7102 6595</a>
                       {auth}
                   </div>
+                  <form action='tim-kiem-vaccine' className='d-flex'>
+                    <input name='search' className='form-control' placeholder='Tìm kiếm vaccine'/>
+                  </form>
                 </div>
               </div>
           </nav>
