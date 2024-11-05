@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import $ from 'jquery'; 
 import DataTable from 'datatables.net-dt';
 import Swal from 'sweetalert2'
+import {getMethod, postMethod} from '../../services/request'
+import Select from 'react-select';
 
 
 var token = localStorage.getItem("token");
@@ -61,13 +63,22 @@ async function handleAddAccount(event) {
 
 const AdminUser = ()=>{
     const [items, setItems] = useState([]);
+    const [user, setUer] = useState(null);
+    const [authority, setAuthority] = useState([]);
+    const [selectedAuthority, setSelectedAuthority] = useState(null);
     useEffect(()=>{
         const getUser = async(role) =>{
             var response = await loadUser(role);
             var listUser = await response.json();
             setItems(listUser)
         };
-        getUser("");
+        getUser(""); 
+        const getAuthority = async() =>{
+            var response = await getMethod('/api/authority/admin/all');
+            var result = await response.json();
+            setAuthority(result)
+        };
+        getAuthority();
     }, []);
 
     $( document ).ready(function() {
@@ -76,12 +87,19 @@ const AdminUser = ()=>{
         }
     });
 
+    console.log(authority);
+    
     async function filterUser(){
         $('#example').DataTable().destroy();
         var role = document.getElementById("role").value
         var response = await loadUser(role);
         var listUser = await response.json();
         setItems(listUser)
+    }
+
+    function setInitUser(item){
+        setUer(item);
+        setSelectedAuthority(item.authorities);
     }
 
     async function lockOrUnlock(id, type) {
@@ -110,6 +128,25 @@ const AdminUser = ()=>{
         }
     }
     
+    async function updateRole(event) {
+        event.preventDefault();
+     
+        var url = '/api/user/admin/update-role?userId='+user.id+'&authorityId='+selectedAuthority.id
+        const res = await postMethod(url)
+        if(res.status < 300){
+            Swal.fire({
+                title: "Thông báo",
+                text: "Thành công!",
+                preConfirm: () => {
+                    window.location.reload();
+                }
+            });
+        }
+        else{
+            toast.error("Thất bại");
+        }
+    };
+
     return (
         <>
             <div class="row">
@@ -157,7 +194,7 @@ const AdminUser = ()=>{
                                     <td>{item.fullname}</td>
                                     <td>{item.phone}</td>
                                     <td>{item.createdDate}</td>
-                                    <td>{item.authorities.name}</td>
+                                    <td>{item.authorities.name} <i onClick={()=>setInitUser(item)} data-bs-toggle="modal" data-bs-target="#updatequyen"  className='fa fa-edit pointer'></i></td>
                                     <td class="sticky-col">
                                         {btn}
                                     </td>
@@ -187,6 +224,34 @@ const AdminUser = ()=>{
                                 <input name='repassword' required id="repass" type="password" class="form-control"/>
                                 <br/>
                                 <button class="form-control btn btn-primary">Thêm tài khoản</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="updatequyen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thay đổi quyền</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                        <div class="modal-body row">
+                            <form onSubmit={updateRole} class="col-sm-6" style={{margin:'auto'}}>
+                                <label class="lb-form">Chọn quyền</label>
+                                <Select
+                                    className="select-container" 
+                                    options={authority}
+                                    value={selectedAuthority}
+                                    onChange={setSelectedAuthority}
+                                    getOptionLabel={(option) => option.name} 
+                                    getOptionValue={(option) => option.id}    
+                                    closeMenuOnSelect={false}
+                                    name='authority'
+                                    placeholder="Chọn quyền"
+                                />
+                                <br/>
+                                <button class="form-control btn btn-primary">Cập nhật</button>
                             </form>
                         </div>
                     </div>

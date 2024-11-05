@@ -1,5 +1,6 @@
 package com.web.service;
 
+import com.web.entity.Authority;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.web.dto.CustomUserDetails;
@@ -18,6 +19,7 @@ import com.web.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import java.util.logging.Logger;
 
 import java.sql.Date;
 import java.util.*;
@@ -25,6 +27,7 @@ import java.util.*;
 @Component
 public class UserService {
 
+    private static final Logger logger = Logger.getLogger(UserService.class.getName());
     @Autowired
     private UserRepository userRepository;
 
@@ -53,8 +56,8 @@ public class UserService {
         // check infor user
         System.out.println(email);
         checkUser(users);
-//        if(passwordEncoder.matches(password, users.get().getPassword())){
-        if (password.equalsIgnoreCase(users.get().getPassword())) {
+        if(passwordEncoder.matches(password, users.get().getPassword())){
+//        if (password.equalsIgnoreCase(users.get().getPassword())) {
             CustomUserDetails customUserDetails = new CustomUserDetails(users.get());
             String token = jwtTokenProvider.generateToken(customUserDetails);
             TokenDto tokenDto = new TokenDto();
@@ -135,20 +138,72 @@ public class UserService {
                 "<a style=\"background-color: #2f5fad; padding: 10px; color: #fff; font-size: 18px; font-weight: bold;\">" + user.getActivationKey() + "</a>", false, true);
         return result;
     }
+    public User registerUser(UserRequest userRequest) {
+        // Kiểm tra email đã tồn tại chưa
+        userRepository.findByEmail(userRequest.getEmail())
+                .ifPresent(exist -> {
+                    if (exist.getActivationKey() != null) {
+                        throw new MessageException("Tài khoản chưa được kích hoạt", 330);
+                    }
+                    throw new MessageException("Email đã được sử dụng", 400);
+                });
 
-    public void activeAccount(String activationKey, String email) {
-        Optional<User> user = userRepository.getUserByActivationKeyAndEmail(activationKey, email);
-        user.ifPresent(exist -> {
-            exist.setActivationKey(null);
-            exist.setActived(true);
-            userRepository.save(exist);
-            return;
-        });
-        if (user.isEmpty()) {
-            throw new MessageException("email hoặc mã xác nhận không chính xác", 404);
-        }
+        // Tạo đối tượng User mới
+        User user = new User();
+        user.setUserType(UserType.standard);
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword())); // Mã hóa mật khẩu
+        user.setAuthorities(authorityRepository.findByName(Contains.ROLE_CUSTOMER));
+        user.setActived(false);
+        user.setEmail(userRequest.getEmail());
+        user.setCreatedDate(new Date(System.currentTimeMillis()));
+        user.setActivationKey(userUtils.randomKey());
+
+        // Lưu người dùng vào cơ sở dữ liệu
+        User result = userRepository.save(user);
+
+        // Gửi email kích hoạt tài khoản
+        mailService.sendEmail(user.getEmail(), "Xác nhận tài khoản của bạn",
+                "Cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi:<br>" +
+                        "Để kích hoạt tài khoản của bạn, hãy nhập mã xác nhận bên dưới để xác thực tài khoản của bạn<br><br>" +
+                        "<a style=\"background-color: #2f5fad; padding: 10px; color: #fff; font-size: 18px; font-weight: bold;\">" +
+                        user.getActivationKey() + "</a>", false, true);
+
+        return result;
     }
 
+    public void activeAccount(String key, String email) {
+        logger.info("Bắt đầu kích hoạt tài khoản cho email: " + email);
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> {
+                    logger.severe("Không tìm thấy user với email: " + email);
+                    return new MessageException("Email không tồn tại", 404);
+                });
+
+        logger.info("User tìm thấy: " + user.getEmail());
+        logger.info("Mã kích hoạt từ yêu cầu: " + key + ", Mã kích hoạt trong DB: " + user.getActivationKey());
+
+        if (user.getActived()) {
+            logger.warning("User đã được kích hoạt: " + email);
+            throw new MessageException("Tài khoản đã được kích hoạt trước đó", 400);
+        }
+        if (user.getActivationKey() == null || !key.equals(user.getActivationKey())) {
+            logger.warning("Key kích hoạt không hợp lệ cho email: " + email);
+            throw new MessageException("Mã kích hoạt không hợp lệ", 400);
+        }
+
+        user.setActived(true);
+        user.setActivationKey(null);
+        userRepository.save(user);
+        logger.info("Trạng thái tài khoản sau khi lưu: Actived = " + user.getActived() + ", Activation Key = " + user.getActivationKey());
+        logger.info("User đã được kích hoạt thành công: " + email);
+    }
+
+    public void updateRole(Long userId, Long authorityId) {
+        User user = userRepository.findById(userId).get();
+        Authority authority = authorityRepository.findById(authorityId).get();
+        user.setAuthorities(authority);
+        userRepository.save(user);
+    }
 
     public void guiYeuCauQuenMatKhau(String email, String url) {
         Optional<User> user = userRepository.findByEmail(email);

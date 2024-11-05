@@ -127,7 +127,7 @@ async function checkAdmin(){
         })
     });
     if (response.status > 300) {
-        window.location.replace('../login')
+        window.location.replace('../')
     }
 }
 
@@ -135,7 +135,7 @@ async function checkAdmin(){
 function logout(){
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    window.location.replace('../login')
+    window.location.replace('../')
 }
 
 export default Header;

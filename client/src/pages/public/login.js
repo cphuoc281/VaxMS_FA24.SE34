@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 
+
 async function handleLogin(event) {
     event.preventDefault();
     const payload = {

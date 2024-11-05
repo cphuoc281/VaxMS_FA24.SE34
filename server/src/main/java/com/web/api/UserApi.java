@@ -66,17 +66,36 @@ public class UserApi {
         TokenDto tokenDto = userService.login(loginDto.getEmail(), loginDto.getPassword());
         return new ResponseEntity(tokenDto, HttpStatus.OK);
     }
+    @PostMapping("/admin/update-role")
+    public ResponseEntity<?> updateRole(@RequestParam Long userId, @RequestParam Long authorityId) throws Exception {
+        userService.updateRole(userId, authorityId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
     @PostMapping("/public/regis")
     public ResponseEntity<?> regisUser(@RequestBody UserRequest userRequest) {
         User result= userService.regisUser(userRequest);
         return new ResponseEntity(result, HttpStatus.OK);
     }
+    @PostMapping("/public/register")
+    public ResponseEntity<?> registerUser(@RequestBody UserRequest userRequest) {
+        User result = userService.registerUser(userRequest);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
 
     @PostMapping("/public/active-account")
-    public ResponseEntity<?> activeAccount(@RequestParam String email, @RequestParam String key) {
-        userService.activeAccount(key, email);
-        return new ResponseEntity<>("kích hoạt thành công", HttpStatus.OK);
+    public ResponseEntity<?> activeAccount(@RequestBody ActivateAccountDto activateAccountDto) {
+        try {
+            userService.activeAccount(activateAccountDto.getKey(), activateAccountDto.getEmail());
+            SuccessResponse successResponse = new SuccessResponse("Kích hoạt thành công");
+            return new ResponseEntity<>(successResponse, HttpStatus.OK);
+        } catch (MessageException e) {
+//            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), e.getStatus());
+            return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+        } catch (Exception e) {
+            ErrorResponse errorResponse = new ErrorResponse("Đã xảy ra lỗi", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/public/send-request-forgot-password")
