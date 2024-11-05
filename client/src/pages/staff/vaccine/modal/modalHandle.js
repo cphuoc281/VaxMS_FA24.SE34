@@ -167,6 +167,22 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
                         />
                     </Form.Item>
                     <Form.Item
+                        label="Số lượng"
+                        validateStatus={formErrors["quantity"] ? "error" : ""}
+                        help={formErrors["quantity"] || ""}
+                    >
+                        <Input
+                            className=""
+                            name="quantity"
+                            placeholder="Số lượng"
+                            value={formHandle["quantity"] || ""}
+                            onChange={(e) => {
+                                handleInputChange("quantity", e.target.value);
+                            }}
+                            type="number"
+                        />
+                    </Form.Item>
+                    <Form.Item
                         label="Loại vaccine"
                         validateStatus={formErrors["vaccineTypeId"] ? "error" : ""}
                         help={formErrors["vaccineTypeId"] || ""}

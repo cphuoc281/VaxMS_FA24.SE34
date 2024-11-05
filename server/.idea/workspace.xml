@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d6866e4-31f4-46cd-8216-552b84457db2" name="Changes" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/src/main/java/com/web/dto/ActivateAccountDto.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/web/dto/ErrorResponse.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/web/dto/SuccessResponse.java" afterDir="false" />
@@ -228,6 +229,27 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/utils/UserUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/utils/UserUtils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/vnpay/VNPayConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/vnpay/VNPayConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/web/vnpay/VNPayService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/vnpay/VNPayService.class" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/layout/staff/layout.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/staff/layout.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/customerSchedule/CustomerSchedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/customerSchedule/CustomerSchedule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/vaccine/modal/modalHandle.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/vaccine/modal/modalHandle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/vaccine/vaccine.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/vaccine/vaccine.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/models/ListVaccineRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/models/ListVaccineRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/CenterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/CenterRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/web/models/ListVaccineRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/models/ListVaccineRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/CenterRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/CenterRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/service/VaccineService.class" afterDir="false" />
+>>>>>>> bd34c264c89a5eb61d6d41f637f4f99f287eb0ae
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,6 +286,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.VaxmsApplication.executor&quot;: &quot;Run&quot;,
@@ -291,8 +314,35 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;cf1e8c14e54505f60aa10ceb8d5d8ab3&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.VaxmsApplication.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/VaxMS/VaxMS_FA24.SE34/server",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Facets",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "spring.configuration.checksum": "cf1e8c14e54505f60aa10ceb8d5d8ab3",
+    "vue.rearranger.settings.migration": "true"
+>>>>>>> bd34c264c89a5eb61d6d41f637f4f99f287eb0ae
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Administrator\Desktop\vaxms-full\VaxMS_FA24.SE34\server\src\main\java\com\web\api" />
@@ -329,7 +379,7 @@
       </method>
     </configuration>
     <configuration name="VaxmsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="server" />
+      <module name="vaxms" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.web.VaxmsApplication" />
       <extension name="coverage">
         <pattern>
@@ -374,6 +424,11 @@
       <workItem from="1730099569675" duration="12578000" />
       <workItem from="1730159222101" duration="7743000" />
       <workItem from="1730187996753" duration="10445000" />
+      <workItem from="1730266526236" duration="953000" />
+      <workItem from="1730267787716" duration="172000" />
+      <workItem from="1730343401680" duration="4338000" />
+      <workItem from="1730444737390" duration="3759000" />
+      <workItem from="1730450262667" duration="5115000" />
     </task>
     <servers />
   </component>
@@ -390,5 +445,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/web/service/VaccineService.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

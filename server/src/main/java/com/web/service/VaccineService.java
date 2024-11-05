@@ -2,6 +2,7 @@ package com.web.service;
 
 import com.web.dto.VaccineTypeResponse;
 import com.web.entity.AgeGroup;
+import com.web.entity.Center;
 import com.web.entity.Manufacturer;
 import com.web.entity.Vaccine;
 import com.web.entity.VaccineInventory;
@@ -19,6 +20,7 @@ import com.web.models.PlusVaccineResponse;
 import com.web.models.UpdateVaccineRequest;
 import com.web.models.UpdateVaccineResponse;
 import com.web.repository.AgeGroupRepository;
+import com.web.repository.CenterRepository;
 import com.web.repository.ManufacturerRepository;
 import com.web.repository.VaccineInventoryRepository;
 import com.web.repository.VaccineRepository;
@@ -61,6 +63,7 @@ public class VaccineService {
     private final AgeGroupRepository ageGroupRepository;
     private final VaccineTypeRepository vaccineTypeRepository;
     private final VaccineInventoryRepository vaccineInventoryRepository;
+    private final CenterRepository centerRepository;
 
     public List<Vaccine> findAll() {
         return vaccineRepository.findAll();
@@ -148,9 +151,17 @@ public class VaccineService {
         vaccine.setVaccineType(optionalVaccineType.get());
         vaccine.setManufacturer(optionalManufacturer.get());
         vaccine.setAgeGroup(optionalAgeGroup.get());
-        vaccine.setInventory(0);
+        vaccine.setInventory(vaccine.getInventory());
         vaccine.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         vaccineRepository.save(vaccine);
+
+        // Tạo VaccineInventory và sử dụng phương thức getCenter
+        VaccineInventory vaccineInventory = new VaccineInventory();
+        vaccineInventory.setVaccine(vaccine);
+        vaccineInventory.setQuantity(0);
+        vaccineInventory.setCenter(getCenter("Ha Noi"));
+        vaccineInventory.setStatus("Đang sử dụng");
+        vaccineInventoryRepository.save(vaccineInventory);
 
         return modelMapper.map(vaccine, CreateVaccineResponse.class);
     }
@@ -401,6 +412,11 @@ public class VaccineService {
             if (ObjectUtils.isNotEmpty(requestBody.getStatus())) {
                 predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("status"), requestBody.getStatus())));
             }
+
+            // Thêm bộ lọc theo khoảng thời gian createdDate
+            if (ObjectUtils.isNotEmpty(requestBody.getStartDate()) && ObjectUtils.isNotEmpty(requestBody.getEndDate())) {
+                predicates.add(criteriaBuilder.between(root.get("createdDate"), requestBody.getStartDate(), requestBody.getEndDate()));
+            }
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
@@ -412,6 +428,18 @@ public class VaccineService {
         search = "%"+search+"%";
         Page<Vaccine> list = vaccineRepository.findByParam(search, pageable);
         return list;
+    }
+
+    private Center getCenter(String city) {
+        Optional<Center> optionalCenter = centerRepository.findByCity(city);
+        if (optionalCenter.isEmpty()) {
+            Center newCenter = new Center();
+            newCenter.setCity(city);
+            newCenter.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+            centerRepository.save(newCenter);
+            return newCenter;
+        }
+        return optionalCenter.get();
     }
 
     public Vaccine findById(Long id) {
