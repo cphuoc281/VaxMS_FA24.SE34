@@ -163,7 +163,7 @@ function ChatFrame(){
     }
     return(
     <div class="chat-container">
-        <button class="chat-button" id="btnopenchat" type='button' onClick={()=>toggleChat()}><i class="fa fa-comment"></i> Chat với chúng tôi</button>
+        <button class="chat-button" id="btnopenchat" type='button' onClick={()=>toggleChat()}><i class="fa fa-comment"></i> Hỗ trợ</button>
 
         <div id="chat-box" class="chat-box">
             <div class="chat-header">
