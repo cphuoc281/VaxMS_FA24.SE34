@@ -230,7 +230,7 @@ function DangKyTiem() {
                                  if (item.quantity !== item.limitPeople) {
                                     setTimeChoose(item, index);
                                 }}}
-                                  className={`singletgtiem ${indexTime === index ? 'activetiem' : ''}`} >
+                                  className={`singletgtiem ${indexTime === index ? 'activetiem' : ''} ${item.quantity !== item.limitPeople?'':'hetslottiem'}`} >
                                 {formatTime(item.start)} - {formatTime(item.end)}<br/>
                                 SL: {item.quantity} / {item.limitPeople}
                               </div>

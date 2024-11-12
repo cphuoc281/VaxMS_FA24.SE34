@@ -400,6 +400,13 @@ public class CustomerScheduleService {
         }
 
         customerSchedule.setVaccineScheduleTime(vaccineScheduleTime);
+        if(customerSchedule.getCounterChange() == null){
+            customerSchedule.setCounterChange(0);
+        }
+        customerSchedule.setCounterChange(customerSchedule.getCounterChange() + 1);
+        if(customerSchedule.getCounterChange() == 4){
+            throw new MessageException("Bạn chỉ được đổi lịch tiêm 3 lần");
+        }
         customerScheduleRepository.save(customerSchedule);
     }
 }
