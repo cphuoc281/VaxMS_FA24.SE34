@@ -111,6 +111,18 @@ public class UserApi {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // @PostMapping("/public/send-forgot-password-request")
+    // public ResponseEntity<?> sendForgotPasswordRequest(@RequestBody ForgotPasswordDto forgotPasswordDto){
+    //     userService.sendForgotPasswordRequest(forgotPasswordDto.getEmail(), forgotPasswordDto.getUrl());
+    //     return new ResponseEntity<>(HttpStatus.OK);
+    // }
+
+    // @PostMapping("/public/confirm-reset-password")
+    // public ResponseEntity<?> confirmResetPassword(@RequestParam String email, @RequestParam String key,
+    //                                               @RequestParam String password) {
+    //     userService.confirmResetPassword(email, password, key);
+    //     return new ResponseEntity<>(HttpStatus.OK);
+    // }
     @PostMapping("/all/user-logged")
     public ResponseEntity<?> inforLogged()  {
         return new ResponseEntity<>(userUtils.getUserWithAuthority(),HttpStatus.OK);

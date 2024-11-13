@@ -106,7 +106,7 @@ function login(){
                     />
                     </div>
                     </GoogleOAuthProvider>
-                    <a href="forgot" class="lbquenmk">Quên mật khẩu ?</a>
+                    <a href="/quenmatkhau" class="lbquenmk">Quên mật khẩu ?</a>
                 </div>
             </div>
         </div>

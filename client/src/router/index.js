@@ -17,6 +17,8 @@ import TraCuuLichTiem from "../pages/public/tracuulichtiem";
 import LichTiemDaQua from "../pages/public/lichtiemdaqua";
 import TimKiemVacxin from "../pages/public/timkiemvaccine";
 import ActivateAccount from '../pages/public/ActivateAccount';
+import QuenMatKhau from "../pages/public/quenmatkhau";
+import DatLaiMatKhau from "../pages/public/datlaimatkhau";
 
 //customer
 import dangkytiemchung from "../pages/customer/dangkytiemchung";
@@ -41,6 +43,8 @@ const publicRoutes = [
     {path: "/signin", component: signin },
     {path: "/tra-cuu-lich-tiem", component: TraCuuLichTiem},
     {path: "/lich-tiem-da-qua", component: LichTiemDaQua},
+    { path: "/quenmatkhau", component: QuenMatKhau },
+    { path: "/datlaimatkhau", component: DatLaiMatKhau },
 ];
 
 const customerRoutes = [
