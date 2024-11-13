@@ -203,7 +203,7 @@ public class VaccineScheduleService {
             param = "";
         }
         param = "%"+param+"%";
-        Page<VaccineSchedule> page = vaccineScheduleRepository.findByParam(param, LocalDateTime.now(), pageable);
+        Page<VaccineSchedule> page = vaccineScheduleRepository.findByParam(param, new Date(System.currentTimeMillis()), pageable);
         for(VaccineSchedule v : page.getContent()){
             if(customerScheduleRepository.countRegis(v.getId()) < v.getLimitPeople()){
                 v.setInStock(true);
@@ -217,7 +217,7 @@ public class VaccineScheduleService {
             param = "";
         }
         param = "%"+param+"%";
-        Page<VaccineSchedule> page = vaccineScheduleRepository.preFindByParam(param, LocalDateTime.now(), pageable);
+        Page<VaccineSchedule> page = vaccineScheduleRepository.preFindByParam(param, new Date(System.currentTimeMillis()), pageable);
         return page;
     }
 
