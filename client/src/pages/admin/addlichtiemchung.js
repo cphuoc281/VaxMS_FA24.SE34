@@ -130,6 +130,7 @@ const AdminAddLichTiemChung = ()=>{
                     
                     <label className='lbadd-admin'>Id lịch tiêm trước đó</label>
                     <input name='idPreSchedule' defaultValue={item==null?'':item.idPreSchedule} type='number' className='form-control'/>
+                    
                 </div>
                 <div className='col-sm-4'>
                     <label className='lbadd-admin'>Tên vacxin</label>

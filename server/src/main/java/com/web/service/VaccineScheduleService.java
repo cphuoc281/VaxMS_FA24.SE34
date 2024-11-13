@@ -20,6 +20,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -64,18 +65,56 @@ public class VaccineScheduleService {
 
         if(vaccineSchedule.getIdPreSchedule() != null){
             Optional<VaccineSchedule> vc = vaccineScheduleRepository.findById(vaccineSchedule.getIdPreSchedule());
+            int roundMonth = getRoundedMonthsBetween(vc.get().getStartDate(), vaccineSchedule.getStartDate());
+            System.out.println("Khoảng cách tháng: "+roundMonth);
             if(vc.isPresent()){
-                List<CustomerSchedule> list = customerScheduleRepository.findByVaccineSchedule(vc.get().getId());
-                for(CustomerSchedule c : list){
-                    mailService.sendEmail(c.getUser().getEmail(),"Thông báo mũi tiêm tiếp theo",
-                            "Mũi tiêm "+c.getVaccineScheduleTime().getVaccineSchedule().getVaccine().getName()+" đã có lịch tiêm tiếp theo<br>"+
-                            "Thời gian tiêm mũi tiếp theo từ ngày: "+vaccineSchedule.getStartDate()+" đến ngày: "+vaccineSchedule.getEndDate()+"<br>"+
-                            vaccineSchedule.getDescription()
-                            , false, true);
+                List<Date> listDate = getDatesBetween(vaccineSchedule.getStartDate(), vaccineSchedule.getEndDate());
+                for(Date d : listDate){
+                    System.out.println("ngày: "+d.toString());
+                    List<CustomerSchedule> list = customerScheduleRepository.findByVaccineScheduleAndDate(vc.get().getId(), d, roundMonth);
+                    for(CustomerSchedule c : list){
+                        mailService.sendEmail(c.getUser().getEmail(),"Thông báo mũi tiêm tiếp theo",
+                                "Mũi tiêm "+c.getVaccineScheduleTime().getVaccineSchedule().getVaccine().getName()+" đã có lịch tiêm tiếp theo<br>"+
+                                        "Thời gian tiêm mũi tiếp theo từ ngày: "+vaccineSchedule.getStartDate()+" đến ngày: "+vaccineSchedule.getEndDate()
+                                        +"<br>Mũi tiêm của bạn nên được tiêm vào ngày: "+d.toString()+
+                                        "<br>"+
+                                        vaccineSchedule.getDescription()
+                                , false, true);
+                    }
                 }
             }
         }
         return vaccineSchedule;
+    }
+
+    public static int getRoundedMonthsBetween(Date startDate, Date endDate) {
+        // Chuyển đổi java.sql.Date sang LocalDate
+        LocalDate start = startDate.toLocalDate();
+        LocalDate end = endDate.toLocalDate();
+
+        // Tính khoảng cách giữa 2 ngày
+        Period period = Period.between(start, end);
+
+        // Lấy số tháng và làm tròn
+        int months = period.getYears() * 12 + period.getMonths();
+
+        // Nếu có ngày dư thì làm tròn lên thêm 1 tháng
+        if (period.getDays() > 0) {
+            months += 1;
+        }
+
+        return months;
+    }
+
+    public static List<Date> getDatesBetween(Date startDate, Date endDate) {
+        List<Date> dates = new ArrayList<>();
+        LocalDate start = startDate.toLocalDate();
+        LocalDate end = endDate.toLocalDate();
+        while (!start.isAfter(end)) {
+            dates.add(Date.valueOf(start));
+            start = start.plusDays(1);
+        }
+        return dates;
     }
 
 

@@ -6,13 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1d6866e4-31f4-46cd-8216-552b84457db2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/entity/CustomerSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/entity/CustomerSchedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/enums/StatusCustomerSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/enums/StatusCustomerSchedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/AuthorityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/AuthorityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/VaccineScheduleTimeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/VaccineScheduleTimeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/CustomerScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/CustomerScheduleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineScheduleTimeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineScheduleTimeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/web/repository/AuthorityRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/web/repository/AuthorityRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/CustomerScheduleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/CustomerScheduleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineScheduleService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +151,8 @@
       <workItem from="1731146804225" duration="336000" />
       <workItem from="1731160879070" duration="3865000" />
       <workItem from="1731248357930" duration="26000" />
-      <workItem from="1731379705563" duration="1488000" />
+      <workItem from="1731379705563" duration="1847000" />
+      <workItem from="1731464411674" duration="3926000" />
     </task>
     <servers />
   </component>
