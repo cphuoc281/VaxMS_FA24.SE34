@@ -7,3 +7,4 @@
 /server/target/
 # Bỏ qua file cấu hình IDE
 /server/.idea/
+.idea/
