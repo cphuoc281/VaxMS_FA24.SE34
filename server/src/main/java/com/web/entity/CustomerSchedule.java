@@ -38,6 +38,8 @@ public class CustomerSchedule {
 
     private String address;
 
+    private Integer counterChange;
+
     @Enumerated(EnumType.STRING)
     private CustomerSchedulePay customerSchedulePay;
 

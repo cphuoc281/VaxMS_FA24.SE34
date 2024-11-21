@@ -78,6 +78,9 @@ public class CustomerScheduleService {
     @Autowired
     private VNPayService vnPayService;
 
+    @Autowired
+    private MailService mailService;
+
     public CustomerSchedule create(CustomerSchedule customerSchedule, String orderId, String requestId) {
         LogUtils.init();
         if (paymentRepository.findByOrderIdAndRequestId(orderId, requestId).isPresent()) {
@@ -400,6 +403,18 @@ public class CustomerScheduleService {
         }
 
         customerSchedule.setVaccineScheduleTime(vaccineScheduleTime);
+        if(customerSchedule.getCounterChange() == null){
+            customerSchedule.setCounterChange(0);
+        }
+        customerSchedule.setCounterChange(customerSchedule.getCounterChange() + 1);
+        if(customerSchedule.getCounterChange() == 4){
+            throw new MessageException("Bạn chỉ được đổi lịch tiêm 3 lần");
+        }
+        else{
+            mailService.sendEmail(customerSchedule.getUser().getEmail(), "ThÔng báo đổi lịch tiêm",
+                    "Bạn đã đổi lịch tiêm "+customerSchedule.getVaccineScheduleTime().getVaccineSchedule().getVaccine().getName()+" "+ customerSchedule.getCounterChange() +" lần<br>bạn chỉ được đổi tối đa 3 lần cho mỗi lịch đăng ký"
+                    ,false, true);
+        }
         customerScheduleRepository.save(customerSchedule);
     }
 }

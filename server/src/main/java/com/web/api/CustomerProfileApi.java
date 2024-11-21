@@ -23,6 +23,7 @@ public class CustomerProfileApi {
     @GetMapping("/customer/find-by-user")
     public ResponseEntity<?> findByUser(){
         CustomerProfile result = customerProfileService.findByUser();
+        System.out.println("customer: "+result.getId());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

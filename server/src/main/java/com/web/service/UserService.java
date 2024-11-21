@@ -7,11 +7,13 @@ import com.web.dto.CustomUserDetails;
 import com.web.dto.TokenDto;
 import com.web.dto.UserRequest;
 import com.web.dto.UserUpdate;
+import com.web.entity.CustomerProfile;
 import com.web.entity.User;
 import com.web.enums.UserType;
 import com.web.exception.MessageException;
 import com.web.jwt.JwtTokenProvider;
 import com.web.repository.AuthorityRepository;
+import com.web.repository.CustomerProfileRepository;
 import com.web.repository.UserRepository;
 import com.web.utils.Contains;
 import com.web.utils.MailService;
@@ -45,6 +47,9 @@ public class UserService {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private CustomerProfileRepository customerProfileRepository;
 
     public TokenDto login(String email, String password) throws Exception {
         Optional<User> users = userRepository.findByEmail(email);
@@ -91,9 +96,18 @@ public class UserService {
             TokenDto tokenDto = new TokenDto();
             tokenDto.setToken(token);
             tokenDto.setUser(users.get());
+            CustomerProfile ex = customerProfileRepository.findByUser(users.get().getId());
+            if(ex == null){
+                CustomerProfile customerProfile = new CustomerProfile();
+                customerProfile.setUser(users.get());
+                customerProfileRepository.save(customerProfile);
+            }
             return tokenDto;
         } else {
             User u = userRepository.save(user);
+            CustomerProfile customerProfile = new CustomerProfile();
+            customerProfile.setUser(u);
+            customerProfileRepository.save(customerProfile);
             CustomUserDetails customUserDetails = new CustomUserDetails(u);
             String token = jwtTokenProvider.generateToken(customUserDetails);
             TokenDto tokenDto = new TokenDto();
@@ -136,6 +150,9 @@ public class UserService {
         mailService.sendEmail(user.getEmail(), "Xác nhận tài khoản của bạn", "Cảm ơn bạn đã tin tưởng và xử dụng dịch vụ của chúng tôi:<br>" +
                 "Để kích hoạt tài khoản của bạn, hãy nhập mã xác nhận bên dưới để xác thực tài khoản của bạn<br><br>" +
                 "<a style=\"background-color: #2f5fad; padding: 10px; color: #fff; font-size: 18px; font-weight: bold;\">" + user.getActivationKey() + "</a>", false, true);
+        CustomerProfile customerProfile = new CustomerProfile();
+        customerProfile.setUser(result);
+        customerProfileRepository.save(customerProfile);
         return result;
     }
     public User registerUser(UserRequest userRequest) {

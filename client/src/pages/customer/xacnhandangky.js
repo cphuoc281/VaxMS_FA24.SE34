@@ -85,7 +85,7 @@ function XacNhanDangky() {
                 title: "Thông báo",
                 text: "Đăng ký thành công, hãy thanh toán trước 24h!",
                 preConfirm: () => {
-                    window.location.reload();
+                    window.location.href = '/tai-khoan#lichtiem';
                 }
             });
         }
