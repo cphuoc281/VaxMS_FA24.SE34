@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Client } from "@stomp/stompjs";
 import avatar from "../../assest/images/avatar.png";
 import SockJS from "sockjs-client";
+import styles from "./staffChat.scss";
 import {
   getMethod,
   postMethod,
@@ -20,6 +21,8 @@ const StaffChat = () => {
   const [itemChat, setItemChat] = useState([]);
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState(null);
+  const [newMessagesCount, setNewMessagesCount] = useState({});
+
 
   useEffect(() => {
     const getItemUser = async () => {
@@ -54,10 +57,20 @@ const StaffChat = () => {
         stompClient.subscribe("/users/queue/messages", (msg) => {
           var Idsender = msg.headers.sender;
           var isFile = msg.headers.isFile;
-          if (Number(isFile) === Number(0)) {
-            appendTinNhanDen(msg.body, Idsender);
+          var uls = new URL(document.URL);
+          var currentUserId = uls.searchParams.get("user");
+          if (Idsender !== currentUserId) {
+            // Nếu tin nhắn đến từ người dùng khác, tăng số lượng tin nhắn mới
+            setNewMessagesCount((prevState) => {
+              const count = prevState[Idsender] ? prevState[Idsender] + 1 : 1;
+              return { ...prevState, [Idsender]: count };
+            });
           } else {
-            appendFileTinNhanDen(msg.body, Idsender);
+            if (Number(isFile) === Number(0)) {
+              appendTinNhanDen(msg.body, Idsender);
+            } else {
+              appendFileTinNhanDen(msg.body, Idsender);
+            }
           }
         });
       },
@@ -148,6 +161,13 @@ const StaffChat = () => {
   };
 
   async function loadMessage(u) {
+    // Reset số lượng tin nhắn mới
+    setNewMessagesCount((prevState) => {
+      const newState = { ...prevState };
+      delete newState[u.id];
+      return newState;
+    });
+
     window.location.href = "chat?user=" + u.id + "&email=" + u.email;
   }
 
@@ -187,6 +207,14 @@ const StaffChat = () => {
     return fileType.startsWith("image/");
   }
 
+  const badgeNewMessageStyle = {
+    backgroundColor: 'red',
+    color: 'white',
+    padding: '2px 6px',
+    borderRadius: '50%',
+    marginLeft: '5px',
+    fontSize: '12px',
+  };
   return (
     <>
       <div class="row">
@@ -206,13 +234,29 @@ const StaffChat = () => {
               </tr>
             </thead>
             <tbody id="listuserchat">
-              {itemUser.map((item, index)=>{
-                                return <tr class="pointer trhoverchat" onClick={()=>loadMessage(item.user)}>
-                                    <td class="col45" onClick={()=>loadMessage(item.user)}><img src={avatar} class="imgavatarchat"/></td>
-                                    <td onClick={()=>loadMessage(item.user)}>{item.user.email}<span class="timechat">{item.timestamp}</span></td>
-                                </tr>
-                            })}
+              {itemUser.map((item, index) => {
+                const newCount = newMessagesCount[item.user.id] || 0;
+                return (
+                  <tr
+                    key={index}
+                    className="pointer trhoverchat"
+                    onClick={() => loadMessage(item.user)}
+                  >
+                    <td className="col45">
+                      <img src={avatar} className="imgavatarchat" />
+                    </td>
+                    <td>
+                      {item.user.email}
+                      <span className="timechat">{item.timestamp}</span>
+                      {newCount > 0 && (
+                        <span style={badgeNewMessageStyle}>{newCount}</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
+
           </table>
         </div>
         <div class="col-sm-9">
@@ -223,18 +267,22 @@ const StaffChat = () => {
               <div class="header-chat-admin form-control">{email}</div>
               <div class="contentchatadmin" id="listchatadmin">
                 {itemChat.map((item, index) => {
-                  if (item.sender.authorities.name == "Customer") {
-                    if (item.isFile != true) {
-                      return <p class="mychat">{item.content}</p>;
-                    } else {
-                      return <img class="mychatimg" src={item.content} />;
-                    }
+                  if (item.sender.authorities.name === "Customer") {
+                    return item.isFile ? (
+                      <img className="mychatimg" src={item.content} key={index} />
+                    ) : (
+                      <p className="mychat" key={index}>
+                        {item.content}
+                      </p>
+                    );
                   } else {
-                    if (item.isFile != true) {
-                      return <p class="adminchat">{item.content}</p>;
-                    } else {
-                      return <img class="adminchatimg" src={item.content} />;
-                    }
+                    return item.isFile ? (
+                      <img className="adminchatimg" src={item.content} key={index} />
+                    ) : (
+                      <p className="adminchat" key={index}>
+                        {item.content}
+                      </p>
+                    );
                   }
                 })}
               </div>
