@@ -8,3 +8,5 @@
 # Bỏ qua file cấu hình IDE
 /server/.idea/
 .idea/
+# Ignore workspace.xml file
+server/.idea/workspace.xml
