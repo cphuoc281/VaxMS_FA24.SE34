@@ -16,6 +16,7 @@ export class CustomerScheduleApi {
       data: data,
     });
   };
+
   static approveCustomerSchedule = (data) => {
     return axios({
       method: "POST",
@@ -23,4 +24,21 @@ export class CustomerScheduleApi {
       data: data,
     });
   };
+
+  static createCustomerFindByIdSchedule = (data) => {
+    return axios({
+      method: "POST",
+      url: `/api/customer-schedule/customer/create-customer-findById-schedule`,
+      data: data,
+    });
+  };
+
+  static UpdateCustomerSchedule = (data) => {
+    return axios({
+      method: "POST",
+      url: `/api/customer-schedule/customer/update-customer-schedule`,
+      data: data,
+    });
+  };
+  
 }

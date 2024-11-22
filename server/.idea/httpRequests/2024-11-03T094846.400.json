@@ -1,0 +1,6 @@
+{
+  "timestamp": "2024-11-03T02:48:46.893+00:00",
+  "status": 400,
+  "error": "Bad Request",
+  "path": "/api/customer-schedule/customer/list-view"
+}

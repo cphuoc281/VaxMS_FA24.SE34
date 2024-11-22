@@ -19,5 +19,6 @@ public class ListVaccineInventoryResponse {
     private Vaccine vaccine;
     private Integer quantity;
     private Timestamp createdDate;
+    private Timestamp expiryDate;
     private String status;
 }

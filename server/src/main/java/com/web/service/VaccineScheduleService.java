@@ -1,5 +1,6 @@
 package com.web.service;
 
+import com.web.api.VaccineScheduleApi;
 import com.web.entity.Center;
 import com.web.entity.CustomerSchedule;
 import com.web.entity.Vaccine;
@@ -11,10 +12,13 @@ import com.web.repository.VaccineScheduleRepository;
 import com.web.repository.VaccineScheduleTimeRepository;
 import com.web.utils.MailService;
 import com.web.utils.UserUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -26,6 +30,7 @@ import java.util.Optional;
 
 @Component
 public class VaccineScheduleService {
+    private static final Logger log = LoggerFactory.getLogger(VaccineScheduleApi.class);
 
     @Autowired
     private VaccineScheduleRepository vaccineScheduleRepository;
@@ -49,6 +54,7 @@ public class VaccineScheduleService {
     * api này dùng để thêm lịch tiêm vaccine
     * */
     public VaccineSchedule save(VaccineSchedule vaccineSchedule) {
+
         Vaccine vaccine = vaccineRepository.findById(vaccineSchedule.getVaccine().getId()).get();
         if(vaccine.getInventory() == null){
             throw new MessageException("Vaccine không đủ số lượng");
@@ -129,6 +135,29 @@ public class VaccineScheduleService {
         }
     }
 
+    public Page<VaccineSchedule> advancedSearch(
+            String vaccineName,
+            String centerName,
+            LocalDate fromDate,
+            LocalDate toDate,
+            String status,
+            Pageable pageable) {
+
+        log.info("Service Layer - fromDate: {}, toDate: {}, status: {}", fromDate, toDate, status);
+
+        if (fromDate != null && toDate != null && fromDate.isAfter(toDate)) {
+            throw new IllegalArgumentException("Ngày bắt đầu không thể lớn hơn ngày kết thúc");
+        }
+
+        return vaccineScheduleRepository.findAdvancedSearch(
+                vaccineName,
+                centerName,
+                fromDate,
+                toDate,
+                status,
+                pageable
+        );
+    }
     /*
      * api này dùng để lấy danh sách lịch tiêm vaccine, truyền vào ngày bắt đầu và kết thúc
      * nếu không truyền ngày bd hoặc kt thì lấy mặc định tất cả

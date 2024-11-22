@@ -38,6 +38,10 @@ public class CustomerSchedule {
 
     private String address;
 
+    private String note;
+    private String healthStatusBefore;
+    private String healthStatusAfter;
+
     @Enumerated(EnumType.STRING)
     private CustomerSchedulePay customerSchedulePay;
 

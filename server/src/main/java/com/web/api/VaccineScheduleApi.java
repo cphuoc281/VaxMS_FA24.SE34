@@ -6,21 +6,31 @@ import com.web.entity.VaccineSchedule;
 import com.web.exception.MessageException;
 import com.web.service.VaccineScheduleService;
 import com.web.service.VaccineService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/vaccine-schedule")
 @CrossOrigin
 public class VaccineScheduleApi {
+    private static final Logger log = LoggerFactory.getLogger(VaccineScheduleApi.class);
 
     @Autowired
     private VaccineScheduleService vaccineScheduleService;
@@ -34,6 +44,26 @@ public class VaccineScheduleApi {
                                     @RequestParam(value = "to", required = false)Date to, Pageable pageable){
         Page<VaccineSchedule> result = vaccineScheduleService.vaccineSchedules(from, to, pageable);
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+    @GetMapping("/search-advanced")
+    public ResponseEntity<?> searchAdvanced(
+            @RequestParam(value = "fromDate", required = false)
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fromDate,
+            @RequestParam(value = "toDate", required = false)
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate toDate,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            @RequestParam(value = "vaccineName", required = false) String vaccineName,
+            @RequestParam(value = "centerName", required = false) String centerName,
+            @RequestParam(value = "status", required = false) String status
+    ) {
+        log.info("Controller Layer - fromDate: {}, toDate: {}, status: {}", fromDate, toDate, status);
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<VaccineSchedule> result = vaccineScheduleService.advancedSearch(
+                vaccineName, centerName, fromDate, toDate, status, pageable);
+
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/all/find-by-vacxin")
@@ -89,6 +119,5 @@ public class VaccineScheduleApi {
         List<VaccineSchedule> result = vaccineScheduleService.getCenter(start, vaccineId);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
 
 }

@@ -28,6 +28,8 @@ public class VaccineInventory {
     private Timestamp exportDate;
 
     private Timestamp createdDate;
+    @Column(name = "expiry_date")
+    private Timestamp expiryDate;
     private String status;
 
     @ManyToOne
@@ -37,4 +39,6 @@ public class VaccineInventory {
     @ManyToOne
     @JoinColumn(name = "center_id")
     private Center center;
+
+
 }

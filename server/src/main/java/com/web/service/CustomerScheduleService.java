@@ -17,6 +17,7 @@ import com.web.models.CreateScheduleGuestResponse;
 import com.web.models.ListCustomerScheduleRequest;
 import com.web.models.ListCustomerScheduleResponse;
 import com.web.models.QueryStatusTransactionResponse;
+import com.web.models.UpdateCustomerSchedule;
 import com.web.processor.QueryTransactionStatus;
 import com.web.repository.*;
 import com.web.utils.MailService;
@@ -44,8 +45,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.Predicate;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
@@ -59,6 +62,9 @@ public class CustomerScheduleService {
 
     @Autowired
     private CustomerScheduleRepository customerScheduleRepository;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
 
     @Autowired
     private UserUtils userUtils;
@@ -77,6 +83,10 @@ public class CustomerScheduleService {
 
     @Autowired
     private VNPayService vnPayService;
+
+    @Autowired
+    private EmailService emailService;
+
 
     public CustomerSchedule create(CustomerSchedule customerSchedule, String orderId, String requestId) {
         LogUtils.init();
@@ -112,17 +122,17 @@ public class CustomerScheduleService {
         return customerSchedule;
     }
 
-    public Page<CustomerSchedule> mySchedule(Pageable pageable, String search,Date from,Date to) {
+    public Page<CustomerSchedule> mySchedule(Pageable pageable, String search, Date from, Date to) {
         User user = userUtils.getUserWithAuthority();
-        if(search == null){
+        if (search == null) {
             search = "";
         }
-        search = "%"+search+"%";
-        if(from == null || to == null){
+        search = "%" + search + "%";
+        if (from == null || to == null) {
             from = Date.valueOf("2000-01-01");
             to = Date.valueOf("2100-01-01");
         }
-        Page<CustomerSchedule> list = customerScheduleRepository.findByUser(user.getId(), search,from, to, pageable);
+        Page<CustomerSchedule> list = customerScheduleRepository.findByUser(user.getId(), search, from, to, pageable);
         return list;
     }
 
@@ -161,6 +171,9 @@ public class CustomerScheduleService {
                             .createdDate(e.getCreatedDate())
                             .vaccineScheduleTime(vaccineScheduleTime.orElse(null))
                             .user(user.orElse(null))
+                            .note(e.getNote())
+                            .healthStatusAfter(e.getHealthStatusAfter())
+                            .healthStatusBefore(e.getHealthStatusBefore())
                             .build();
                 }
         ).toList();
@@ -178,6 +191,12 @@ public class CustomerScheduleService {
             if (ObjectUtils.isNotEmpty(requestBody.getStatus())) {
                 predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("statusCustomerSchedule"), StatusCustomerSchedule.valueOf(requestBody.getStatus()))));
             }
+
+            // Tìm kiếm theo vaccineScheduleId
+            if (ObjectUtils.isNotEmpty(requestBody.getVaccineScheduleId())) {
+                predicates.add(criteriaBuilder.equal(root.get("vaccineScheduleTime").get("vaccineSchedule").get("id"), requestBody.getVaccineScheduleId()));
+            }
+
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
@@ -185,39 +204,88 @@ public class CustomerScheduleService {
     @Transactional(rollbackFor = Exception.class)
     public CreateScheduleGuestResponse createScheduleGuest(CreateScheduleGuestRequest request) {
         if (ObjectUtils.isEmpty(request)) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi");
+            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi");
         }
-        Optional<User> optionalUser = userRepository.findByEmail(request.getEmail());
-        if (optionalUser.isPresent()) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Email đã tồn tại");
-        }
-        Optional<User> optionalUserPhone = userRepository.findByPhoneNumber(request.getPhone());
-        if (optionalUserPhone.isPresent()) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Số điện thoại đã tồn tại");
-        }
-        User user = User.builder()
-                .email(request.getEmail())
-                .createdDate(new Date(System.currentTimeMillis()))
-                .phoneNumber(request.getPhone())
-                .password("123")
-                .userType(UserType.standard)
-                .build();
-        userRepository.save(user);
-        Optional<VaccineScheduleTime> optionalVaccineScheduleTime = vaccineScheduleTimeRepository.findById(request.getVaccineScheduleId());
 
+        // Tìm người dùng dựa trên email
+        Optional<User> optionalUser = userRepository.findByEmail(request.getEmail());
+        User user;
+
+        if (optionalUser.isPresent()) {
+            user = optionalUser.get();
+        } else {
+            // Nếu người dùng chưa tồn tại, tạo mới
+            Optional<User> optionalUserPhone = userRepository.findByPhoneNumber(request.getPhone());
+            if (optionalUserPhone.isPresent()) {
+                throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Số điện thoại đã tồn tại");
+            }
+
+            // Mã hóa mật khẩu trước khi lưu
+            user = User.builder()
+                    .email(request.getEmail())
+                    .createdDate(new Date(System.currentTimeMillis()))
+                    .phoneNumber(request.getPhone())
+                    .authorities(authorityRepository.findById(4L).get())
+                    .password("123")
+                    .userType(UserType.standard)
+                    .build();
+            userRepository.save(user);
+        }
+
+        // Tìm hoặc tạo các khung giờ tiêm cho ngày hiện tại
+        VaccineScheduleTime vaccineScheduleTime = vaccineScheduleTimeRepository.findFirstByVaccineScheduleId(request.getVaccineScheduleId());
+        if (vaccineScheduleTime == null) {
+            VaccineSchedule vaccineSchedule = vaccineScheduleRepository.findById(request.getVaccineScheduleId())
+                    .orElseThrow(() -> new MessageException(HttpStatus.BAD_REQUEST.value(), "Không tìm thấy Vaccine Schedule"));
+
+            // Tạo khung giờ sáng
+            VaccineScheduleTime morningSchedule = new VaccineScheduleTime();
+            morningSchedule.setInjectDate(new Date(System.currentTimeMillis()));
+            morningSchedule.setStart(Time.valueOf("08:00:00"));
+            morningSchedule.setEnd(Time.valueOf("12:00:00"));
+            morningSchedule.setLimitPeople(100);
+            morningSchedule.setVaccineSchedule(vaccineSchedule);
+            vaccineScheduleTimeRepository.save(morningSchedule);
+
+            // Tạo khung giờ chiều
+            VaccineScheduleTime afternoonSchedule = new VaccineScheduleTime();
+            afternoonSchedule.setInjectDate(new Date(System.currentTimeMillis()));
+            afternoonSchedule.setStart(Time.valueOf("13:00:00"));
+            afternoonSchedule.setEnd(Time.valueOf("17:00:00"));
+            afternoonSchedule.setLimitPeople(100);
+            afternoonSchedule.setVaccineSchedule(vaccineSchedule);
+            vaccineScheduleTimeRepository.save(afternoonSchedule);
+
+            vaccineScheduleTime = morningSchedule;
+        }
+
+        // Tạo lịch tiêm cho người dùng
         CustomerSchedule customerSchedule = CustomerSchedule.builder()
                 .statusCustomerSchedule(StatusCustomerSchedule.pending)
                 .fullName(request.getFullName())
-                .vaccineScheduleTime(optionalVaccineScheduleTime.orElse(null))
+                .vaccineScheduleTime(vaccineScheduleTime)
                 .phone(request.getPhone())
+                .customerSchedulePay(CustomerSchedulePay.CHUA_THANH_TOAN)
                 .address(request.getAddress())
                 .createdDate(new Timestamp(System.currentTimeMillis()))
                 .user(user)
                 .build();
         customerScheduleRepository.save(customerSchedule);
-        sendEmailToCustomer(customerSchedule);
+
+        // Gửi email thông báo lịch tiêm
+        emailService.sendVaccinationScheduleNotification(
+                user.getEmail(),
+                request.getFullName(),
+                String.format("Thời gian tiêm từ %s đến %s vào ngày %s",
+                        vaccineScheduleTime.getStart().toString(),
+                        vaccineScheduleTime.getEnd().toString(),
+                        vaccineScheduleTime.getInjectDate().toString()),
+                user.getEmail(),
+                "Đã được mã hóa"
+        );
+
         return CreateScheduleGuestResponse.builder()
-                .vaccineScheduleTime(optionalVaccineScheduleTime.orElse(null))
+                .vaccineScheduleTime(vaccineScheduleTime)
                 .createdDate(customerSchedule.getCreatedDate())
                 .fullName(customerSchedule.getFullName())
                 .id(customerSchedule.getId())
@@ -225,6 +293,7 @@ public class CustomerScheduleService {
                 .status(customerSchedule.getStatusCustomerSchedule().name())
                 .build();
     }
+
 
     public ApproveCustomerScheduleResponse approveCustomerSchedule(ApproveCustomerScheduleRequest request) {
         if (ObjectUtils.isEmpty(request)) {
@@ -246,7 +315,7 @@ public class CustomerScheduleService {
         String to = customerSchedule.getUser().getEmail();
         String subject = "Thông báo về lịch tiêm";
         String body = "Lịch tiêm của bạn đã được "
-                + (customerSchedule.getStatusCustomerSchedule() == StatusCustomerSchedule.confirmed ? "xác nhận"
+                      + (customerSchedule.getStatusCustomerSchedule() == StatusCustomerSchedule.confirmed ? "xác nhận"
                 : (customerSchedule.getStatusCustomerSchedule() == StatusCustomerSchedule.pending ? "tạo" : "hủy")) + ".";
 
         // Thiết lập gửi email
@@ -281,18 +350,18 @@ public class CustomerScheduleService {
     }
 
     public CustomerSchedule createVnPay(CustomerScheduleVnpay customerScheduleVnpay) {
-        if(paymentRepository.findByOrderIdAndRequestId(customerScheduleVnpay.getVnpOrderInfo(),customerScheduleVnpay.getVnpOrderInfo()).isPresent()){
+        if (paymentRepository.findByOrderIdAndRequestId(customerScheduleVnpay.getVnpOrderInfo(), customerScheduleVnpay.getVnpOrderInfo()).isPresent()) {
             throw new MessageException("Lịch đặt đã được thanh toán");
         }
         int paymentStatus = vnPayService.orderReturnByUrl(customerScheduleVnpay.getVnpayUrl());
-        if(paymentStatus != 1){
+        if (paymentStatus != 1) {
             throw new MessageException("Thanh toán thất bại");
         }
         CustomerSchedule result = save(customerScheduleVnpay.getCustomerSchedule(), PayType.VNPAY, customerScheduleVnpay.getVnpOrderInfo());
         return result;
     }
 
-    public CustomerSchedule createMomo(CustomerSchedule customerSchedule,String orderId,String requestId) {
+    public CustomerSchedule createMomo(CustomerSchedule customerSchedule, String orderId, String requestId) {
         LogUtils.init();
         if (paymentRepository.findByOrderIdAndRequestId(orderId, requestId).isPresent()) {
             throw new MessageException("Không được thực hiện hành động này");
@@ -313,13 +382,13 @@ public class CustomerScheduleService {
         return result;
     }
 
-    public CustomerSchedule save(CustomerSchedule customerSchedule, PayType payType, String orderId){
+    public CustomerSchedule save(CustomerSchedule customerSchedule, PayType payType, String orderId) {
         VaccineScheduleTime vaccineScheduleTime = vaccineScheduleTimeRepository.findById(customerSchedule.getVaccineScheduleTime().getId()).get();
         Long count = customerScheduleRepository.countBySchedule(vaccineScheduleTime.getId());
-        if (count == null){
+        if (count == null) {
             count = 0L;
         }
-        if(count + 1 > vaccineScheduleTime.getLimitPeople()){
+        if (count + 1 > vaccineScheduleTime.getLimitPeople()) {
             throw new MessageException("Ca tiêm này đã đủ");
         }
         User user = userUtils.getUserWithAuthority();
@@ -327,17 +396,17 @@ public class CustomerScheduleService {
         customerSchedule.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         customerSchedule.setStatusCustomerSchedule(StatusCustomerSchedule.pending);
         customerSchedule.setCustomerSchedulePay(CustomerSchedulePay.CHUA_THANH_TOAN);
-        if(payType != null){
-            if(payType.equals(PayType.VNPAY)){
+        if (payType != null) {
+            if (payType.equals(PayType.VNPAY)) {
                 customerSchedule.setCustomerSchedulePay(CustomerSchedulePay.THANH_TOAN_VNPAY);
             }
-            if(payType.equals(PayType.MOMO)){
+            if (payType.equals(PayType.MOMO)) {
                 customerSchedule.setCustomerSchedulePay(CustomerSchedulePay.THANH_TOAN_MOMO);
             }
         }
         customerScheduleRepository.save(customerSchedule);
 
-        if(payType != null){
+        if (payType != null) {
             Payment payment = new Payment();
             payment.setCreatedDate(new Timestamp(System.currentTimeMillis()));
             payment.setCreatedBy(user);
@@ -353,11 +422,11 @@ public class CustomerScheduleService {
 
     public void finishPayment(Long id, PaymentRequest paymentRequest) {
         CustomerSchedule customerSchedule = customerScheduleRepository.findById(id).get();
-        if(!customerSchedule.getCustomerSchedulePay().equals(CustomerSchedulePay.CHUA_THANH_TOAN)){
+        if (!customerSchedule.getCustomerSchedulePay().equals(CustomerSchedulePay.CHUA_THANH_TOAN)) {
             throw new MessageException("Lịch này đã được thanh toán");
         }
         String orderId = null;
-        if(paymentRequest.getPayType().equals(PayType.MOMO)){
+        if (paymentRequest.getPayType().equals(PayType.MOMO)) {
             LogUtils.init();
             orderId = paymentRequest.getOrderId();
             Environment environment = Environment.selectEnv("dev");
@@ -372,15 +441,15 @@ public class CustomerScheduleService {
             }
             customerSchedule.setCustomerSchedulePay(CustomerSchedulePay.THANH_TOAN_MOMO);
         }
-        if(paymentRequest.getPayType().equals(PayType.VNPAY)){
+        if (paymentRequest.getPayType().equals(PayType.VNPAY)) {
             orderId = paymentRequest.getVnpOrderInfo();
             int paymentStatus = vnPayService.orderReturnByUrl(paymentRequest.getVnpayUrl());
-            if(paymentStatus != 1){
+            if (paymentStatus != 1) {
                 throw new MessageException("Thanh toán thất bại");
             }
             customerSchedule.setCustomerSchedulePay(CustomerSchedulePay.THANH_TOAN_VNPAY);
         }
-        if(paymentRepository.findByOrderIdAndRequestId(orderId,orderId).isPresent()){
+        if (paymentRepository.findByOrderIdAndRequestId(orderId, orderId).isPresent()) {
             throw new MessageException("Không hợp lệ");
         }
         customerScheduleRepository.save(customerSchedule);
@@ -396,10 +465,39 @@ public class CustomerScheduleService {
         Instant now = Instant.now();
 
         if (Duration.between(createdDate, now).toHours() > 24) {
-            throw new MessageException("Đã quá "+Duration.between(createdDate, now).toHours()+"h, không thể đổi được lịch tiêm");
+            throw new MessageException("Đã quá " + Duration.between(createdDate, now).toHours() + "h, không thể đổi được lịch tiêm");
         }
 
         customerSchedule.setVaccineScheduleTime(vaccineScheduleTime);
         customerScheduleRepository.save(customerSchedule);
+    }
+
+    public CustomerSchedule updateCustomerSchedule(UpdateCustomerSchedule request) {
+        // Kiểm tra ID
+        if (request.getId() == null) {
+            throw new IllegalArgumentException("ID không được phép null");
+        }
+
+        // Kiểm tra bản ghi có tồn tại
+        CustomerSchedule customerSchedule = customerScheduleRepository.findById(request.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Không tìm thấy lịch trình"));
+
+        // Cập nhật từng trường
+        if (request.getHealthStatusAfter() != null) {
+            customerSchedule.setHealthStatusAfter(request.getHealthStatusAfter());
+        }
+        if (request.getHealthStatusBefore() != null) {
+            customerSchedule.setHealthStatusBefore(request.getHealthStatusBefore());
+        }
+
+        // Kiểm tra trạng thái
+        if (request.getStatus() != null) {
+            customerSchedule.setStatusCustomerSchedule(
+                    StatusCustomerSchedule.getStatusCustomerSchedule(request.getStatus())
+            );
+        }
+
+        // Lưu và trả về
+        return customerScheduleRepository.save(customerSchedule);
     }
 }

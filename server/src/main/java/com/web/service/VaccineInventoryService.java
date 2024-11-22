@@ -56,6 +56,7 @@ public class VaccineInventoryService {
                 .vaccine(e.getVaccine())
                 .quantity(e.getQuantity())
                 .createdDate(e.getCreatedDate())
+                .expiryDate(e.getExpiryDate()) // sửa ở đây: Đảm bảo trường expiryDate được ánh xạ đúng
                 .status(e.getStatus())
                 .build()
         ).toList();

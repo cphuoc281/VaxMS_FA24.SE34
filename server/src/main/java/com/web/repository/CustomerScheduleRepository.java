@@ -32,4 +32,5 @@ public interface CustomerScheduleRepository extends JpaRepository<CustomerSchedu
 
     @Query("select c from CustomerSchedule c where c.vaccineScheduleTime.vaccineSchedule.id = ?1")
     List<CustomerSchedule> findByVaccineSchedule(Long id);
+
 }

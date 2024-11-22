@@ -1,0 +1,59 @@
+POST http://localhost:8080/api/customer-schedule/customer/list-view
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2024-11-03T095000.400.json
+
+###
+
+POST http://localhost:8080/api/customer-schedule/customer/list-view
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2024-11-03T094952.400.json
+
+###
+
+POST http://localhost:8080/api/customer-schedule/customer/list-view
+Content-Type: application/json
+Content-Length: 89
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "vaccineScheduleId": 6,
+  "status": "",
+  "fullName": "",
+  "page": 0,
+  "limit": 0
+}
+
+<> 2024-11-03T094901.500.json
+
+###
+
+POST http://localhost:8080/api/customer-schedule/customer/list-view
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2024-11-03T094846.400.json
+
+###
+
+POST http://localhost:8080/api/customer-schedule/customer/list-view
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2024-11-03T094834.400.json
+
+###
+

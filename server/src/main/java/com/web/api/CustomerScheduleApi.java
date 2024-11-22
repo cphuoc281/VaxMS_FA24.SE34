@@ -7,6 +7,7 @@ import com.web.entity.VaccineSchedule;
 import com.web.models.ApproveCustomerScheduleRequest;
 import com.web.models.CreateScheduleGuestRequest;
 import com.web.models.ListCustomerScheduleRequest;
+import com.web.models.UpdateCustomerSchedule;
 import com.web.service.CustomerScheduleService;
 import com.web.service.VaccineScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +86,15 @@ public class CustomerScheduleApi {
     public ResponseEntity<?> change(@RequestParam Long id, @RequestParam Long timeId) {
         customerScheduleService.change(id, timeId);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/customer/create-customer-findById-schedule")
+    public ResponseEntity<?> createCustomerFindByIdSchedule(@RequestBody CreateScheduleGuestRequest request) {
+        return new ResponseEntity<>(customerScheduleService.createScheduleGuest(request),HttpStatus.OK);
+    }
+
+    @PostMapping("/customer/update-customer-schedule")
+    public ResponseEntity<?> createCustomerFindByIdSchedule(@RequestBody UpdateCustomerSchedule request) {
+        return new ResponseEntity<>(customerScheduleService.updateCustomerSchedule(request),HttpStatus.OK);
     }
 }

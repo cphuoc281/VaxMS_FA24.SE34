@@ -25,7 +25,8 @@ function Header({ children }) {
           <a href="chat">Tin nhắn</a>
           <a href="vaccine">Quản lý vaccine</a>
           <a href="vaccine-inventory">Kho vaccine</a>
-          <a href="customer-schedule">Danh sách đăng ký</a>
+          {/* <a href="customer-schedule">Danh sách đăng ký</a> */}
+          <a href="customer-schedule-1">Lịch tiêm và Khách hàng</a>
           <a href="#" onClick={() => logout()}>
             Đăng xuất
           </a>

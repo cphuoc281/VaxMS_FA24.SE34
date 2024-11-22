@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,9 +26,12 @@ public class VaccineSchedule {
     @Column(name = "id")
     private Long id;
 
-    private Date startDate;
+    // Chuyển từ Date sang LocalDate
+    @Column(name = "start_date")
+    private LocalDate startDate;
 
-    private Date endDate;
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
     private Integer limitPeople;
 
@@ -55,4 +59,14 @@ public class VaccineSchedule {
     @OneToMany(mappedBy = "vaccineSchedule", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<VaccineScheduleTime> vaccineScheduleTimes;
+    public boolean isDateRangeValid() {
+        return startDate != null && endDate != null && !startDate.isAfter(endDate);
+    }
+
+    public boolean isActive() {
+        LocalDate today = LocalDate.now();
+        return startDate != null && endDate != null
+                && !today.isBefore(startDate)
+                && !today.isAfter(endDate);
+    }
 }

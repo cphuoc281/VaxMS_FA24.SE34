@@ -27,6 +27,8 @@ import StaffChat from "../pages/staff/chat";
 import Vaccine from "../pages/staff/vaccine/vaccine";
 import VaccineInventory from "../pages/staff/vaccineInventory/VaccineInventory";
 import CustomerSchedule from "../pages/staff/customerSchedule/CustomerSchedule";
+import CustomerScheduleView from "../pages/staff/customerSchedule";
+import {CustomerScheduleViewDetail} from "../pages/staff/customerSchedule/modal/CustomerScheduleViewDetail";
 
 const publicRoutes = [
     {path: "/", component: index},
@@ -65,6 +67,8 @@ const staffRoutes = [
     {path: "/staff/vaccine", component: Vaccine, layout: layoutStaff},
     {path: "/staff/vaccine-inventory", component: VaccineInventory, layout: layoutStaff},
     {path: "/staff/customer-schedule", component: CustomerSchedule, layout: layoutStaff},
+    {path: "/staff/customer-schedule-1", component: CustomerScheduleView, layout: layoutStaff},
+    {path: "/staff/customer-schedule-1-detail", component: CustomerScheduleViewDetail, layout: layoutStaff},
 ];
 
 

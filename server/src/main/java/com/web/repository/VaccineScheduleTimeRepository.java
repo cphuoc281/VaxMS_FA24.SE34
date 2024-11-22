@@ -24,4 +24,6 @@ public interface VaccineScheduleTimeRepository extends JpaRepository<VaccineSche
             "(select count(cs.id) from customer_schedule cs where cs.vaccine_schedule_time_id = vt.id) as quantity\n" +
             "from vaccine_schedule_time vt where vt.vaccine_schedule_id = ?1 and vt.inject_date = ?2", nativeQuery = true)
     List<VaccineScheduleTimeResponse> findTimeBySchedule(Long idSchedule, Date date);
+
+    VaccineScheduleTime findFirstByVaccineScheduleId(Long idSchedule);
 }

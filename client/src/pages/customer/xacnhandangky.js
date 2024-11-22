@@ -42,6 +42,8 @@ function XacNhanDangky() {
   }
 
   async function dangKyTiem(event) {
+
+      console.log(vaccineTime)
         event.preventDefault();
         var con = window.confirm("Xác nhận đăng ký tiêm");
         if(con == false){
