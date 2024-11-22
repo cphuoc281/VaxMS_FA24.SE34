@@ -1,0 +1,105 @@
+* [33md765373[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Update Staff
+[31m|[m * [33m8ad6167[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Update feature UI
+[31m|[m * [33mb841afc[m Add server/target to .gitignore
+[31m|[m * [33m9293c53[m Add server/target to .gitignore
+[31m|[m *   [33ma6cf8ec[m Resolve merge conflicts and complete merge with develop-vulq
+[31m|[m [33m|[m[34m\[m  
+[31m|[m [33m|[m * [33m583757f[m mail doi lich tiem
+[31m|[m [33m|[m * [33mca98d2e[m change lich
+[31m|[m [33m|[m * [33m6873de5[m nhac nho lich tiem
+[31m|[m [33m|[m * [33ma19e3f3[m update chuyen trang huy lich
+[31m|[m * [34m|[m [33m3b4a152[m Update .gitignore to ignore workspace.xml
+[31m|[m * [34m|[m [33m2525479[m Ignore .idea folder
+[31m|[m * [34m|[m [33m4a293f6[m Update .gitignore
+[31m|[m * [34m|[m [33mdfdf024[m update author change pass
+[31m|[m * [34m|[m [33md245b0a[m push chatbotAI #2
+[31m|[m * [34m|[m [33mbb21ccd[m push chatbotAI #1
+[31m|[m * [34m|[m [33m0bebba8[m push chatbotAI
+[31m|[m * [34m|[m [33m4e21edd[m #3 merge author
+[31m|[m * [34m|[m [33m0a35c0a[m #2 merge author
+[31m|[m * [34m|[m   [33mf48c397[m merge author main
+[31m|[m [35m|[m[31m\[m [34m\[m  
+[31m|[m [35m|[m[31m/[m [34m/[m  
+[31m|[m[31m/[m[35m|[m [34m|[m   
+* [35m|[m [34m|[m [33mbd34c26[m update client
+* [35m|[m [34m|[m [33m397e1a0[m update server
+[36m|[m * [34m|[m [33m245e68f[m merge  author
+[36m|[m * [34m|[m [33m7da1111[m Cập nhật workspace.xml
+[36m|[m[36m/[m [34m/[m  
+* [34m|[m [33m82e6cca[m Merge pull request #10 from cphuoc281/develop-vulq
+[1;31m|[m[34m\[m[34m|[m 
+[1;31m|[m * [33ma4fea1d[m[33m ([m[1;31morigin/develop-vulq[m[33m)[m send mail next schedule
+[1;31m|[m * [33m347d8cb[m chuyen link dang ky
+[1;31m|[m * [33mea40478[m thay doi lich tiem
+[1;31m|[m * [33mafa7806[m thanh toan lich da dat
+[1;31m|[m * [33m6ee0dd8[m form-dki-lich-tiem
+[1;31m|[m [1;32m|[m * [33m51dd1eb[m[33m ([m[1;31morigin/develop-ducanhlv[m[33m)[m update to merge
+[1;31m|[m [1;32m|[m * [33m98ccff6[m update searchvaccine
+[1;31m|[m [1;32m|[m * [33m194d025[m important
+[1;31m|[m [1;32m|[m * [33m703eb52[m Lưu các thay đổi hiện tại
+[1;31m|[m [1;32m|[m * [33m7edc77b[m update layout
+[1;31m|[m [1;32m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;32m|[m   
+* [1;32m|[m [33m14c7d2a[m Merge pull request #7 from cphuoc281/develop-vulq
+[1;34m|[m[1;32m\[m[1;32m|[m 
+[1;34m|[m * [33m69e0e2e[m update customer schedule
+[1;34m|[m *   [33mb206f19[m Merge remote-tracking branch 'origin/develop-ducanhlv' into develop-vulq
+[1;34m|[m [1;36m|[m[31m\[m  
+[1;34m|[m [1;36m|[m * [33m1f11cbf[m complete sprint2 guest role
+[1;34m|[m [1;36m|[m * [33ma36c70f[m Update sprint 2
+[1;34m|[m [1;36m|[m * [33mdadac1d[m complete sprint2 guest role
+[1;34m|[m [1;36m|[m * [33ma301dfc[m Update sprint 2
+[1;34m|[m [1;36m|[m * [33m60ba9b0[m Initial commit after reconnecting with develop-duclv
+[1;34m|[m * [33m52073bb[m before merge
+[1;34m|[m * [33mf21f844[m add doctor and nurse to schedule
+[1;34m|[m * [33m7046ac6[m relationship customer_schdule and time
+[1;34m|[m * [33mc4387ec[m vaccine schedule time
+* [31m|[m   [33m5258446[m Merge pull request #5 from cphuoc281/develop-phuochc
+[31m|[m[33m\[m [31m\[m  
+[31m|[m [33m|[m[31m/[m  
+[31m|[m[31m/[m[33m|[m   
+* [33m|[m   [33ma2f7f34[m Merge pull request #4 from cphuoc281/develop-phuochc
+[34m|[m[35m\[m [33m\[m  
+* [35m\[m [33m\[m   [33md4b7e74[m Merge pull request #3 from cphuoc281/develop-phuochc
+[36m|[m[1;31m\[m [35m\[m [33m\[m  
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33mf0662c3[m[33m ([m[1;31morigin/develop-phuochc[m[33m)[m 'fix'
+[36m|[m [1;31m|[m [35m|[m [33m|[m * [33mab8bae0[m update inventory and search
+[36m|[m [1;31m|[m [35m|[m [33m|[m[33m/[m  
+[36m|[m [1;31m|[m [35m|[m * [33m0502b85[m Update file import_excel
+[36m|[m [1;31m|[m [35m|[m[35m/[m  
+[36m|[m [1;31m|[m * [33mcea2f17[m update BE Staff
+[36m|[m [1;31m|[m * [33m60e9a88[m update BE Staff
+[36m|[m [1;31m|[m[1;31m/[m  
+[36m|[m * [33m1c664fe[m Update FE Staff
+[36m|[m [1;32m|[m * [33m6aabec2[m[33m ([m[1;31morigin/develop-server[m[33m)[m Remove client folder from develop-server
+[36m|[m [1;32m|[m * [33mc97bcd3[m Update sprint 2
+[36m|[m [1;32m|[m * [33mf20d635[m Initial commit after reconnecting with develop-duclv
+[36m|[m [1;32m|[m * [33m4785dc2[m Remove target directory from tracking
+[36m|[m [1;32m|[m * [33m4c7689c[m tách client
+[36m|[m [1;32m|[m [1;33m|[m * [33mf09bb4f[m[33m ([m[1;31morigin/develop-client[m[33m)[m Update .gitignore to exclude server folder
+[36m|[m [1;32m|[m [1;33m|[m * [33m190731c[m Remove server folder from develop-client branch
+[36m|[m [1;32m|[m [1;33m|[m * [33m1c26e9d[m Update sprint 2
+[36m|[m [1;32m|[m [1;33m|[m * [33m8ef644d[m Initial commit after reconnecting with develop-duclv
+[36m|[m [1;32m|[m [1;33m|[m * [33m7cb52dd[m Add .gitignore to ignore metadata folder
+[36m|[m [1;32m|[m [1;33m|[m * [33m08addc3[m tách server
+[36m|[m [1;32m|[m [1;33m|[m[1;33m/[m  
+[36m|[m [1;32m|[m *   [33m135562d[m giải quyết xung đột
+[36m|[m [1;32m|[m [1;35m|[m[1;36m\[m  
+[36m|[m [1;32m|[m [1;35m|[m *   [33mbe99627[m[33m ([m[1;31morigin/develop-anltb[m[33m)[m Merge pull request #2 from cphuoc281/develop-phuochc
+[36m|[m [1;32m|[m [1;35m|[m [31m|[m[1;32m\[m  
+[36m|[m [1;32m|[m [1;35m|[m[1;32m_[m[31m|[m[1;32m/[m  
+[36m|[m [1;32m|[m[1;32m/[m[1;35m|[m [31m|[m   
+[36m|[m * [1;35m|[m [31m|[m [33ma7d3720[m  base code
+[36m|[m [32m|[m [1;35m|[m *   [33md521817[m Merge pull request #1 from cphuoc281/develop-phuochc
+[36m|[m [32m|[m [1;35m|[m [33m|[m[32m\[m  
+[36m|[m [32m|[m [1;35m|[m[32m_[m[33m|[m[32m/[m  
+[36m|[m [32m|[m[32m/[m[1;35m|[m [33m|[m   
+[36m|[m * [1;35m|[m [33m|[m [33m53cb67d[m  base code
+[36m|[m [33m|[m [1;35m|[m[33m/[m  
+[36m|[m [33m|[m[33m/[m[1;35m|[m   
+[36m|[m [33m|[m * [33mf8a2e55[m Xoá folder client
+[36m|[m [33m|[m[33m/[m  
+[36m|[m * [33m6199434[m  base code
+[36m|[m[36m/[m  
+* [33m4e80ce4[m Initial commit
+* [33m6d6bfbb[m[33m ([m[1;31morigin/develop-phuonglm[m[33m)[m  branch develop-phuonglm
