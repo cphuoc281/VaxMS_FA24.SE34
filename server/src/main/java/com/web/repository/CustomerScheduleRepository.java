@@ -32,8 +32,11 @@ public interface CustomerScheduleRepository extends JpaRepository<CustomerSchedu
 
     @Query("select c from CustomerSchedule c where c.vaccineScheduleTime.vaccineSchedule.id = ?1")
     List<CustomerSchedule> findByVaccineSchedule(Long id);
+<<<<<<< HEAD
 
     @Query(value = "select c.* from customer_schedule c inner join vaccine_schedule_time vt on vt.id = c.vaccine_schedule_time_id\n" +
             "where vt.vaccine_schedule_id  = ?1 and vt.inject_date = DATE_SUB(?2, INTERVAL ?3 MONTH)", nativeQuery = true)
     List<CustomerSchedule> findByVaccineScheduleAndDate(Long id, Date date, Integer numMonth);
+=======
+>>>>>>> feature-admin-code
 }

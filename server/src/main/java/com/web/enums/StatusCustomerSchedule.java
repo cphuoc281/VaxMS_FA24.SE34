@@ -7,8 +7,14 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StatusCustomerSchedule {
 
+<<<<<<< HEAD
     pending,
     confirmed,
     cancelled,
     finished,
+=======
+    pending, //Đã đăng ký
+    confirmed, // hoãn
+    cancelled, // hoàn thành tiêm
+>>>>>>> feature-admin-code
 }

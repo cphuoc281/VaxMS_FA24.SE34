@@ -450,7 +450,11 @@ body{
 .chat-container {
     position: fixed;
     bottom: 20px;
+<<<<<<< HEAD
     left: 20px;
+=======
+    right: 20px;
+>>>>>>> feature-admin-code
     z-index: 10000;
 }
 
@@ -472,7 +476,11 @@ body{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: fixed;
     bottom: 80px;
+<<<<<<< HEAD
     left: 20px;
+=======
+    right: 20px;
+>>>>>>> feature-admin-code
     border: 1px solid #ccc;
 }
 
@@ -772,6 +780,7 @@ body{
 .motavaccinesearch{
     display: block;
     margin-top: 10px;
+<<<<<<< HEAD
 }
 .hetslottiem{
     color: #a62e21;
@@ -807,3 +816,6 @@ body{
   .hetslottiem .cross::before {
     content: '✖'; /* Biểu tượng gạch chéo */
   }
+=======
+}
+>>>>>>> feature-admin-code

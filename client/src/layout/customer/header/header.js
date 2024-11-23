@@ -9,7 +9,11 @@ export const HeaderContext = createContext();
 var token = localStorage.getItem("token");
 function Header (){
 import('../styles/styleuser.scss');
+<<<<<<< HEAD
 var auth = <a href="/signin" class="itemheader itemtopheader hotlineheader">Đăng nhập</a>
+=======
+var auth = <a href="/login" class="itemheader itemtopheader hotlineheader">Đăng nhập</a>
+>>>>>>> feature-admin-code
 if(token != null){
   auth = <>
   <a href="/tai-khoan" class="itemheader itemtopheader">Tài khoản</a>
@@ -20,7 +24,11 @@ if(token != null){
 function logout(){
   localStorage.removeItem("token");
   localStorage.removeItem("user");
+<<<<<<< HEAD
   window.location.replace('/')
+=======
+  window.location.replace('login')
+>>>>>>> feature-admin-code
 }
 return(
   <>

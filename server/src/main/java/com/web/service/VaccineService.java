@@ -2,7 +2,10 @@ package com.web.service;
 
 import com.web.dto.VaccineTypeResponse;
 import com.web.entity.AgeGroup;
+<<<<<<< HEAD
 import com.web.entity.Center;
+=======
+>>>>>>> feature-admin-code
 import com.web.entity.Manufacturer;
 import com.web.entity.Vaccine;
 import com.web.entity.VaccineInventory;
@@ -20,7 +23,10 @@ import com.web.models.PlusVaccineResponse;
 import com.web.models.UpdateVaccineRequest;
 import com.web.models.UpdateVaccineResponse;
 import com.web.repository.AgeGroupRepository;
+<<<<<<< HEAD
 import com.web.repository.CenterRepository;
+=======
+>>>>>>> feature-admin-code
 import com.web.repository.ManufacturerRepository;
 import com.web.repository.VaccineInventoryRepository;
 import com.web.repository.VaccineRepository;
@@ -63,7 +69,10 @@ public class VaccineService {
     private final AgeGroupRepository ageGroupRepository;
     private final VaccineTypeRepository vaccineTypeRepository;
     private final VaccineInventoryRepository vaccineInventoryRepository;
+<<<<<<< HEAD
     private final CenterRepository centerRepository;
+=======
+>>>>>>> feature-admin-code
 
     public List<Vaccine> findAll() {
         return vaccineRepository.findAll();
@@ -151,6 +160,7 @@ public class VaccineService {
         vaccine.setVaccineType(optionalVaccineType.get());
         vaccine.setManufacturer(optionalManufacturer.get());
         vaccine.setAgeGroup(optionalAgeGroup.get());
+<<<<<<< HEAD
         vaccine.setInventory(vaccine.getInventory());
         vaccine.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         vaccineRepository.save(vaccine);
@@ -163,6 +173,12 @@ public class VaccineService {
         vaccineInventory.setStatus("Đang sử dụng");
         vaccineInventoryRepository.save(vaccineInventory);
 
+=======
+        vaccine.setInventory(0);
+        vaccine.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+        vaccineRepository.save(vaccine);
+
+>>>>>>> feature-admin-code
         return modelMapper.map(vaccine, CreateVaccineResponse.class);
     }
 
@@ -412,11 +428,14 @@ public class VaccineService {
             if (ObjectUtils.isNotEmpty(requestBody.getStatus())) {
                 predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("status"), requestBody.getStatus())));
             }
+<<<<<<< HEAD
 
             // Thêm bộ lọc theo khoảng thời gian createdDate
             if (ObjectUtils.isNotEmpty(requestBody.getStartDate()) && ObjectUtils.isNotEmpty(requestBody.getEndDate())) {
                 predicates.add(criteriaBuilder.between(root.get("createdDate"), requestBody.getStartDate(), requestBody.getEndDate()));
             }
+=======
+>>>>>>> feature-admin-code
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
@@ -430,6 +449,7 @@ public class VaccineService {
         return list;
     }
 
+<<<<<<< HEAD
     private Center getCenter(String city) {
         Optional<Center> optionalCenter = centerRepository.findByCity(city);
         if (optionalCenter.isEmpty()) {
@@ -442,6 +462,8 @@ public class VaccineService {
         return optionalCenter.get();
     }
 
+=======
+>>>>>>> feature-admin-code
     public Vaccine findById(Long id) {
         return vaccineRepository.findById(id).get();
     }

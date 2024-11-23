@@ -24,11 +24,19 @@ public interface VaccineScheduleRepository extends JpaRepository<VaccineSchedule
             "(select count(cs.id) from customer_schedule cs where cs.vaccine_schedule_id = v.id and cs.status != 'cancelled') )", nativeQuery = true)
     public List<VaccineSchedule> findByVacxin(Long vacxinId, LocalDateTime now);
 
+<<<<<<< HEAD
     @Query("select v from VaccineSchedule v where v.vaccine.name like ?1 and v.endDate > ?2")
     public Page<VaccineSchedule> findByParam(String param, Date now, Pageable pageable);
 
     @Query("select v from VaccineSchedule v where v.vaccine.name like ?1 and v.endDate <= ?2")
     public Page<VaccineSchedule> preFindByParam(String param, Date now, Pageable pageable);
+=======
+    @Query("select v from VaccineSchedule v where v.vaccine.name like ?1 and v.endDate> ?2")
+    public Page<VaccineSchedule> findByParam(String param, LocalDateTime now, Pageable pageable);
+
+    @Query("select v from VaccineSchedule v where v.vaccine.name like ?1 and v.endDate <= ?2")
+    public Page<VaccineSchedule> preFindByParam(String param, LocalDateTime now, Pageable pageable);
+>>>>>>> feature-admin-code
 
     @Query("select v from VaccineSchedule v where v.endDate >= ?1 and v.startDate <= ?1 and v.vaccine.id = ?2")
     List<VaccineSchedule> getCenter(Date start, Long vaccineId);

@@ -5,7 +5,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { Client } from "@stomp/stompjs";
 import avatar from "../../assest/images/avatar.png";
 import SockJS from "sockjs-client";
+<<<<<<< HEAD
 import styles from "./staffChat.scss";
+=======
+>>>>>>> feature-admin-code
 import {
   getMethod,
   postMethod,
@@ -21,8 +24,11 @@ const StaffChat = () => {
   const [itemChat, setItemChat] = useState([]);
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState(null);
+<<<<<<< HEAD
   const [newMessagesCount, setNewMessagesCount] = useState({});
 
+=======
+>>>>>>> feature-admin-code
 
   useEffect(() => {
     const getItemUser = async () => {
@@ -57,6 +63,7 @@ const StaffChat = () => {
         stompClient.subscribe("/users/queue/messages", (msg) => {
           var Idsender = msg.headers.sender;
           var isFile = msg.headers.isFile;
+<<<<<<< HEAD
           var uls = new URL(document.URL);
           var currentUserId = uls.searchParams.get("user");
           if (Idsender !== currentUserId) {
@@ -71,6 +78,12 @@ const StaffChat = () => {
             } else {
               appendFileTinNhanDen(msg.body, Idsender);
             }
+=======
+          if (Number(isFile) === Number(0)) {
+            appendTinNhanDen(msg.body, Idsender);
+          } else {
+            appendFileTinNhanDen(msg.body, Idsender);
+>>>>>>> feature-admin-code
           }
         });
       },
@@ -161,6 +174,7 @@ const StaffChat = () => {
   };
 
   async function loadMessage(u) {
+<<<<<<< HEAD
     // Reset số lượng tin nhắn mới
     setNewMessagesCount((prevState) => {
       const newState = { ...prevState };
@@ -168,6 +182,8 @@ const StaffChat = () => {
       return newState;
     });
 
+=======
+>>>>>>> feature-admin-code
     window.location.href = "chat?user=" + u.id + "&email=" + u.email;
   }
 
@@ -207,6 +223,7 @@ const StaffChat = () => {
     return fileType.startsWith("image/");
   }
 
+<<<<<<< HEAD
   const badgeNewMessageStyle = {
     backgroundColor: 'red',
     color: 'white',
@@ -215,6 +232,8 @@ const StaffChat = () => {
     marginLeft: '5px',
     fontSize: '12px',
   };
+=======
+>>>>>>> feature-admin-code
   return (
     <>
       <div class="row">
@@ -234,6 +253,7 @@ const StaffChat = () => {
               </tr>
             </thead>
             <tbody id="listuserchat">
+<<<<<<< HEAD
               {itemUser.map((item, index) => {
                 const newCount = newMessagesCount[item.user.id] || 0;
                 return (
@@ -257,6 +277,15 @@ const StaffChat = () => {
               })}
             </tbody>
 
+=======
+              {itemUser.map((item, index)=>{
+                                return <tr class="pointer trhoverchat" onClick={()=>loadMessage(item.user)}>
+                                    <td class="col45" onClick={()=>loadMessage(item.user)}><img src={avatar} class="imgavatarchat"/></td>
+                                    <td onClick={()=>loadMessage(item.user)}>{item.user.email}<span class="timechat">{item.timestamp}</span></td>
+                                </tr>
+                            })}
+            </tbody>
+>>>>>>> feature-admin-code
           </table>
         </div>
         <div class="col-sm-9">
@@ -267,6 +296,7 @@ const StaffChat = () => {
               <div class="header-chat-admin form-control">{email}</div>
               <div class="contentchatadmin" id="listchatadmin">
                 {itemChat.map((item, index) => {
+<<<<<<< HEAD
                   if (item.sender.authorities.name === "Customer") {
                     return item.isFile ? (
                       <img className="mychatimg" src={item.content} key={index} />
@@ -283,6 +313,20 @@ const StaffChat = () => {
                         {item.content}
                       </p>
                     );
+=======
+                  if (item.sender.authorities.name == "Customer") {
+                    if (item.isFile != true) {
+                      return <p class="mychat">{item.content}</p>;
+                    } else {
+                      return <img class="mychatimg" src={item.content} />;
+                    }
+                  } else {
+                    if (item.isFile != true) {
+                      return <p class="adminchat">{item.content}</p>;
+                    } else {
+                      return <img class="adminchatimg" src={item.content} />;
+                    }
+>>>>>>> feature-admin-code
                   }
                 })}
               </div>

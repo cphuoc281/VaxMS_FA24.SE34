@@ -12,8 +12,13 @@ import javax.persistence.*;
 @Setter
 @ToString
 public class Authority {
+<<<<<<< HEAD
 
     @Id
+=======
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+>>>>>>> feature-admin-code
     @Column(name = "authority_id")
     private Long id;
 

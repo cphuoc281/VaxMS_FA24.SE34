@@ -167,6 +167,7 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
                         />
                     </Form.Item>
                     <Form.Item
+<<<<<<< HEAD
                         label="Số lượng"
                         validateStatus={formErrors["quantity"] ? "error" : ""}
                         help={formErrors["quantity"] || ""}
@@ -183,6 +184,8 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
                         />
                     </Form.Item>
                     <Form.Item
+=======
+>>>>>>> feature-admin-code
                         label="Loại vaccine"
                         validateStatus={formErrors["vaccineTypeId"] ? "error" : ""}
                         help={formErrors["vaccineTypeId"] || ""}

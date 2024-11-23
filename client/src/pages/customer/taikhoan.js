@@ -23,15 +23,21 @@ import FeedBack from './feedback';
 function TaiKhoan(){
     const [value, setValue] = React.useState(0);
     useEffect(()=>{
+<<<<<<< HEAD
         if (window.location.hash === '#lichtiem') {
             setValue(1); 
         }
+=======
+>>>>>>> feature-admin-code
     }, []);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature-admin-code
   
 
     return(
@@ -45,6 +51,10 @@ function TaiKhoan(){
                 onChange={handleChange}
                 aria-label="Vertical tabs example"
                 sx={{ borderRight: 1, borderColor: 'divider' }}>
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature-admin-code
                 <Tab label="Thông tin" {...a11yProps(0)} />
                 <Tab label="Lịch tiêm" {...a11yProps(1)} />
                 <Tab label="Đổi mật khẩu" {...a11yProps(2)} />

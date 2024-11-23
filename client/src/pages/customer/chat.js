@@ -9,7 +9,10 @@ import {getMethod, postMethod, postMethodPayload, uploadSingleFile} from '../../
 import Swal from 'sweetalert2'
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
+<<<<<<< HEAD
 // import style from '../../layout/customer/styles/styleuser.scss'
+=======
+>>>>>>> feature-admin-code
 
 function toggleChat() {
     var chatBox = document.getElementById("chat-box");
@@ -164,7 +167,11 @@ function ChatFrame(){
     }
     return(
     <div class="chat-container">
+<<<<<<< HEAD
         <button class="chat-button" id="btnopenchat" type='button' onClick={()=>toggleChat()}><i class="fa fa-comment"></i> Hỗ trợ</button>
+=======
+        <button class="chat-button" id="btnopenchat" type='button' onClick={()=>toggleChat()}><i class="fa fa-comment"></i> Chat với chúng tôi</button>
+>>>>>>> feature-admin-code
 
         <div id="chat-box" class="chat-box">
             <div class="chat-header">

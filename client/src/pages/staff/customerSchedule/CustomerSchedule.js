@@ -190,14 +190,22 @@ const CustomerSchedule = () => {
       dataIndex: "vaccineSchedule",
       key: "vaccineSchedule",
       align: "center",
+<<<<<<< HEAD
       render: (date) => date?.startDate ? dayjs(date.startDate).format("HH:mm DD-MM-YYYY") : "N/A",
+=======
+      render: (date) => dayjs(date.startDate).format("HH:mm DD-MM-YYYY"),
+>>>>>>> feature-admin-code
     },
     {
       title: "Thời gian kết thúc",
       dataIndex: "vaccineSchedule",
       key: "vaccineSchedule",
       align: "center",
+<<<<<<< HEAD
       render: (date) => date?.endDate ? dayjs(date.endDate).format("HH:mm DD-MM-YYYY") : "N/A",
+=======
+      render: (date) => dayjs(date.endDate).format("HH:mm DD-MM-YYYY"),
+>>>>>>> feature-admin-code
     },
     {
       title: "Ngày tạo",

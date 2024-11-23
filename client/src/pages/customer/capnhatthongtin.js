@@ -109,7 +109,11 @@ function CapNhatThongTin(){
                 <label class="lbacc">Họ tên *</label>
                 <input name="fullname" defaultValue={profile!=null?profile.fullName:''} class="form-control" required/>
                 <label class="lbacc">Số điện thoại liên lạc *</label>
+<<<<<<< HEAD
                 <input name="phone" defaultValue={profile!=null?profile.phone:''} class="form-control" required/>
+=======
+                <input name="phonell" defaultValue={profile!=null?profile.phone:''} class="form-control" required/>
+>>>>>>> feature-admin-code
                 <label class="lbacc">Giới tính *</label>
                 <select name="gender" class="form-control">
                     <option value="Male" selected={profile==null?false:(profile.gender =='Male')}>Nam</option>

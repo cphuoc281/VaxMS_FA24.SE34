@@ -15,7 +15,11 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+<<<<<<< HEAD
 /*!40101 SET NAMES utf8mb4 */;
+=======
+/*!40101 SET NAMES utf8 */;
+>>>>>>> feature-admin-code
 
 --
 -- Cơ sở dữ liệu: `vaxms`
@@ -39,7 +43,11 @@ CREATE TABLE `account` (
   `authority_id` bigint NOT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `remember_key` varchar(255) DEFAULT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `account`
@@ -63,7 +71,11 @@ CREATE TABLE `age_groups` (
   `age_group_id` bigint NOT NULL,
   `age_range` varchar(50) NOT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `age_groups`
@@ -89,7 +101,11 @@ INSERT INTO `age_groups` (`age_group_id`, `age_range`, `created_date`) VALUES
 CREATE TABLE `authority` (
   `authority_id` bigint NOT NULL,
   `name` varchar(50) NOT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `authority`
@@ -116,7 +132,11 @@ CREATE TABLE `centers` (
   `ward` varchar(100) NOT NULL,
   `street` varchar(255) DEFAULT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `centers`
@@ -138,7 +158,11 @@ CREATE TABLE `chatting` (
   `created_date` datetime DEFAULT NULL,
   `receiver` bigint DEFAULT NULL,
   `sender` bigint DEFAULT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `chatting`
@@ -164,7 +188,11 @@ CREATE TABLE `comments` (
   `content` text,
   `likes_count` int DEFAULT '0',
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `comments`
@@ -197,7 +225,11 @@ CREATE TABLE `customer_profile` (
   `contact_relationship` varchar(50) NOT NULL,
   `contact_phone` varchar(15) NOT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `customer_profile`
@@ -223,7 +255,11 @@ CREATE TABLE `customer_schedule` (
   `dob` date DEFAULT NULL,
   `full_name` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `customer_schedule`
@@ -250,7 +286,11 @@ CREATE TABLE `doctors` (
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `avatar` varchar(255) DEFAULT NULL,
   `full_name` varchar(255) DEFAULT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `doctors`
@@ -275,7 +315,11 @@ CREATE TABLE `feedback` (
   `rating` tinyint(1) DEFAULT NULL,
   `response` text,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `feedback`
@@ -296,7 +340,11 @@ CREATE TABLE `manufacturers` (
   `name` varchar(100) NOT NULL,
   `country` varchar(100) DEFAULT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `manufacturers`
@@ -321,7 +369,11 @@ CREATE TABLE `news` (
   `author_id` bigint NOT NULL,
   `topic_id` bigint NOT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `news`
@@ -342,7 +394,11 @@ CREATE TABLE `news_sources` (
   `news_id` bigint NOT NULL,
   `source_name` varchar(255) NOT NULL,
   `source_url` varchar(255) NOT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `news_sources`
@@ -367,7 +423,11 @@ CREATE TABLE `nurses` (
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `avatar` varchar(255) DEFAULT NULL,
   `full_name` varchar(255) DEFAULT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `nurses`
@@ -390,7 +450,11 @@ CREATE TABLE `payment` (
   `created_by` bigint NOT NULL,
   `order_id` varchar(255) DEFAULT NULL,
   `request_id` varchar(255) DEFAULT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `payment`
@@ -413,7 +477,11 @@ CREATE TABLE `payment_details` (
   `method_id` bigint NOT NULL,
   `amount` int NOT NULL,
   `transaction_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `payment_details`
@@ -432,7 +500,11 @@ INSERT INTO `payment_details` (`payment_detail_id`, `payment_id`, `method_id`, `
 CREATE TABLE `payment_methods` (
   `method_id` bigint NOT NULL,
   `method_name` varchar(50) NOT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `payment_methods`
@@ -453,7 +525,11 @@ CREATE TABLE `topics` (
   `topic_id` bigint NOT NULL,
   `topic_name` varchar(100) NOT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `topics`
@@ -480,7 +556,11 @@ CREATE TABLE `vaccine` (
   `image` varchar(255) DEFAULT NULL,
   `price` int NOT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `vaccine`
@@ -500,10 +580,17 @@ INSERT INTO `vaccine` (`id`, `name`, `type_id`, `manufacturer_id`, `age_group_id
 CREATE TABLE `vaccine_distribution` (
   `distribution_id` bigint NOT NULL,
   `inventory_id` bigint NOT NULL,
+<<<<<<< HEAD
   `distribution_type` enum('imports','export') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `quantity` int NOT NULL,
   `distribution_date` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+  `distribution_type` enum('imports','export') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `quantity` int NOT NULL,
+  `distribution_date` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `vaccine_distribution`
@@ -527,7 +614,11 @@ CREATE TABLE `vaccine_inventory` (
   `import_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `export_date` datetime DEFAULT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `vaccine_inventory`
@@ -552,7 +643,11 @@ CREATE TABLE `vaccine_schedule` (
   `end_date` datetime NOT NULL,
   `limit_people` int NOT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `vaccine_schedule`
@@ -573,7 +668,11 @@ CREATE TABLE `vaccine_types` (
   `type_id` bigint NOT NULL,
   `type_name` varchar(100) NOT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `vaccine_types`

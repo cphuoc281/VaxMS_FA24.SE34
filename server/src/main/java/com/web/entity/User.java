@@ -19,7 +19,11 @@ import java.sql.Timestamp;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+<<<<<<< HEAD
 public class User{
+=======
+public class User {
+>>>>>>> feature-admin-code
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,4 +54,7 @@ public class User{
     @JoinColumn(name = "authority_id")
     private Authority authorities;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature-admin-code

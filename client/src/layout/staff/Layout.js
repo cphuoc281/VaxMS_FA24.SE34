@@ -48,14 +48,22 @@ async function checkAdmin() {
     }),
   });
   if (response.status > 300) {
+<<<<<<< HEAD
     window.location.replace("../");
+=======
+    window.location.replace("../login");
+>>>>>>> feature-admin-code
   }
 }
 
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
+<<<<<<< HEAD
   window.location.replace("../");
+=======
+  window.location.replace("../login");
+>>>>>>> feature-admin-code
 }
 
 export default Header;

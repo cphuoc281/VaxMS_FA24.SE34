@@ -38,8 +38,11 @@ public class CustomerSchedule {
 
     private String address;
 
+<<<<<<< HEAD
     private Integer counterChange;
 
+=======
+>>>>>>> feature-admin-code
     @Enumerated(EnumType.STRING)
     private CustomerSchedulePay customerSchedulePay;
 

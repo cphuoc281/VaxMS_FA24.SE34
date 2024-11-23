@@ -13,7 +13,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
+<<<<<<< HEAD
 import style from '../../layout/customer/styles/styleuser.scss'
+=======
+>>>>>>> feature-admin-code
 
 
 var sizepro = 20

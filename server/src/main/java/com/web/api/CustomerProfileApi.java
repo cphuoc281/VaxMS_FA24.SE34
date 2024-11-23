@@ -1,11 +1,20 @@
 package com.web.api;
 
+<<<<<<< HEAD
+=======
+import com.web.dto.CustomerProfileDTO;
+>>>>>>> feature-admin-code
 import com.web.entity.Center;
 import com.web.entity.CustomerProfile;
 import com.web.repository.CustomerProfileRepository;
 import com.web.service.CenterService;
 import com.web.service.CustomerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
+=======
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+>>>>>>> feature-admin-code
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +32,10 @@ public class CustomerProfileApi {
     @GetMapping("/customer/find-by-user")
     public ResponseEntity<?> findByUser(){
         CustomerProfile result = customerProfileService.findByUser();
+<<<<<<< HEAD
         System.out.println("customer: "+result.getId());
+=======
+>>>>>>> feature-admin-code
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -32,4 +44,33 @@ public class CustomerProfileApi {
         CustomerProfile result = customerProfileService.update(customerProfile);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+<<<<<<< HEAD
+=======
+
+    /* -----------ADMIN-----------*/
+
+    /* Get list customer*/
+    @GetMapping("/admin/list-customer")
+    public ResponseEntity<?> findAllCustomerProfile(@RequestParam(required = false) String q, Pageable pageable){
+        Page<CustomerProfileDTO> result = customerProfileService.getCustomers(q, pageable);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    /* update customer*/
+    @PutMapping("/admin/update/{id}")
+    public ResponseEntity<?> updateCustomerProfile(@PathVariable("id") Long id, @RequestBody CustomerProfile customerProfile){
+        CustomerProfileDTO customerUpdated = customerProfileService.updateCustomerProfile(id, customerProfile);
+        return new ResponseEntity<>(customerUpdated, HttpStatus.OK);
+    }
+
+    /* Delete a customer*/
+    @DeleteMapping("/admin/delete/{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable("id") Long id){
+        customerProfileService.deleteCustomer(id);
+        return ResponseEntity.ok().build();
+    }
+
+    /* -----------ADMIN-----------*/
+
+>>>>>>> feature-admin-code
 }

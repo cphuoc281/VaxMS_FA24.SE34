@@ -21,7 +21,11 @@ public interface VaccineScheduleTimeRepository extends JpaRepository<VaccineSche
     public Long quantityBySchedule(Long scheduleId);
 
     @Query(value = "select vt.id, vt.inject_date as injectDate, vt.start, vt.end, vt.limit_people as limitPeople,\n" +
+<<<<<<< HEAD
             "(select count(cs.id) from customer_schedule cs where cs.vaccine_schedule_time_id = vt.id and cs.status != 'cancelled') as quantity\n" +
+=======
+            "(select count(cs.id) from customer_schedule cs where cs.vaccine_schedule_time_id = vt.id) as quantity\n" +
+>>>>>>> feature-admin-code
             "from vaccine_schedule_time vt where vt.vaccine_schedule_id = ?1 and vt.inject_date = ?2", nativeQuery = true)
     List<VaccineScheduleTimeResponse> findTimeBySchedule(Long idSchedule, Date date);
 }

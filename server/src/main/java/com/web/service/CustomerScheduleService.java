@@ -78,9 +78,12 @@ public class CustomerScheduleService {
     @Autowired
     private VNPayService vnPayService;
 
+<<<<<<< HEAD
     @Autowired
     private MailService mailService;
 
+=======
+>>>>>>> feature-admin-code
     public CustomerSchedule create(CustomerSchedule customerSchedule, String orderId, String requestId) {
         LogUtils.init();
         if (paymentRepository.findByOrderIdAndRequestId(orderId, requestId).isPresent()) {
@@ -403,6 +406,7 @@ public class CustomerScheduleService {
         }
 
         customerSchedule.setVaccineScheduleTime(vaccineScheduleTime);
+<<<<<<< HEAD
         if(customerSchedule.getCounterChange() == null){
             customerSchedule.setCounterChange(0);
         }
@@ -415,6 +419,8 @@ public class CustomerScheduleService {
                     "Bạn đã đổi lịch tiêm "+customerSchedule.getVaccineScheduleTime().getVaccineSchedule().getVaccine().getName()+" "+ customerSchedule.getCounterChange() +" lần<br>bạn chỉ được đổi tối đa 3 lần cho mỗi lịch đăng ký"
                     ,false, true);
         }
+=======
+>>>>>>> feature-admin-code
         customerScheduleRepository.save(customerSchedule);
     }
 }

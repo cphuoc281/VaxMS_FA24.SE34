@@ -89,6 +89,25 @@ async function deleteMethod(url) {
     return response
 }
 
+<<<<<<< HEAD
 
 
 export {getMethod,postMethod, uploadSingleFile,uploadMultipleFile,postMethodPayload,deleteMethod}
+=======
+async function putMethod(url, payload) {
+    if(url.includes(firstUrl) == false){
+        url = firstUrl + url;
+    }
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: new Headers({
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(payload)
+    });
+    return response
+}
+
+export {getMethod, postMethod, uploadSingleFile, uploadMultipleFile, postMethodPayload, deleteMethod, putMethod}
+>>>>>>> feature-admin-code
