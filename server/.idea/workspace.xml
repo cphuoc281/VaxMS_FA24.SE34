@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65592ccc-93a4-45c1-bcb2-c0568ed54dd6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/chat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/staffChat.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/staffChat.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +30,7 @@
   "keyToString": {
     "Application.VaxmsApplication.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "develop-lequocvu",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/DEV/Code/VaxMS/VaxMS_FA24.SE34",
     "project.structure.last.edited": "SDKs",

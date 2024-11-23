@@ -9,6 +9,7 @@ import {getMethod, postMethod, postMethodPayload, uploadSingleFile} from '../../
 import Swal from 'sweetalert2'
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
+// import style from '../../layout/customer/styles/styleuser.scss'
 
 function toggleChat() {
     var chatBox = document.getElementById("chat-box");
