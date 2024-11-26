@@ -1,6 +1,5 @@
 package com.web.api;
 
-import com.web.entity.Center;
 import com.web.entity.Vaccine;
 import com.web.entity.VaccineSchedule;
 import com.web.exception.MessageException;
@@ -24,7 +23,6 @@ public class VaccineScheduleApi {
 
     @Autowired
     private VaccineScheduleService vaccineScheduleService;
-
     @PostMapping("/all/find-all")
     public ResponseEntity<?> findAll(){
         return new ResponseEntity<>(vaccineScheduleService.list(), HttpStatus.OK);
@@ -81,12 +79,6 @@ public class VaccineScheduleApi {
     @GetMapping("/public/find-by-id")
     public ResponseEntity<?> findById(@RequestParam(value = "id") Long id){
         VaccineSchedule result = vaccineScheduleService.findById(id);
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    @GetMapping("/public/get-center")
-    public ResponseEntity<?> getCenter(@RequestParam Date start, @RequestParam Long vaccineId){
-        List<VaccineSchedule> result = vaccineScheduleService.getCenter(start, vaccineId);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
