@@ -9,7 +9,7 @@ import {getMethod, postMethod, postMethodPayload, uploadSingleFile} from '../../
 import Swal from 'sweetalert2'
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
-// import style from '../../layout/customer/styles/styleuser.scss'
+// import styles from '../../layout/customer/styles/chatFrame.module.scss'
 
 function toggleChat() {
     var chatBox = document.getElementById("chat-box");
@@ -168,7 +168,7 @@ function ChatFrame(){
 
         <div id="chat-box" class="chat-box">
             <div class="chat-header">
-                <h3>Xin chào bạn!</h3>
+                <h3>Nhân viên hỗ trợ!</h3>
                 <button class="close-btn" onClick={()=>toggleChat()}>X</button>
             </div>
             <div class="chat-body" id="scroll-to-bottom">

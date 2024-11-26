@@ -1,0 +1,201 @@
+/* Biến màu sắc */
+$primary-color: #0084ff; /* Màu xanh chủ đạo của Messenger */
+$secondary-color: #f1f0f0; /* Màu nền xám nhạt */
+$admin-chat-bg: #e4e6eb; /* Màu nền tin nhắn admin */
+$my-chat-bg: $primary-color; /* Màu nền tin nhắn người dùng */
+$input-bg-color: #f1f0f0; /* Màu nền input */
+$icon-color: $primary-color; /* Màu icon */
+$border-color: #ddd; /* Màu viền */
+
+/* Mixin cho bo góc */
+@mixin rounded-corners($radius) {
+  border-radius: $radius;
+}
+
+/* Container Chat */
+.chatContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000;
+
+  /* Nút mở chat */
+  .chatButton {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    @include rounded-corners(50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+
+    i {
+      margin: 0;
+    }
+  }
+
+  /* Hộp Chat */
+  .chatBox {
+    display: none;
+    width: 350px;
+    height: 500px;
+    background-color: white;
+    @include rounded-corners(10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    flex-direction: column;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 10001;
+
+    /* Header */
+    .chatHeader {
+      background-color: $primary-color;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h3 {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .closeBtn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
+
+    /* Nội dung chat */
+    .chatBody {
+      flex: 1;
+      background-color: $secondary-color;
+      padding: 10px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+
+      #listchat {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .myChat,
+      .adminChat {
+        max-width: 70%;
+        margin: 5px 0;
+        padding: 8px 12px;
+        font-size: 14px;
+        line-height: 1.5;
+        @include rounded-corners(18px);
+        word-wrap: break-word;
+
+        &.image {
+          padding: 0;
+          background: none;
+
+          img {
+            max-width: 100%;
+            @include rounded-corners(10px);
+          }
+        }
+      }
+
+      .myChat {
+        align-self: flex-end;
+        background-color: $my-chat-bg;
+        color: white;
+        border-radius: 18px 18px 0 18px;
+      }
+
+      .adminChat {
+        align-self: flex-start;
+        background-color: $admin-chat-bg;
+        color: black;
+        border-radius: 18px 18px 18px 0;
+      }
+
+      /* Tin nhắn hình ảnh */
+      .myChatImg,
+      .adminChatImg {
+        max-width: 70%;
+        margin: 5px 0;
+        @include rounded-corners(10px);
+      }
+
+      .myChatImg {
+        align-self: flex-end;
+      }
+
+      .adminChatImg {
+        align-self: flex-start;
+      }
+    }
+
+    /* Footer */
+    .chatFooter {
+      background-color: $input-bg-color;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+
+      input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid $border-color;
+        background-color: white;
+        font-size: 14px;
+        @include rounded-corners(20px);
+        margin-right: 10px;
+      }
+
+      .iconBtn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: $icon-color;
+        font-size: 20px;
+        margin-right: 10px;
+
+        &:hover {
+          color: darken($icon-color, 10%);
+        }
+      }
+
+      .sendBtn {
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        @include rounded-corners(50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darken($primary-color, 10%);
+        }
+
+        i {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
