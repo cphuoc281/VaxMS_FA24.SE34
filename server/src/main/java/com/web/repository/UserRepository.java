@@ -4,6 +4,7 @@ import com.web.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,4 +32,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query("select u from User u where u.authorities.name = ?1")
     List<User> getUserByRole(String role);
 
+    @Query("SELECT u FROM User u WHERE u.authorities.id = :authorityId")
+    List<User> findEmployeesByAuthority(@Param("authorityId") Long authorityId);
 }

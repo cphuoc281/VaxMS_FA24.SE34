@@ -1,6 +1,8 @@
 package com.web.api;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+//import com.nimbusds.oauth2.sdk.ErrorResponse;
+//import com.nimbusds.oauth2.sdk.SuccessResponse;
 import com.web.dto.*;
 import com.web.entity.Authority;
 import com.web.entity.User;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/user")
@@ -67,18 +71,43 @@ public class UserApi {
         return new ResponseEntity(tokenDto, HttpStatus.OK);
     }
 
+    @PostMapping("/admin/update-role")
+    public ResponseEntity<?> updateRole(@RequestParam Long userId, @RequestParam Long authorityId) throws Exception {
+        userService.updateRole(userId, authorityId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
     @PostMapping("/public/regis")
     public ResponseEntity<?> regisUser(@RequestBody UserRequest userRequest) {
         User result= userService.regisUser(userRequest);
         return new ResponseEntity(result, HttpStatus.OK);
     }
-
-    @PostMapping("/public/active-account")
-    public ResponseEntity<?> activeAccount(@RequestParam String email, @RequestParam String key) {
-        userService.activeAccount(key, email);
-        return new ResponseEntity<>("kích hoạt thành công", HttpStatus.OK);
+    @PostMapping("/public/register")
+    public ResponseEntity<?> registerUser(@RequestBody UserRequest userRequest) {
+        User result = userService.registerUser(userRequest);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
+
+//    @PostMapping("/public/active-account")
+//    public ResponseEntity<?> activeAccount(@RequestParam String email, @RequestParam String key) {
+//        userService.activeAccount(key, email);
+//        return new ResponseEntity<>("kích hoạt thành công", HttpStatus.OK);
+//    }
+
+    @PostMapping("/public/active-account")
+    public ResponseEntity<?> activeAccount(@RequestBody ActivateAccountDto activateAccountDto) {
+        try {
+            userService.activeAccount(activateAccountDto.getKey(), activateAccountDto.getEmail());
+            SuccessResponse successResponse = new SuccessResponse("Kích hoạt thành công");
+            return new ResponseEntity<>(successResponse, HttpStatus.OK);
+        } catch (MessageException e) {
+//            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), e.getStatus());
+            return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+        } catch (Exception e) {
+            ErrorResponse errorResponse = new ErrorResponse("Đã xảy ra lỗi", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @PostMapping("/public/send-request-forgot-password")
     public ResponseEntity<?> quenMatKhau(@RequestBody ForgotPasswordDto forgotPasswordDto){
         userService.guiYeuCauQuenMatKhau(forgotPasswordDto.getEmail(), forgotPasswordDto.getUrl());
@@ -91,7 +120,18 @@ public class UserApi {
         userService.xacNhanDatLaiMatKhau(email, password, key);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+// @PostMapping("/public/send-forgot-password-request")
+    // public ResponseEntity<?> sendForgotPasswordRequest(@RequestBody ForgotPasswordDto forgotPasswordDto){
+    //     userService.sendForgotPasswordRequest(forgotPasswordDto.getEmail(), forgotPasswordDto.getUrl());
+    //     return new ResponseEntity<>(HttpStatus.OK);
+    // }
 
+    // @PostMapping("/public/confirm-reset-password")
+    // public ResponseEntity<?> confirmResetPassword(@RequestParam String email, @RequestParam String key,
+    //                                               @RequestParam String password) {
+    //     userService.confirmResetPassword(email, password, key);
+    //     return new ResponseEntity<>(HttpStatus.OK);
+    // }
     @PostMapping("/all/user-logged")
     public ResponseEntity<?> inforLogged()  {
         return new ResponseEntity<>(userUtils.getUserWithAuthority(),HttpStatus.OK);
@@ -156,6 +196,16 @@ public class UserApi {
     @GetMapping("/user/check-role-user")
     public void checkRoleUser(){
         System.out.println("user");
+    }
+
+    @GetMapping("/{accountId}/roles")
+    public ResponseEntity<List<String>> getUserRoles(@PathVariable Long accountId) {
+        List<String> roles = userService.getRolesByAccountId(accountId);
+        if (roles.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonList("Không tìm thấy quyền cho tài khoản này."));
+        }
+        return ResponseEntity.ok(roles);
     }
 
     @GetMapping("/employee/check-role-employee")

@@ -10,10 +10,15 @@ import addLichTiemChungAdmin from "../pages/admin/addlichtiemchung";
 
 //public
 import login from "../pages/public/login";
+import register from '../pages/public/register';
+import signin from '../pages/public/signin';
 import index from "../pages/public/index";
 import TraCuuLichTiem from "../pages/public/tracuulichtiem";
 import LichTiemDaQua from "../pages/public/lichtiemdaqua";
 import TimKiemVacxin from "../pages/public/timkiemvaccine";
+import ActivateAccount from '../pages/public/ActivateAccount';
+import QuenMatKhau from "../pages/public/quenmatkhau";
+import DatLaiMatKhau from "../pages/public/datlaimatkhau";
 
 //customer
 import dangkytiemchung from "../pages/customer/dangkytiemchung";
@@ -33,8 +38,13 @@ const publicRoutes = [
     { path: "/tim-kiem-vaccine", component: TimKiemVacxin },
     {path: "/index", component: index},
     {path: "/login", component: login, layout: layoutLogin},
+    { path: "/activate-account", component: ActivateAccount },
+    {path: "/register", component: register },
+    {path: "/signin", component: signin },
     {path: "/tra-cuu-lich-tiem", component: TraCuuLichTiem},
     {path: "/lich-tiem-da-qua", component: LichTiemDaQua},
+    { path: "/quenmatkhau", component: QuenMatKhau },
+    { path: "/datlaimatkhau", component: DatLaiMatKhau },
 ];
 
 const customerRoutes = [
