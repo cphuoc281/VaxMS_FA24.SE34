@@ -27,6 +27,9 @@ public class CreateVaccineResponse {
 
     private Integer inventory;
 
+    private Integer quantity;
+
+
     private String status;
 
     private Timestamp createdDate;

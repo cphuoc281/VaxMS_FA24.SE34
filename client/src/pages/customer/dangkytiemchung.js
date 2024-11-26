@@ -225,7 +225,6 @@ function DangKyTiem() {
                       <div><span className='title-form-dki-tiem dichvu-dky-tiem'>CHỌN GIỜ TIÊM</span></div>
                       <div className='row listdiadiemtiem'>
                         {vacxinScheduleTime.map((item, index)=>{
-<<<<<<< HEAD
                               return <div className='col-sm-3'>
                                 <div key={item.id} onClick={() => {
                                   if (item.quantity !== item.limitPeople) {
@@ -237,18 +236,6 @@ function DangKyTiem() {
                                   {item.quantity === item.limitPeople && <span className="cross"></span>}
                                 </div>
                               </div>
-=======
-                            return <div className='col-sm-3'>
-                              <div key={item.id} onClick={() => {
-                                 if (item.quantity !== item.limitPeople) {
-                                    setTimeChoose(item, index);
-                                }}}
-                                  className={`singletgtiem ${indexTime === index ? 'activetiem' : ''}`} >
-                                {formatTime(item.start)} - {formatTime(item.end)}<br/>
-                                SL: {item.quantity} / {item.limitPeople}
-                              </div>
-                            </div>
->>>>>>> feature-admin-code
                         })}
                       </div>
                     </div>

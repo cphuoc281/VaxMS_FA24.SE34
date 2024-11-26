@@ -6,10 +6,6 @@ import Swal from 'sweetalert2'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 
-<<<<<<< HEAD
-
-=======
->>>>>>> feature-admin-code
 async function handleLogin(event) {
     event.preventDefault();
     const payload = {
@@ -109,11 +105,7 @@ function login(){
                     />
                     </div>
                     </GoogleOAuthProvider>
-<<<<<<< HEAD
                     <a href="/quenmatkhau" class="lbquenmk">Quên mật khẩu ?</a>
-=======
-                    <a href="forgot" class="lbquenmk">Quên mật khẩu ?</a>
->>>>>>> feature-admin-code
                 </div>
             </div>
         </div>

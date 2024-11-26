@@ -12,6 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ListCustomerScheduleRequest {
+    private Long vaccineScheduleId;
     private String status;
     private String fullName;
     private int page;

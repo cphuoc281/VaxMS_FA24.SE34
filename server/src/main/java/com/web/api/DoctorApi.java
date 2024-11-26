@@ -1,18 +1,5 @@
 package com.web.api;
 
-<<<<<<< HEAD
-import com.web.entity.Doctor;
-import com.web.entity.News;
-import com.web.service.DoctorService;
-import com.web.service.NewsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-=======
 import com.web.dto.CustomerProfileDTO;
 import com.web.dto.DoctorDTO;
 import com.web.entity.CustomerProfile;
@@ -24,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
->>>>>>> feature-admin-code
 
 import java.util.List;
 
@@ -41,8 +27,6 @@ public class DoctorApi {
         List<Doctor> result = doctorService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-<<<<<<< HEAD
-=======
 
     /* -----------ADMIN-----------*/
 
@@ -67,5 +51,4 @@ public class DoctorApi {
         return ResponseEntity.ok().build();
     }
     /* -----------ADMIN-----------*/
->>>>>>> feature-admin-code
 }

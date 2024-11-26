@@ -1,20 +1,14 @@
 package com.web.api;
 
-<<<<<<< HEAD
-=======
 import com.web.dto.CustomerProfileDTO;
->>>>>>> feature-admin-code
 import com.web.entity.Center;
 import com.web.entity.CustomerProfile;
 import com.web.repository.CustomerProfileRepository;
 import com.web.service.CenterService;
 import com.web.service.CustomerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-=======
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
->>>>>>> feature-admin-code
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,10 +26,7 @@ public class CustomerProfileApi {
     @GetMapping("/customer/find-by-user")
     public ResponseEntity<?> findByUser(){
         CustomerProfile result = customerProfileService.findByUser();
-<<<<<<< HEAD
         System.out.println("customer: "+result.getId());
-=======
->>>>>>> feature-admin-code
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -44,8 +35,6 @@ public class CustomerProfileApi {
         CustomerProfile result = customerProfileService.update(customerProfile);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-<<<<<<< HEAD
-=======
 
     /* -----------ADMIN-----------*/
 
@@ -72,5 +61,4 @@ public class CustomerProfileApi {
 
     /* -----------ADMIN-----------*/
 
->>>>>>> feature-admin-code
 }

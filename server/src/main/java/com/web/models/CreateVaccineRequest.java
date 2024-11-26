@@ -19,6 +19,10 @@ public class CreateVaccineRequest {
     private String image;
 
     private Integer price;
+    private Integer inventory;
+
+    private Integer quantity;
+
 
     private Long vaccineTypeId;
 

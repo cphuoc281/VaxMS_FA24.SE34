@@ -145,12 +145,9 @@ public class VaccineScheduleTimeService {
     public VaccineScheduleTime save(VaccineScheduleTime vaccineScheduleTime){
         Long count = vaccineScheduleTimeRepository.quantityBySchedule(vaccineScheduleTime.getVaccineSchedule().getId());
         VaccineSchedule vaccineSchedule = vaccineScheduleRepository.findById(vaccineScheduleTime.getVaccineSchedule().getId()).get();
-<<<<<<< HEAD
         if(count == null){
             count = 0L;
         }
-=======
->>>>>>> feature-admin-code
         if(vaccineSchedule.getLimitPeople() < count + vaccineScheduleTime.getLimitPeople()){
             throw new MessageException("Số lượng mũi tiêm hiện tại đang phát hành là: "+count+" chỉ được phát hành thêm: "+(vaccineSchedule.getLimitPeople() - count)+" mũi tiêm");
         }

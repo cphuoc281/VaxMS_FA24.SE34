@@ -1,69 +1,77 @@
 import lich from "../../assest/images/lich.png";
 import avatar from "../../assest/images/user.svg";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 function Header({ children }) {
   const [isCssLoaded, setCssLoaded] = useState(false);
+
   useEffect(() => {
     if (!isCssLoaded) {
       import("../staff/layout.scss").then(() => setCssLoaded(true));
     }
   }, [isCssLoaded]);
 
-
-
-
   return (
     <>
-      <div class="navleft" id="navleft">
-        <div class="divroot">
-         <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4hUp-MAkSvxl5dRdJldNsEN7K-BljNVZaEQ&s"}
-          style={{borderRadius:"50%", height:"90%"}}
-         />
+      {/* Left Navigation Bar */}
+      <div className="navleft">
+        <div className="divroot">
+          <img src={avatar} alt="Avatar" />
+          <div className="name-status">
+            <h4>Staff</h4>
+            <span className="online-status">
+              <i className="fa fa-circle"></i> Online
+            </span>
+          </div>
         </div>
-        <div class="listmenumain">
-          <a href="chat">Tin nhắn</a>
-          <a href="vaccine">Quản lý vaccine</a>
-          <a href="vaccine-inventory">Kho vaccine</a>
-          <a href="customer-schedule">Danh sách đăng ký</a>
+        <div className="listmenumain">
+          <a href="chat">
+            <i className="fa fa-envelope"></i> Tin nhắn
+          </a>
+          <a href="vaccine">
+            <i className="fa fa-medkit"></i> Quản lý vaccine
+          </a>
+          <a href="vaccine-inventory">
+            <i className="fa fa-hospital-o"></i> Kho vaccine
+          </a>
+          <a href="customer-schedule-1">
+            <i className="fa fa-calendar"></i> Lịch tiêm và Khách hàng
+          </a>
           <a href="#" onClick={() => logout()}>
-            Đăng xuất
+            <i className="fa fa-sign-out"></i> Đăng xuất
           </a>
         </div>
       </div>
-      <div class="contentadminweb">
 
-        <div class="contentmain">{children}</div>
+      {/* Header Section */}
+      <div className="header">
+        <div className="header-left">
+        </div>
+        <div className="header-right">
+          <i className="fa fa-bell"></i>
+          <i className="fa fa-question-circle"></i>
+          <i className="fa fa-envelope"></i>
+          <div className="profile">
+            <img src={avatar} alt="Avatar" />
+            <span>Staff</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Content Section */}
+      <div className="contentadminweb">
+        <div className="contentmain">
+          <div className="table-section">{children}</div>
+        </div>
       </div>
     </>
   );
 }
 
-async function checkAdmin() {
-  var token = localStorage.getItem("token");
-  var url = "http://localhost:8080/api/admin/check-role-admin";
-  const response = await fetch(url, {
-    headers: new Headers({
-      Authorization: "Bearer " + token,
-    }),
-  });
-  if (response.status > 300) {
-<<<<<<< HEAD
-    window.location.replace("../");
-=======
-    window.location.replace("../login");
->>>>>>> feature-admin-code
-  }
-}
-
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
-<<<<<<< HEAD
   window.location.replace("../");
-=======
-  window.location.replace("../login");
->>>>>>> feature-admin-code
 }
 
 export default Header;

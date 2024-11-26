@@ -1,15 +1,5 @@
 package com.web.service;
 
-<<<<<<< HEAD
-import com.web.entity.Doctor;
-import com.web.entity.Nurse;
-import com.web.repository.DoctorRepository;
-import com.web.repository.NurseRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-=======
 import com.web.dto.DoctorDTO;
 import com.web.dto.NurseDTO;
 import com.web.entity.Doctor;
@@ -26,7 +16,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
->>>>>>> feature-admin-code
 
 @Component
 public class NurseService {
@@ -37,8 +26,6 @@ public class NurseService {
     public List<Nurse> findAll(){
         return nurseRepository.findAll();
     }
-<<<<<<< HEAD
-=======
 
     public Page<NurseDTO> getNurse(String q, Pageable pageable){
         Page<Nurse> nurses = nurseRepository.getNurse(q, pageable);
@@ -78,5 +65,4 @@ public class NurseService {
         BeanUtils.copyProperties(nurse, dto);
         return dto;
     }
->>>>>>> feature-admin-code
 }

@@ -1,11 +1,6 @@
 package com.web.repository;
 
 import com.web.entity.Nurse;
-<<<<<<< HEAD
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface NurseRepository extends JpaRepository<Nurse, Long> {
-=======
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,5 +15,4 @@ public interface NurseRepository extends JpaRepository<Nurse, Long> {
             "OR LOWER(n.user.phoneNumber) LIKE LOWER(CONCAT('%', :q, '%')) " +
             "OR LOWER(n.user.email) LIKE LOWER(CONCAT('%', :q, '%')))")
     public Page<Nurse> getNurse(@Param("q") String q, Pageable pageable);
->>>>>>> feature-admin-code
 }

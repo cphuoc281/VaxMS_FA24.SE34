@@ -1,16 +1,16 @@
-import {Button, Form, Input, Modal, Popconfirm, Radio, Select, Upload,} from "antd";
-import {UploadOutlined} from "@ant-design/icons";
-import React, {useEffect, useState} from "react";
-import {VaccineTypeApi} from "../../../../services/staff/VaccineType.api";
-import {AgeGroupApi} from "../../../../services/staff/AgeGroup.api";
-import {ManufacturerApi} from "../../../../services/staff/Manufacturer.api";
+import { Button, Form, Input, Modal, Popconfirm, Radio, Select, Upload, } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import { VaccineTypeApi } from "../../../../services/staff/VaccineType.api";
+import { AgeGroupApi } from "../../../../services/staff/AgeGroup.api";
+import { ManufacturerApi } from "../../../../services/staff/Manufacturer.api";
 import TextArea from "antd/es/input/TextArea";
-import {VaccineApi} from "../../../../services/staff/Vaccine.api";
-import {AppNotification} from "../../../../components/AppNotification";
+import { VaccineApi } from "../../../../services/staff/Vaccine.api";
+import { AppNotification } from "../../../../components/AppNotification";
 
-const {Option} = Select;
+const { Option } = Select;
 
-function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
+function ModalHandle({ modalHandle, setModalHandle, setVaccines }) {
     const [formHandle, setFormHandle] = useState({
         status: "ACTIVE",
     });
@@ -20,9 +20,8 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
     const [manufacturers, setManufacturers] = useState([]);
 
     useEffect(() => {
-        console.log("aaaaaaaaaaaa")
         if (modalHandle.id) {
-            VaccineApi.detailVaccine({id: modalHandle.id}).then((res) => {
+            VaccineApi.detailVaccine({ id: modalHandle.id }).then((res) => {
                 const detailVaccine = res.data;
                 setFormHandle({
                     ...detailVaccine,
@@ -74,25 +73,27 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
 
         if (modalHandle.id) {
             VaccineApi.updateVaccine(formHandle)
+                .then(() => {
+                    return VaccineApi.detailVaccine({ id: modalHandle.id });
+                })
                 .then((res) => {
                     setVaccines((prev) =>
                         prev.map((vaccine, index) =>
                             vaccine.id === res.data.id
-                                ? {...res.data, stt: index + 1}
-                                : {...vaccine, stt: index + 1}
+                                ? { ...vaccine, ...res.data, stt: index + 1 }
+                                : { ...vaccine, stt: index + 1 }
                         )
                     );
-                    AppNotification.success("Cập nhật thành công");
+                    AppNotification.success("Cập nhật thành công");
                     closeModal();
                 })
                 .catch((err) => {
-                    AppNotification.error("Cập nhật thất bại");
+                    AppNotification.error("Cập nhật thất bại");
                     console.log(err);
                 });
         } else {
             VaccineApi.createVaccine(formHandle)
                 .then((res) => {
-                    AppNotification.success("Thêm mới thành công");
                     setVaccines((prev) => [
                         ...prev,
                         {
@@ -100,6 +101,7 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
                             stt: prev.length + 1,
                         },
                     ]);
+                    AppNotification.success("Thêm mới thành công");
                     closeModal();
                 })
                 .catch((err) => {
@@ -113,7 +115,7 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
         let reader = new FileReader();
         reader.readAsDataURL(info);
         reader.onload = function () {
-            setFormHandle({...formHandle, image: reader.result});
+            setFormHandle({ ...formHandle, image: reader.result });
         };
         reader.onerror = function (error) {
             console.log("Error: ", error);
@@ -121,7 +123,7 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
     };
     const closeModal = () => {
         setModalHandle({});
-        setFormHandle({status: "ACTIVE"});
+        setFormHandle({ status: "ACTIVE" });
         setFormErrors({});
     };
     return (
@@ -130,8 +132,8 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
                 title={modalHandle.id ? "Cập nhật vaccine" : "Thêm mới vaccine"}
                 visible={modalHandle.status}
                 onCancel={closeModal}
-                okButtonProps={{style: {display: "none"}}}
-                cancelButtonProps={{style: {display: "none"}}}
+                okButtonProps={{ style: { display: "none" } }}
+                cancelButtonProps={{ style: { display: "none" } }}
             >
                 <Form name="validateOnly" layout="vertical" autoComplete="off">
                     <Form.Item
@@ -167,25 +169,22 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
                         />
                     </Form.Item>
                     <Form.Item
-<<<<<<< HEAD
                         label="Số lượng"
-                        validateStatus={formErrors["quantity"] ? "error" : ""}
-                        help={formErrors["quantity"] || ""}
+                        validateStatus={formErrors["inventory"] ? "error" : ""}
+                        help={formErrors["inventory"] || ""}
                     >
                         <Input
                             className=""
-                            name="quantity"
+                            name="inventory"
                             placeholder="Số lượng"
-                            value={formHandle["quantity"] || ""}
+                            value={formHandle["inventory"] || ""}
                             onChange={(e) => {
-                                handleInputChange("quantity", e.target.value);
+                                handleInputChange("inventory", e.target.value);
                             }}
                             type="number"
                         />
                     </Form.Item>
                     <Form.Item
-=======
->>>>>>> feature-admin-code
                         label="Loại vaccine"
                         validateStatus={formErrors["vaccineTypeId"] ? "error" : ""}
                         help={formErrors["vaccineTypeId"] || ""}
@@ -253,7 +252,7 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
                     </Form.Item>
 
                     <Form.Item
-                        label="Mô tả"
+                        label="Thông tin Vaccine"
                         validateStatus={formErrors["description"] ? "error" : ""}
                         help={formErrors["description"] || ""}
                     >
@@ -267,7 +266,7 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
                             }}
                         />
                     </Form.Item>
-                    <Form.Item>
+                    {/* <Form.Item>
                         <Radio.Group
                             name="status"
                             onChange={(e) => handleInputChange("status", e.target.value)}
@@ -276,7 +275,7 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
                             <Radio value={"ACTIVE"}>Kinh doanh</Radio>
                             <Radio value={"INACTIVE"}>Ngừng kinh doanh</Radio>
                         </Radio.Group>
-                    </Form.Item>
+                    </Form.Item> */}
                     <div>
                         <Upload
                             beforeUpload={(file) => {
@@ -297,13 +296,13 @@ function ModalHandle({modalHandle, setModalHandle, setVaccines}) {
                                     }}
                                 />
                             ) : (
-                                <Button icon={<UploadOutlined/>}>Chọn ảnh</Button>
+                                <Button icon={<UploadOutlined />}>Chọn ảnh</Button>
                             )}
                         </Upload>
                     </div>
-                    <div style={{display: "flex", marginTop: 20}}>
+                    <div style={{ display: "flex", marginTop: 20 }}>
                         <Button
-                            style={{marginLeft: "auto", marginRight: 10}}
+                            style={{ marginLeft: "auto", marginRight: 10 }}
                             key="submit"
                             title="Thêm"
                             onClick={closeModal}

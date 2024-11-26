@@ -15,11 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-<<<<<<< HEAD
 /*!40101 SET NAMES utf8mb4 */;
-=======
-/*!40101 SET NAMES utf8 */;
->>>>>>> feature-admin-code
 
 --
 -- Cơ sở dữ liệu: `vaxms`
@@ -47,11 +43,6 @@ CREATE TABLE `account` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 =======
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
->>>>>>> feature-admin-code
-
---
--- Đang đổ dữ liệu cho bảng `account`
---
 
 INSERT INTO `account` (`account_id`, `email`, `password`, `google_id`, `phone_number`, `login_type`, `activation_key`, `actived`, `authority_id`, `created_date`, `remember_key`) VALUES
 (1, 'admin@vaxms.com', 'admin', NULL, '0123456789', 'standard', NULL, b'1', 1, '2024-08-27 16:20:27', NULL),
@@ -132,11 +123,7 @@ CREATE TABLE `centers` (
   `ward` varchar(100) NOT NULL,
   `street` varchar(255) DEFAULT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
-<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-=======
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
->>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `centers`
@@ -162,11 +149,6 @@ CREATE TABLE `chatting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 =======
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
->>>>>>> feature-admin-code
-
---
--- Đang đổ dữ liệu cho bảng `chatting`
---
 
 INSERT INTO `chatting` (`id`, `content`, `created_date`, `receiver`, `sender`) VALUES
 (1, 'hehehe', '2024-09-09 16:42:13', NULL, 4),

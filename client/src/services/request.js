@@ -89,11 +89,6 @@ async function deleteMethod(url) {
     return response
 }
 
-<<<<<<< HEAD
-
-
-export {getMethod,postMethod, uploadSingleFile,uploadMultipleFile,postMethodPayload,deleteMethod}
-=======
 async function putMethod(url, payload) {
     if(url.includes(firstUrl) == false){
         url = firstUrl + url;
@@ -110,4 +105,3 @@ async function putMethod(url, payload) {
 }
 
 export {getMethod, postMethod, uploadSingleFile, uploadMultipleFile, postMethodPayload, deleteMethod, putMethod}
->>>>>>> feature-admin-code

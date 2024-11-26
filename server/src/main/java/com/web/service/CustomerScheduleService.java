@@ -1,5 +1,5 @@
 package com.web.service;
-
+import com.web.models.UpdateCustomerSchedule;
 import com.web.config.Environment;
 import com.web.constants.LogUtils;
 import com.web.dto.CustomerScheduleVnpay;
@@ -44,6 +44,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.Predicate;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -56,6 +57,8 @@ import java.util.Properties;
 
 @Component
 public class CustomerScheduleService {
+    @Autowired
+    private AuthorityRepository authorityRepository;
 
     @Autowired
     private CustomerScheduleRepository customerScheduleRepository;
@@ -78,12 +81,9 @@ public class CustomerScheduleService {
     @Autowired
     private VNPayService vnPayService;
 
-<<<<<<< HEAD
     @Autowired
     private MailService mailService;
 
-=======
->>>>>>> feature-admin-code
     public CustomerSchedule create(CustomerSchedule customerSchedule, String orderId, String requestId) {
         LogUtils.init();
         if (paymentRepository.findByOrderIdAndRequestId(orderId, requestId).isPresent()) {
@@ -167,6 +167,9 @@ public class CustomerScheduleService {
                             .createdDate(e.getCreatedDate())
                             .vaccineScheduleTime(vaccineScheduleTime.orElse(null))
                             .user(user.orElse(null))
+                            .note(e.getNote())
+                            .healthStatusAfter(e.getHealthStatusAfter())
+                            .healthStatusBefore(e.getHealthStatusBefore())
                             .build();
                 }
         ).toList();
@@ -184,10 +187,15 @@ public class CustomerScheduleService {
             if (ObjectUtils.isNotEmpty(requestBody.getStatus())) {
                 predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("statusCustomerSchedule"), StatusCustomerSchedule.valueOf(requestBody.getStatus()))));
             }
+
+            // Tìm kiếm theo vaccineScheduleId
+            if (ObjectUtils.isNotEmpty(requestBody.getVaccineScheduleId())) {
+                predicates.add(criteriaBuilder.equal(root.get("vaccineScheduleTime").get("vaccineSchedule").get("id"), requestBody.getVaccineScheduleId()));
+            }
+
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
-
     @Transactional(rollbackFor = Exception.class)
     public CreateScheduleGuestResponse createScheduleGuest(CreateScheduleGuestRequest request) {
         if (ObjectUtils.isEmpty(request)) {
@@ -392,7 +400,6 @@ public class CustomerScheduleService {
         customerScheduleRepository.save(customerSchedule);
     }
 
-
     public void change(Long id, Long timeId) {
         CustomerSchedule customerSchedule = customerScheduleRepository.findById(id).get();
         VaccineScheduleTime vaccineScheduleTime = vaccineScheduleTimeRepository.findById(timeId).get();
@@ -406,7 +413,6 @@ public class CustomerScheduleService {
         }
 
         customerSchedule.setVaccineScheduleTime(vaccineScheduleTime);
-<<<<<<< HEAD
         if(customerSchedule.getCounterChange() == null){
             customerSchedule.setCounterChange(0);
         }
@@ -419,8 +425,35 @@ public class CustomerScheduleService {
                     "Bạn đã đổi lịch tiêm "+customerSchedule.getVaccineScheduleTime().getVaccineSchedule().getVaccine().getName()+" "+ customerSchedule.getCounterChange() +" lần<br>bạn chỉ được đổi tối đa 3 lần cho mỗi lịch đăng ký"
                     ,false, true);
         }
-=======
->>>>>>> feature-admin-code
         customerScheduleRepository.save(customerSchedule);
+    }
+
+    public CustomerSchedule updateCustomerSchedule(UpdateCustomerSchedule request) {
+        // Kiểm tra ID
+        if (request.getId() == null) {
+            throw new IllegalArgumentException("ID không được phép null");
+        }
+
+        // Kiểm tra bản ghi có tồn tại
+        CustomerSchedule customerSchedule = customerScheduleRepository.findById(request.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Không tìm thấy lịch trình"));
+
+        // Cập nhật từng trường
+        if (request.getHealthStatusAfter() != null) {
+            customerSchedule.setHealthStatusAfter(request.getHealthStatusAfter());
+        }
+        if (request.getHealthStatusBefore() != null) {
+            customerSchedule.setHealthStatusBefore(request.getHealthStatusBefore());
+        }
+
+        // Kiểm tra trạng thái
+        if (request.getStatus() != null) {
+            customerSchedule.setStatusCustomerSchedule(
+                    StatusCustomerSchedule.getStatusCustomerSchedule(request.getStatus())
+            );
+        }
+
+        // Lưu và trả về
+        return customerScheduleRepository.save(customerSchedule);
     }
 }

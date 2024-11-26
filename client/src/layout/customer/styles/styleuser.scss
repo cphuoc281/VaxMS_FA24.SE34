@@ -117,17 +117,17 @@ body{
 .dichvu-dky-tiem{
     margin-top: 20px;
 }
-.headerwebadmin{
-    height: 170px !important;
-    background-color: #fff;
-    width: 100%;
-    box-shadow: 0 4px 2px -2px gray;
-    padding-left: 40px;
-    position: fixed;
-    left: 250px;
-    padding-right: 250px;
-    z-index: 1000;
-}
+// .headerwebadmin{
+//     height: 170px !important;
+//     background-color: #fff;
+//     width: 100%;
+//     box-shadow: 0 4px 2px -2px gray;
+//     padding-left: 40px;
+//     position: fixed;
+//     left: 250px;
+//     padding-right: 250px;
+//     z-index: 1000;
+// }
 .singletgtiem{
     margin-top: 20px;
     background-color: #575757;
@@ -450,11 +450,7 @@ body{
 .chat-container {
     position: fixed;
     bottom: 20px;
-<<<<<<< HEAD
     left: 20px;
-=======
-    right: 20px;
->>>>>>> feature-admin-code
     z-index: 10000;
 }
 
@@ -476,11 +472,7 @@ body{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: fixed;
     bottom: 80px;
-<<<<<<< HEAD
     left: 20px;
-=======
-    right: 20px;
->>>>>>> feature-admin-code
     border: 1px solid #ccc;
 }
 
@@ -780,7 +772,6 @@ body{
 .motavaccinesearch{
     display: block;
     margin-top: 10px;
-<<<<<<< HEAD
 }
 .hetslottiem{
     color: #a62e21;
@@ -816,6 +807,3 @@ body{
   .hetslottiem .cross::before {
     content: '✖'; /* Biểu tượng gạch chéo */
   }
-=======
-}
->>>>>>> feature-admin-code

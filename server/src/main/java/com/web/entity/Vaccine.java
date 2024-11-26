@@ -25,12 +25,14 @@ public class Vaccine {
     private String image;
 
     private Integer price;
+    private Integer quantity;
 
     private Timestamp createdDate;
 
     private Integer inventory;
 
     private String status;
+    private Timestamp expirationDate;
 
     @ManyToOne
     @JoinColumn(name = "type_id")

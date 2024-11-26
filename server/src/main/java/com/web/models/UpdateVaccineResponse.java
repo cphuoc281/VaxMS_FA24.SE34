@@ -26,6 +26,7 @@ public class UpdateVaccineResponse {
     private Integer inventory;
 
     private Integer price;
+    private Integer quantity;
 
     private String status;
 

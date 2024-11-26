@@ -5,7 +5,6 @@ import layoutStaff from "../layout/staff/Layout";
 //admin
 import homeAdmin from "../pages/admin/index";
 import userAdmin from "../pages/admin/user";
-<<<<<<< HEAD
 import lichTiemChungAdmin from "../pages/admin/lichtiemchung";
 import addLichTiemChungAdmin from "../pages/admin/addlichtiemchung";
 
@@ -13,25 +12,16 @@ import addLichTiemChungAdmin from "../pages/admin/addlichtiemchung";
 import login from "../pages/public/login";
 import register from '../pages/public/register';
 import signin from '../pages/public/signin';
-=======
 import nhanvienAdmin from "../pages/admin/nhanvien";
-import lichTiemChungAdmin from "../pages/admin/lichtiemchung";
-import addLichTiemChungAdmin from "../pages/admin/addlichtiemchung";
 import khachHangAdmin from "../pages/admin/khachhang";
 import employeeAdmin from "../pages/admin/employee";
-//public
-import login from "../pages/public/login";
->>>>>>> feature-admin-code
 import index from "../pages/public/index";
 import TraCuuLichTiem from "../pages/public/tracuulichtiem";
 import LichTiemDaQua from "../pages/public/lichtiemdaqua";
 import TimKiemVacxin from "../pages/public/timkiemvaccine";
-<<<<<<< HEAD
 import ActivateAccount from '../pages/public/ActivateAccount';
 import QuenMatKhau from "../pages/public/quenmatkhau";
 import DatLaiMatKhau from "../pages/public/datlaimatkhau";
-=======
->>>>>>> feature-admin-code
 
 //customer
 import dangkytiemchung from "../pages/customer/dangkytiemchung";
@@ -45,9 +35,10 @@ import StaffChat from "../pages/staff/chat";
 import Vaccine from "../pages/staff/vaccine/vaccine";
 import VaccineInventory from "../pages/staff/vaccineInventory/VaccineInventory";
 import CustomerSchedule from "../pages/staff/customerSchedule/CustomerSchedule";
+import CustomerScheduleView from "../pages/staff/customerSchedule";
+import {CustomerScheduleViewDetail} from "../pages/staff/customerSchedule/modal/CustomerScheduleViewDetail";
 
 const publicRoutes = [
-<<<<<<< HEAD
     {path: "/", component: index},
     { path: "/tim-kiem-vaccine", component: TimKiemVacxin },
     {path: "/index", component: index},
@@ -72,28 +63,7 @@ const customerRoutes = [
 const adminRoutes = [
     {path: "/admin/index", component: homeAdmin, layout: layoutAdmin},
     {path: "/admin/user", component: userAdmin, layout: layoutAdmin},
-=======
-    { path: "/", component: index },
-    { path: "/tim-kiem-vaccine", component: TimKiemVacxin },
-    { path: "/index", component: index },
-    { path: "/login", component: login, layout: layoutLogin },
-    { path: "/tra-cuu-lich-tiem", component: TraCuuLichTiem },
-    { path: "/lich-tiem-da-qua", component: LichTiemDaQua },
-];
-
-const customerRoutes = [
-    { path: "/dang-ky-tiem-chung", component: dangkytiemchung },
-    { path: "/tai-khoan", component: taikhoan },
-    { path: "/thong-bao", component: thongbao },
-    { path: "/xac-nhan-dang-ky", component: XacNhanDangky },
-    { path: "/thanh-cong", component: ThanhCong },
-];
-
-const adminRoutes = [
-    { path: "/admin/index", component: homeAdmin, layout: layoutAdmin },
-    { path: "/admin/user", component: userAdmin, layout: layoutAdmin },
     { path: "/admin/nhanvien", component: nhanvienAdmin, layout: layoutAdmin },
->>>>>>> feature-admin-code
     {
         path: "/admin/lich-tiem-chung",
         component: lichTiemChungAdmin,
@@ -104,15 +74,6 @@ const adminRoutes = [
         component: addLichTiemChungAdmin,
         layout: layoutAdmin,
     },
-<<<<<<< HEAD
-];
-
-const staffRoutes = [
-    {path: "/staff/chat", component: StaffChat, layout: layoutStaff},
-    {path: "/staff/vaccine", component: Vaccine, layout: layoutStaff},
-    {path: "/staff/vaccine-inventory", component: VaccineInventory, layout: layoutStaff},
-    {path: "/staff/customer-schedule", component: CustomerSchedule, layout: layoutStaff},
-=======
     {
         path: "/admin/khach-hang",
         component: khachHangAdmin,
@@ -126,17 +87,13 @@ const staffRoutes = [
 ];
 
 const staffRoutes = [
-    { path: "/staff/chat", component: StaffChat, layout: layoutStaff },
-    { path: "/staff/vaccine", component: Vaccine, layout: layoutStaff },
-    { path: "/staff/vaccine-inventory", component: VaccineInventory, layout: layoutStaff },
-    { path: "/staff/customer-schedule", component: CustomerSchedule, layout: layoutStaff },
->>>>>>> feature-admin-code
+    {path: "/staff/chat", component: StaffChat, layout: layoutStaff},
+    {path: "/staff/vaccine", component: Vaccine, layout: layoutStaff},
+    {path: "/staff/vaccine-inventory", component: VaccineInventory, layout: layoutStaff},
+    {path: "/staff/customer-schedule", component: CustomerSchedule, layout: layoutStaff},
+    {path: "/staff/customer-schedule-1", component: CustomerScheduleView, layout: layoutStaff},
+    {path: "/staff/customer-schedule-1-detail", component: CustomerScheduleViewDetail, layout: layoutStaff},
 ];
 
 
-
-<<<<<<< HEAD
 export {publicRoutes, adminRoutes, customerRoutes, staffRoutes};
-=======
-export { publicRoutes, adminRoutes, customerRoutes, staffRoutes };
->>>>>>> feature-admin-code

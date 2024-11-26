@@ -37,12 +37,13 @@ public class CustomerSchedule {
     private String phone;
 
     private String address;
+    private String note;
 
-<<<<<<< HEAD
+    private String healthStatusBefore;
+    private String healthStatusAfter;
+
     private Integer counterChange;
 
-=======
->>>>>>> feature-admin-code
     @Enumerated(EnumType.STRING)
     private CustomerSchedulePay customerSchedulePay;
 

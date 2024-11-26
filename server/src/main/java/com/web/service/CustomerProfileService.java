@@ -1,15 +1,5 @@
 package com.web.service;
 
-<<<<<<< HEAD
-import com.web.entity.CustomerProfile;
-import com.web.entity.User;
-import com.web.repository.CustomerProfileRepository;
-import com.web.utils.UserUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.sql.Timestamp;
-=======
 import com.web.dto.CustomerProfileDTO;
 import com.web.entity.CustomerProfile;
 import com.web.entity.User;
@@ -26,7 +16,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
->>>>>>> feature-admin-code
 
 @Component
 public class CustomerProfileService {
@@ -52,8 +41,6 @@ public class CustomerProfileService {
         customerProfileRepository.save(customerProfile);
         return customerProfile;
     }
-<<<<<<< HEAD
-=======
 
     public Page<CustomerProfileDTO> getCustomers(String q, Pageable pageable){
         Page<CustomerProfile> customers = customerProfileRepository.getCustomerProfile(q, pageable);
@@ -101,5 +88,4 @@ public class CustomerProfileService {
         return dto;
     }
 
->>>>>>> feature-admin-code
 }

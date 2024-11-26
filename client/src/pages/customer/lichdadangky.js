@@ -51,57 +51,30 @@ function LichDaDangKy(){
         getNurse();
     }, []);
   
-<<<<<<< HEAD
     async function huyTiem(id) {
         var con = window.confirm("Xác nhận hủy tiêm?");
-=======
-    async function hoanTiem(id) {
-        var con = window.confirm("Xác nhận hoãn tiêm?");
->>>>>>> feature-admin-code
         if(con == false){
             return;
         }
         var res = await postMethod('/api/customer-schedule/customer/cancel?id='+id)
         if (res.status < 300) {
-<<<<<<< HEAD
             toast.success("Đã hủy lịch tiêm thành công!")
             var response = await getMethod('/api/customer-schedule/customer/my-schedule?&size='+size+'&sort=id,desc&page='+0);
             var result = await response.json();
             setCustomerSchedule(result.content)
             setpageCount(result.totalPages)
             url = '/api/customer-schedule/customer/my-schedule?&size='+size+'&sort=id,desc&page='
-=======
-            Swal.fire({
-                title: "Thông báo",
-                text: "Đã hủy lịch tiêm thành công!",
-                preConfirm: () => {
-                    getLichDangKy();
-                }
-            });
->>>>>>> feature-admin-code
         } else {
             if(res.status == 417){
                 var result = await res.json();
                 toast.error(result.defaultMessage);
             }
             else{
-<<<<<<< HEAD
                 toast.error("Hủy lịch tiêm thất bại");
-=======
-                toast.error("Đăng ký lịch tiêm thất bại");
->>>>>>> feature-admin-code
             }
         }
     }
 
-<<<<<<< HEAD
-=======
-    const getLichDangKy= async() =>{
-        var response = await getMethod('/api/customer-schedule/customer/my-schedule');
-        var result = await response.json();
-        setCustomerSchedule(result)
-    };
->>>>>>> feature-admin-code
 
     const handleRatingSelect = (ratingValue) => {
         setRating(ratingValue);
@@ -269,23 +242,17 @@ function LichDaDangKy(){
                                 <th>Trạng thái</th>
                                 <th>Chức năng</th>
                                 <th>Phản hồi</th>
-<<<<<<< HEAD
                                 <th>Hủy lịch</th>
-=======
->>>>>>> feature-admin-code
                             </tr>
                         </thead>
                         <tbody>
                         {customerSchedule.map((item, index)=>{
-<<<<<<< HEAD
                             const currentDate = new Date();
                             const targetDate = new Date(item.vaccineScheduleTime.injectDate);
                             var checked = false;
                             if (currentDate.getTime() >= targetDate.getTime()) {
                                 checked = true;
                             }
-=======
->>>>>>> feature-admin-code
                             return <tr>
                                 <td>{item.id}</td>
                                 <td>{item.vaccineScheduleTime.vaccineSchedule.vaccine.name}</td>
@@ -307,15 +274,12 @@ function LichDaDangKy(){
                                     <button onClick={()=>setSchedule(item)} data-bs-toggle="modal" data-bs-target="#exampleModal" className='btn btn-primary btncommont'>Gửi</button>:<></>
                                     }
                                 </td>
-<<<<<<< HEAD
                                 <td>
                                     {
                                     item.statusCustomerSchedule != 'cancelled' && item.statusCustomerSchedule != 'finished' && checked == false?
                                     <button onClick={()=>huyTiem(item.id)} className='btn btn-danger'>Hủy</button>:<></>
                                     }
                                 </td>
-=======
->>>>>>> feature-admin-code
                             </tr>
                          })}
                         </tbody>

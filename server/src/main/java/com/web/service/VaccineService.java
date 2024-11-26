@@ -2,10 +2,7 @@ package com.web.service;
 
 import com.web.dto.VaccineTypeResponse;
 import com.web.entity.AgeGroup;
-<<<<<<< HEAD
 import com.web.entity.Center;
-=======
->>>>>>> feature-admin-code
 import com.web.entity.Manufacturer;
 import com.web.entity.Vaccine;
 import com.web.entity.VaccineInventory;
@@ -23,10 +20,7 @@ import com.web.models.PlusVaccineResponse;
 import com.web.models.UpdateVaccineRequest;
 import com.web.models.UpdateVaccineResponse;
 import com.web.repository.AgeGroupRepository;
-<<<<<<< HEAD
 import com.web.repository.CenterRepository;
-=======
->>>>>>> feature-admin-code
 import com.web.repository.ManufacturerRepository;
 import com.web.repository.VaccineInventoryRepository;
 import com.web.repository.VaccineRepository;
@@ -69,10 +63,7 @@ public class VaccineService {
     private final AgeGroupRepository ageGroupRepository;
     private final VaccineTypeRepository vaccineTypeRepository;
     private final VaccineInventoryRepository vaccineInventoryRepository;
-<<<<<<< HEAD
     private final CenterRepository centerRepository;
-=======
->>>>>>> feature-admin-code
 
     public List<Vaccine> findAll() {
         return vaccineRepository.findAll();
@@ -127,6 +118,9 @@ public class VaccineService {
         if (StringUtils.isEmpty(requestBody.getName())) {
             throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Nhập tên vaccine");
         }
+        if (ObjectUtils.isEmpty(requestBody.getInventory())) {
+            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Nhập số lượng vaccine");
+        }
         if (ObjectUtils.isEmpty(requestBody.getPrice())) {
             throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Nhập giá vaccine");
         }
@@ -155,12 +149,12 @@ public class VaccineService {
         vaccine.setName(requestBody.getName());
         vaccine.setPrice(requestBody.getPrice());
         vaccine.setImage(requestBody.getImage());
+        vaccine.setInventory(requestBody.getInventory());
         vaccine.setDescription(requestBody.getDescription());
         vaccine.setStatus(requestBody.getStatus());
         vaccine.setVaccineType(optionalVaccineType.get());
         vaccine.setManufacturer(optionalManufacturer.get());
         vaccine.setAgeGroup(optionalAgeGroup.get());
-<<<<<<< HEAD
         vaccine.setInventory(vaccine.getInventory());
         vaccine.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         vaccineRepository.save(vaccine);
@@ -173,12 +167,6 @@ public class VaccineService {
         vaccineInventory.setStatus("Đang sử dụng");
         vaccineInventoryRepository.save(vaccineInventory);
 
-=======
-        vaccine.setInventory(0);
-        vaccine.setCreatedDate(new Timestamp(System.currentTimeMillis()));
-        vaccineRepository.save(vaccine);
-
->>>>>>> feature-admin-code
         return modelMapper.map(vaccine, CreateVaccineResponse.class);
     }
 
@@ -201,6 +189,12 @@ public class VaccineService {
         if (ObjectUtils.isEmpty(requestBody.getAgeGroupId())) {
             throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Chọn nhóm tuổi");
         }
+        if (ObjectUtils.isEmpty(requestBody.getInventory())) {
+            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Nhập số lượng vaccine");
+        }
+        if (requestBody.getInventory() < 0) {
+            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Số lượng vaccine phải là số dương");
+        }
         Optional<VaccineType> optionalVaccineType = vaccineTypeRepository.findById(requestBody.getVaccineTypeId());
         if (optionalVaccineType.isEmpty()) {
             throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Loại vaccine không tồn tại");
@@ -220,6 +214,8 @@ public class VaccineService {
         Vaccine vaccine = optionalVaccine.get();
         vaccine.setName(requestBody.getName());
         vaccine.setPrice(requestBody.getPrice());
+        vaccine.setInventory(requestBody.getInventory());
+//        vaccine.setQuantity(requestBody.get
         vaccine.setImage(requestBody.getImage());
         vaccine.setDescription(requestBody.getDescription());
         vaccine.setStatus(requestBody.getStatus());
@@ -245,9 +241,7 @@ public class VaccineService {
         if (ObjectUtils.equals(vaccine.getStatus(), "DELETE")) {
             throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Vaccine đã xóa rồi");
         }
-        if (ObjectUtils.equals(vaccine.getStatus(), "ACTIVE")) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Chỉ được xóa vaccine ngừng kinh doanh");
-        }
+
         vaccine.setStatus("DELETE");
         try {
             vaccineRepository.save(vaccine);
@@ -425,17 +419,14 @@ public class VaccineService {
             if (ObjectUtils.isNotEmpty(requestBody.getPrice())) {
                 predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("price"), requestBody.getPrice())));
             }
-            if (ObjectUtils.isNotEmpty(requestBody.getStatus())) {
-                predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("status"), requestBody.getStatus())));
+            if (ObjectUtils.isNotEmpty(requestBody.getManufacturer())) {
+                predicates.add(criteriaBuilder.equal(root.get("manufacturer").get("name"), requestBody.getManufacturer()));
             }
-<<<<<<< HEAD
 
             // Thêm bộ lọc theo khoảng thời gian createdDate
             if (ObjectUtils.isNotEmpty(requestBody.getStartDate()) && ObjectUtils.isNotEmpty(requestBody.getEndDate())) {
                 predicates.add(criteriaBuilder.between(root.get("createdDate"), requestBody.getStartDate(), requestBody.getEndDate()));
             }
-=======
->>>>>>> feature-admin-code
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
@@ -449,7 +440,6 @@ public class VaccineService {
         return list;
     }
 
-<<<<<<< HEAD
     private Center getCenter(String city) {
         Optional<Center> optionalCenter = centerRepository.findByCity(city);
         if (optionalCenter.isEmpty()) {
@@ -462,8 +452,6 @@ public class VaccineService {
         return optionalCenter.get();
     }
 
-=======
->>>>>>> feature-admin-code
     public Vaccine findById(Long id) {
         return vaccineRepository.findById(id).get();
     }

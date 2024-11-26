@@ -1,29 +1,19 @@
 package com.web.service;
 
-<<<<<<< HEAD
 import com.web.entity.Authority;
 
-=======
->>>>>>> feature-admin-code
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.web.dto.CustomUserDetails;
 import com.web.dto.TokenDto;
 import com.web.dto.UserRequest;
 import com.web.dto.UserUpdate;
-<<<<<<< HEAD
 import com.web.entity.CustomerProfile;
-=======
-import com.web.entity.Authority;
->>>>>>> feature-admin-code
 import com.web.entity.User;
 import com.web.enums.UserType;
 import com.web.exception.MessageException;
 import com.web.jwt.JwtTokenProvider;
 import com.web.repository.AuthorityRepository;
-<<<<<<< HEAD
 import com.web.repository.CustomerProfileRepository;
-=======
->>>>>>> feature-admin-code
 import com.web.repository.UserRepository;
 import com.web.utils.Contains;
 import com.web.utils.MailService;
@@ -31,25 +21,15 @@ import com.web.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-<<<<<<< HEAD
 import java.util.logging.Logger;
 
 import java.sql.Date;
 import java.util.*;
-=======
-
-import java.sql.Date;
-import java.util.*;
-import java.util.stream.Collectors;
->>>>>>> feature-admin-code
 
 @Component
 public class UserService {
 
-<<<<<<< HEAD
     private static final Logger logger = Logger.getLogger(UserService.class.getName());
-=======
->>>>>>> feature-admin-code
     @Autowired
     private UserRepository userRepository;
 
@@ -68,12 +48,9 @@ public class UserService {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-<<<<<<< HEAD
     @Autowired
     private CustomerProfileRepository customerProfileRepository;
 
-=======
->>>>>>> feature-admin-code
     public TokenDto login(String email, String password) throws Exception {
         Optional<User> users = userRepository.findByEmail(email);
         if (users.isPresent()) {
@@ -84,13 +61,8 @@ public class UserService {
         // check infor user
         System.out.println(email);
         checkUser(users);
-<<<<<<< HEAD
         if(passwordEncoder.matches(password, users.get().getPassword())){
 //        if (password.equalsIgnoreCase(users.get().getPassword())) {
-=======
-        // if(passwordEncoder.matches(password, users.get().getPassword())){
-        if (password.equalsIgnoreCase(users.get().getPassword())) {
->>>>>>> feature-admin-code
             CustomUserDetails customUserDetails = new CustomUserDetails(users.get());
             String token = jwtTokenProvider.generateToken(customUserDetails);
             TokenDto tokenDto = new TokenDto();
@@ -102,20 +74,12 @@ public class UserService {
         }
     }
 
-<<<<<<< HEAD
 
     public TokenDto loginWithGoogle(GoogleIdToken.Payload payload) throws Exception {
         User user = new User();
         user.setEmail(payload.getEmail());
 //        user.setAvatar(payload.get("picture").toString());
 //        user.setFullName(payload.get("name").toString());
-=======
-    public TokenDto loginWithGoogle(GoogleIdToken.Payload payload) throws Exception {
-        User user = new User();
-        user.setEmail(payload.getEmail());
-        // user.setAvatar(payload.get("picture").toString());
-        // user.setFullName(payload.get("name").toString());
->>>>>>> feature-admin-code
         user.setActived(true);
         user.setAuthorities(authorityRepository.findByName(Contains.ROLE_CUSTOMER));
         user.setCreatedDate(new Date(System.currentTimeMillis()));
@@ -132,7 +96,6 @@ public class UserService {
             TokenDto tokenDto = new TokenDto();
             tokenDto.setToken(token);
             tokenDto.setUser(users.get());
-<<<<<<< HEAD
             CustomerProfile ex = customerProfileRepository.findByUser(users.get().getId());
             if(ex == null){
                 CustomerProfile customerProfile = new CustomerProfile();
@@ -145,11 +108,6 @@ public class UserService {
             CustomerProfile customerProfile = new CustomerProfile();
             customerProfile.setUser(u);
             customerProfileRepository.save(customerProfile);
-=======
-            return tokenDto;
-        } else {
-            User u = userRepository.save(user);
->>>>>>> feature-admin-code
             CustomUserDetails customUserDetails = new CustomUserDetails(u);
             String token = jwtTokenProvider.generateToken(customUserDetails);
             TokenDto tokenDto = new TokenDto();
@@ -159,10 +117,6 @@ public class UserService {
         }
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> feature-admin-code
     public Boolean checkUser(Optional<User> users) {
         if (users.isPresent() == false) {
             throw new MessageException("Không tìm thấy tài khoản", 404);
@@ -184,16 +138,11 @@ public class UserService {
                 });
         User user = new User();
         user.setUserType(UserType.standard);
-<<<<<<< HEAD
 //        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-=======
-        // user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
->>>>>>> feature-admin-code
         user.setPassword(userRequest.getPassword());
         user.setAuthorities(authorityRepository.findByName(Contains.ROLE_CUSTOMER));
         user.setActived(false);
         user.setEmail(userRequest.getEmail());
-<<<<<<< HEAD
 //        user.setFullName(userRequest.getFullName());
         user.setCreatedDate(new Date(System.currentTimeMillis()));
         user.setActivationKey(userUtils.randomKey());
@@ -271,33 +220,6 @@ public class UserService {
         Authority authority = authorityRepository.findById(authorityId).get();
         user.setAuthorities(authority);
         userRepository.save(user);
-=======
-        // user.setFullName(userRequest.getFullName());
-        user.setCreatedDate(new Date(System.currentTimeMillis()));
-        user.setActivationKey(userUtils.randomKey());
-        User result = userRepository.save(user);
-        mailService.sendEmail(user.getEmail(), "Xác nhận tài khoản của bạn",
-                "Cảm ơn bạn đã tin tưởng và xử dụng dịch vụ của chúng tôi:<br>" +
-                        "Để kích hoạt tài khoản của bạn, hãy nhập mã xác nhận bên dưới để xác thực tài khoản của bạn<br><br>"
-                        +
-                        "<a style=\"background-color: #2f5fad; padding: 10px; color: #fff; font-size: 18px; font-weight: bold;\">"
-                        + user.getActivationKey() + "</a>",
-                false, true);
-        return result;
-    }
-
-    public void activeAccount(String activationKey, String email) {
-        Optional<User> user = userRepository.getUserByActivationKeyAndEmail(activationKey, email);
-        user.ifPresent(exist -> {
-            exist.setActivationKey(null);
-            exist.setActived(true);
-            userRepository.save(exist);
-            return;
-        });
-        if (user.isEmpty()) {
-            throw new MessageException("email hoặc mã xác nhận không chính xác", 404);
-        }
->>>>>>> feature-admin-code
     }
 
     public void guiYeuCauQuenMatKhau(String email, String url) {
@@ -312,20 +234,10 @@ public class UserService {
         user.get().setRememberKey(random);
         userRepository.save(user.get());
 
-<<<<<<< HEAD
         mailService.sendEmail(email, "Đặt lại mật khẩu", "Cảm ơn bạn đã tin tưởng và xử dụng dịch vụ của chúng tôi:<br>" +
                 "Chúng tôi đã tạo một mật khẩu mới từ yêu cầu của bạn<br>" +
                 "Hãy lick vào bên dưới để đặt lại mật khẩu mới của bạn<br><br>" +
                 "<a href='" + url + "?email=" + email + "&key=" + random + "' style=\"background-color: #2f5fad; padding: 10px; color: #fff; font-size: 18px; font-weight: bold;\">Đặt lại mật khẩu</a>", false, true);
-=======
-        mailService.sendEmail(email, "Đặt lại mật khẩu", "Cảm ơn bạn đã tin tưởng và xử dụng dịch vụ của chúng tôi:<br>"
-                +
-                "Chúng tôi đã tạo một mật khẩu mới từ yêu cầu của bạn<br>" +
-                "Hãy lick vào bên dưới để đặt lại mật khẩu mới của bạn<br><br>" +
-                "<a href='" + url + "?email=" + email + "&key=" + random
-                + "' style=\"background-color: #2f5fad; padding: 10px; color: #fff; font-size: 18px; font-weight: bold;\">Đặt lại mật khẩu</a>",
-                false, true);
->>>>>>> feature-admin-code
 
     }
 
@@ -342,15 +254,9 @@ public class UserService {
 
     public void updateInfor(UserUpdate userUpdate) {
         User user = userUtils.getUserWithAuthority();
-<<<<<<< HEAD
 //        user.setFullName(userUpdate.getFullName());
 //        user.setAvatar(userUpdate.getAvatar());
 //        user.setAddress(userUpdate.getAddress());
-=======
-        // user.setFullName(userUpdate.getFullName());
-        // user.setAvatar(userUpdate.getAvatar());
-        // user.setAddress(userUpdate.getAddress());
->>>>>>> feature-admin-code
         userRepository.save(user);
     }
 
@@ -359,20 +265,12 @@ public class UserService {
         if (user.getUserType().equals(UserType.google)) {
             throw new MessageException("Xin lỗi, chức năng này không hỗ trợ đăng nhập bằng google");
         }
-<<<<<<< HEAD
 //        if (passwordEncoder.matches(oldPass, user.getPassword())) {
         if (oldPass.equals(user.getPassword())) {
             user.setPassword(newPass);
             userRepository.save(user);
         }
         else {
-=======
-        // if (passwordEncoder.matches(oldPass, user.getPassword())) {
-        if (oldPass.equals(user.getPassword())) {
-            user.setPassword(newPass);
-            userRepository.save(user);
-        } else {
->>>>>>> feature-admin-code
             throw new MessageException("Mật khẩu cũ không chính xác", 500);
         }
     }
@@ -383,8 +281,6 @@ public class UserService {
         }
         return userRepository.getUserByRole(role);
     }
-<<<<<<< HEAD
-=======
 
     public List<User> getEmployeesByAuthority(Long authorityId) {
         return userRepository.findEmployeesByAuthority(authorityId);
@@ -399,5 +295,4 @@ public class UserService {
         return Collections.emptyList(); // Trả về danh sách rỗng nếu không tìm thấy
     }
 
->>>>>>> feature-admin-code
 }

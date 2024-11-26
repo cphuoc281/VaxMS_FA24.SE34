@@ -11,4 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UpdateVaccineRequest extends CreateVaccineRequest{
     private Long id;
+    private Integer quantity;
+    private Integer inventory;
 }

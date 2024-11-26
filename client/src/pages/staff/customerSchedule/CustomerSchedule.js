@@ -1,26 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
-import {
-  Table,
-  Button,
-  Tag,
-  Input,
-  InputNumber,
-  Select,
-  Pagination,
-  Popconfirm,
-  Modal,
-  Form,
-} from "antd";
-import { VaccineApi } from "../../../services/staff/Vaccine.api";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faEdit, faRemove } from "@fortawesome/free-solid-svg-icons";
+import React, {useEffect, useRef, useState} from "react";
+import {Button, Form, Input, Modal, Pagination, Popconfirm, Select, Table, Tag,} from "antd";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCheck, faRemove} from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
-import { UploadOutlined, DownloadOutlined } from "@ant-design/icons";
 // import ModalHandle from "./modal/modalHandle";
-import { AppNotification } from "../../../components/AppNotification";
-import * as XLSX from "xlsx";
-import { CustomerScheduleApi } from "../../../services/staff/CustomerSchedule.api";
-import { VaccineScheduleApi } from "../../../services/staff/VaccineSchedule.api";
+import {AppNotification} from "../../../components/AppNotification";
+import {CustomerScheduleApi} from "../../../services/staff/CustomerSchedule.api";
+import {VaccineScheduleApi} from "../../../services/staff/VaccineSchedule.api";
+
 const { Option } = Select;
 const CustomerSchedule = () => {
   const [modalHandle, setModalHandle] = useState(false);
@@ -63,6 +50,7 @@ const CustomerSchedule = () => {
       limit: pageSize,
     });
   }, [currentPage, pageSize]);
+
   const handleCustomerSchedules = async (formSearch) => {
     setLoading(true);
     await CustomerScheduleApi.customerSchedules(formSearch)
@@ -114,6 +102,8 @@ const CustomerSchedule = () => {
   };
 
   const handleSubmit = async () => {
+    console.log('')
+
     const isValid =
       formHandle.fullName &&
       formHandle.phone &&
@@ -166,7 +156,7 @@ const CustomerSchedule = () => {
       title: "Tên Vaccine",
       dataIndex: "vaccineSchedule",
       key: "vaccineSchedule",
-      render: (vaccineSchedule) => vaccineSchedule?.vaccine?.name,
+      render: (_, record) => record.vaccineScheduleTime?.vaccineSchedule?.vaccine?.name
     },
     {
       title: "Tên khách hàng",
@@ -190,22 +180,14 @@ const CustomerSchedule = () => {
       dataIndex: "vaccineSchedule",
       key: "vaccineSchedule",
       align: "center",
-<<<<<<< HEAD
       render: (date) => date?.startDate ? dayjs(date.startDate).format("HH:mm DD-MM-YYYY") : "N/A",
-=======
-      render: (date) => dayjs(date.startDate).format("HH:mm DD-MM-YYYY"),
->>>>>>> feature-admin-code
     },
     {
       title: "Thời gian kết thúc",
       dataIndex: "vaccineSchedule",
       key: "vaccineSchedule",
       align: "center",
-<<<<<<< HEAD
       render: (date) => date?.endDate ? dayjs(date.endDate).format("HH:mm DD-MM-YYYY") : "N/A",
-=======
-      render: (date) => dayjs(date.endDate).format("HH:mm DD-MM-YYYY"),
->>>>>>> feature-admin-code
     },
     {
       title: "Ngày tạo",
@@ -287,6 +269,7 @@ const CustomerSchedule = () => {
         ),
     },
   ];
+
   const handleInputChange = (name, value) => {
     setFormHandle((prev) => ({
       ...prev,

@@ -7,14 +7,18 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StatusCustomerSchedule {
 
-<<<<<<< HEAD
     pending,
     confirmed,
     cancelled,
     finished,
-=======
-    pending, //Đã đăng ký
-    confirmed, // hoãn
-    cancelled, // hoàn thành tiêm
->>>>>>> feature-admin-code
+    injected,
+    not_injected;
+    public static StatusCustomerSchedule getStatusCustomerSchedule( String value ) {
+        for (StatusCustomerSchedule status : StatusCustomerSchedule.values()) {
+            if (status.name().equalsIgnoreCase(value)) {
+                return status;
+            }
+        }
+        return null;
+    }
 }

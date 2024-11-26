@@ -65,11 +65,7 @@ function ThanhCong(){
                     <p className='notithanhcong'>Cảm ơn bạn đã tin tưởng dịch vụ của chúng tôi.</p>
                     <p className='notithanhcong'>Hãy kiểm tra thông tin lịch đặt của bạn trong mục tài khoản</p>
                     <br/><br/>
-<<<<<<< HEAD
                     <a href="tai-khoan#lichtiem" class="btn btn-danger">Xem lịch sử lịch đặt</a>
-=======
-                    <a href="tai-khoan" class="btn btn-danger">Xem lịch sử lịch đặt</a>
->>>>>>> feature-admin-code
                 </div>
 
                 <div id="thatbai">

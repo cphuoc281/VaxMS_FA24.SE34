@@ -6,9 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -24,21 +26,52 @@ public interface VaccineScheduleRepository extends JpaRepository<VaccineSchedule
             "(select count(cs.id) from customer_schedule cs where cs.vaccine_schedule_id = v.id and cs.status != 'cancelled') )", nativeQuery = true)
     public List<VaccineSchedule> findByVacxin(Long vacxinId, LocalDateTime now);
 
-<<<<<<< HEAD
     @Query("select v from VaccineSchedule v where v.vaccine.name like ?1 and v.endDate > ?2")
     public Page<VaccineSchedule> findByParam(String param, Date now, Pageable pageable);
 
     @Query("select v from VaccineSchedule v where v.vaccine.name like ?1 and v.endDate <= ?2")
     public Page<VaccineSchedule> preFindByParam(String param, Date now, Pageable pageable);
-=======
-    @Query("select v from VaccineSchedule v where v.vaccine.name like ?1 and v.endDate> ?2")
-    public Page<VaccineSchedule> findByParam(String param, LocalDateTime now, Pageable pageable);
-
-    @Query("select v from VaccineSchedule v where v.vaccine.name like ?1 and v.endDate <= ?2")
-    public Page<VaccineSchedule> preFindByParam(String param, LocalDateTime now, Pageable pageable);
->>>>>>> feature-admin-code
 
     @Query("select v from VaccineSchedule v where v.endDate >= ?1 and v.startDate <= ?1 and v.vaccine.id = ?2")
     List<VaccineSchedule> getCenter(Date start, Long vaccineId);
+
+    @Query(value = """
+    SELECT v.*
+    FROM vaccine_schedule v
+    JOIN vaccine vc ON v.vaccine_id = vc.id
+    JOIN centers c ON v.center_id = c.center_id
+    WHERE (:vaccineName IS NULL OR LOWER(vc.name) LIKE LOWER(CONCAT('%', :vaccineName, '%')))
+      AND (:centerName IS NULL OR LOWER(c.center_name) LIKE LOWER(CONCAT('%', :centerName, '%')))
+      AND (:fromDate IS NULL OR v.start_date >= CAST(:fromDate AS date))
+      AND (:toDate IS NULL OR v.end_date <= CAST(:toDate AS date))
+      AND (:status IS NULL
+           OR (:status = 'ACTIVE' AND v.start_date <= CURRENT_DATE AND v.end_date >= CURRENT_DATE)
+           OR (:status = 'INACTIVE' AND v.end_date < CURRENT_DATE)
+           OR (:status = 'UPCOMING' AND v.start_date > CURRENT_DATE))
+    ORDER BY v.start_date DESC
+""",
+            countQuery = """
+    SELECT COUNT(*)
+    FROM vaccine_schedule v
+    JOIN vaccine vc ON v.vaccine_id = vc.id
+    JOIN centers c ON v.center_id = c.center_id
+    WHERE (:vaccineName IS NULL OR LOWER(vc.name) LIKE LOWER(CONCAT('%', :vaccineName, '%')))
+      AND (:centerName IS NULL OR LOWER(c.center_name) LIKE LOWER(CONCAT('%', :centerName, '%')))
+      AND (:fromDate IS NULL OR v.start_date >= CAST(:fromDate AS date))
+      AND (:toDate IS NULL OR v.end_date <= CAST(:toDate AS date))
+      AND (:status IS NULL
+           OR (:status = 'ACTIVE' AND v.start_date <= CURRENT_DATE AND v.end_date >= CURRENT_DATE)
+           OR (:status = 'INACTIVE' AND v.end_date < CURRENT_DATE)
+           OR (:status = 'UPCOMING' AND v.start_date > CURRENT_DATE))
+""",
+            nativeQuery = true)
+    Page<VaccineSchedule> findAdvancedSearch(
+            @Param("vaccineName") String vaccineName,
+            @Param("centerName") String centerName,
+            @Param("fromDate") LocalDate fromDate,
+            @Param("toDate") LocalDate toDate,
+            @Param("status") String status,
+            Pageable pageable
+    );
 
 }

@@ -1,5 +1,6 @@
 package com.web.service;
 
+import com.web.api.VaccineScheduleApi;
 import com.web.entity.Center;
 import com.web.entity.CustomerSchedule;
 import com.web.entity.Vaccine;
@@ -11,6 +12,8 @@ import com.web.repository.VaccineScheduleRepository;
 import com.web.repository.VaccineScheduleTimeRepository;
 import com.web.utils.MailService;
 import com.web.utils.UserUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,16 +23,15 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-<<<<<<< HEAD
 import java.time.Period;
-=======
->>>>>>> feature-admin-code
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Component
 public class VaccineScheduleService {
+    private static final Logger log = LoggerFactory.getLogger(VaccineScheduleApi.class);
+
 
     @Autowired
     private VaccineScheduleRepository vaccineScheduleRepository;
@@ -68,7 +70,6 @@ public class VaccineScheduleService {
 
         if(vaccineSchedule.getIdPreSchedule() != null){
             Optional<VaccineSchedule> vc = vaccineScheduleRepository.findById(vaccineSchedule.getIdPreSchedule());
-<<<<<<< HEAD
             int roundMonth = getRoundedMonthsBetween(vc.get().getStartDate(), vaccineSchedule.getStartDate());
             System.out.println("Khoảng cách tháng: "+roundMonth);
             if(vc.isPresent()){
@@ -85,23 +86,12 @@ public class VaccineScheduleService {
                                         vaccineSchedule.getDescription()
                                 , false, true);
                     }
-=======
-            if(vc.isPresent()){
-                List<CustomerSchedule> list = customerScheduleRepository.findByVaccineSchedule(vc.get().getId());
-                for(CustomerSchedule c : list){
-                    mailService.sendEmail(c.getUser().getEmail(),"Thông báo mũi tiêm tiếp theo",
-                            "Mũi tiêm "+c.getVaccineScheduleTime().getVaccineSchedule().getVaccine().getName()+" đã có lịch tiêm tiếp theo<br>"+
-                            "Thời gian tiêm mũi tiếp theo từ ngày: "+vaccineSchedule.getStartDate()+" đến ngày: "+vaccineSchedule.getEndDate()+"<br>"+
-                            vaccineSchedule.getDescription()
-                            , false, true);
->>>>>>> feature-admin-code
                 }
             }
         }
         return vaccineSchedule;
     }
 
-<<<<<<< HEAD
     public static int getRoundedMonthsBetween(Date startDate, Date endDate) {
         // Chuyển đổi java.sql.Date sang LocalDate
         LocalDate start = startDate.toLocalDate();
@@ -132,8 +122,6 @@ public class VaccineScheduleService {
         return dates;
     }
 
-=======
->>>>>>> feature-admin-code
 
     /*
      * api này dùng để cập nhật lịch tiêm vaccine
@@ -220,11 +208,7 @@ public class VaccineScheduleService {
             param = "";
         }
         param = "%"+param+"%";
-<<<<<<< HEAD
         Page<VaccineSchedule> page = vaccineScheduleRepository.findByParam(param, new Date(System.currentTimeMillis()), pageable);
-=======
-        Page<VaccineSchedule> page = vaccineScheduleRepository.findByParam(param, LocalDateTime.now(), pageable);
->>>>>>> feature-admin-code
         for(VaccineSchedule v : page.getContent()){
             if(customerScheduleRepository.countRegis(v.getId()) < v.getLimitPeople()){
                 v.setInStock(true);
@@ -238,11 +222,7 @@ public class VaccineScheduleService {
             param = "";
         }
         param = "%"+param+"%";
-<<<<<<< HEAD
         Page<VaccineSchedule> page = vaccineScheduleRepository.preFindByParam(param, new Date(System.currentTimeMillis()), pageable);
-=======
-        Page<VaccineSchedule> page = vaccineScheduleRepository.preFindByParam(param, LocalDateTime.now(), pageable);
->>>>>>> feature-admin-code
         return page;
     }
 
@@ -262,4 +242,29 @@ public class VaccineScheduleService {
         list = vaccineScheduleRepository.getCenter(start, vaccineId);
         return list;
     }
+
+    public Page<VaccineSchedule> advancedSearch(
+            String vaccineName,
+            String centerName,
+            LocalDate fromDate,
+            LocalDate toDate,
+            String status,
+            Pageable pageable) {
+
+        log.info("Service Layer - fromDate: {}, toDate: {}, status: {}", fromDate, toDate, status);
+
+        if (fromDate != null && toDate != null && fromDate.isAfter(toDate)) {
+            throw new IllegalArgumentException("Ngày bắt đầu không thể lớn hơn ngày kết thúc");
+        }
+
+        return vaccineScheduleRepository.findAdvancedSearch(
+                vaccineName,
+                centerName,
+                fromDate,
+                toDate,
+                status,
+                pageable
+        );
+    }
+
 }

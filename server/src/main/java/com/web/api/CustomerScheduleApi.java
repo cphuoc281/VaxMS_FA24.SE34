@@ -1,5 +1,6 @@
 package com.web.api;
 
+import com.web.models.UpdateCustomerSchedule;
 import com.web.dto.CustomerScheduleVnpay;
 import com.web.dto.PaymentRequest;
 import com.web.entity.CustomerSchedule;
@@ -85,5 +86,15 @@ public class CustomerScheduleApi {
     public ResponseEntity<?> change(@RequestParam Long id, @RequestParam Long timeId) {
         customerScheduleService.change(id, timeId);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/customer/create-customer-findById-schedule")
+    public ResponseEntity<?> createCustomerFindByIdSchedule(@RequestBody CreateScheduleGuestRequest request) {
+        return new ResponseEntity<>(customerScheduleService.createScheduleGuest(request),HttpStatus.OK);
+    }
+
+    @PostMapping("/customer/update-customer-schedule")
+    public ResponseEntity<?> createCustomerFindByIdSchedule(@RequestBody UpdateCustomerSchedule request) {
+        return new ResponseEntity<>(customerScheduleService.updateCustomerSchedule(request),HttpStatus.OK);
     }
 }

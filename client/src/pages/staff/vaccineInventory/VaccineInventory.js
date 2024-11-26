@@ -61,7 +61,10 @@ const VaccineInventory = () => {
         setTotal(res.data.totalElements);
         setCurrentPage(res.data.pageable.pageNumber + 1);
         setPageSize(res.data.size);
-        const dataVacines = res.data.content;
+        const dataVacines = res.data.content.map((item) => ({
+          ...item,
+          expiryDate: item.expiryDate, // Đảm bảo API trả về trường expiryDate
+        }));
         setVaccineInventorys(
           updatedList(dataVacines, formSearch.page, formSearch.limit)
         );
@@ -203,7 +206,7 @@ const VaccineInventory = () => {
       dataIndex: "createdDate",
       key: "createdDate",
       align: "center",
-      render: (date) => dayjs(date).format("HH:mm:ss DD-MM-YYYY"),
+      render: (date) => dayjs(date).format(" DD-MM-YYYY"),
     },
     {
       title: "Trạng Thái",
@@ -217,6 +220,15 @@ const VaccineInventory = () => {
           </Tag>
         );
       },
+    },
+    {
+      title: "Ngày hết hạn",
+      dataIndex: "expiryDate",
+      key: "expiryDate",
+      align: "center",
+      render: (date) => {
+        return date ? dayjs(date).format("DD-MM-YYYY") : "01/01/2026";
+      }
     },
     {
       title: "Hành động",

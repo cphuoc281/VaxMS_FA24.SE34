@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useEffect } from "react";
 import Headers from "../header/header";
 import Footer from "../footer/footer";
@@ -68,27 +67,8 @@ function DefaultLayout({ children }) {
                 agent-id="b47d8d40-5fd9-4103-8670-c42e1ae86fbb"
                 language-code="vi"
             ></df-messenger>
-=======
-import Headers from "../header/header";
-import Footer from "../footer/footer"
-import ChatFrame from "../../../pages/customer/chat"
-
-function DefaultLayout({children}){
-    return (
-        <div>
-            <Headers/>
-            <div className="main-content-web">
-            {children}
-            </div>
-            <Footer/>
-            <ChatFrame/>
->>>>>>> feature-admin-code
         </div>
     );
 }
 
-<<<<<<< HEAD
 export default DefaultLayout;
-=======
-export default DefaultLayout;
->>>>>>> feature-admin-code

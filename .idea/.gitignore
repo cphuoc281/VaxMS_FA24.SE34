@@ -3,7 +3,6 @@
 /workspace.xml
 # Editor-based HTTP Client requests
 /httpRequests/
-<<<<<<< HEAD
 # Bỏ qua các file trong thư mục target
 /server/target/
 # Bỏ qua file cấu hình IDE
@@ -11,5 +10,3 @@
 .idea/
 # Ignore workspace.xml file
 server/.idea/workspace.xml
-=======
->>>>>>> feature-admin-code
