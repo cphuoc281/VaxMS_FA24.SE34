@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query(value = "select u from User u where u.email = ?1")
     Optional<User> findByUsername(String username);
@@ -25,6 +25,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select u.* from account u where u.account_id = ?1", nativeQuery = true)
     Optional<User> findById(Long id);
 
+
     @Query(value = "select u from User u where u.activationKey = ?1 and u.email = ?2")
     Optional<User> getUserByActivationKeyAndEmail(String key, String email);
 
@@ -33,5 +34,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE u.authorities.id = :authorityId")
     List<User> findEmployeesByAuthority(@Param("authorityId") Long authorityId);
-
 }

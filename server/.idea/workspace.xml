@@ -5,87 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65592ccc-93a4-45c1-bcb2-c0568ed54dd6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/web/models/UpdateCustomerSchedule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/web/service/EmailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/untitled/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../client/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/layout/admin/Layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/admin/Layout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/layout/customer/defaultLayout/defaultLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/customer/defaultLayout/defaultLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/layout/customer/header/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/customer/header/header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/layout/customer/styles/styleuser.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/customer/styles/styleuser.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/layout/staff/Layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/staff/Layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/layout/staff/layout.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/staff/layout.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/admin/addlichtiemchung.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/admin/addlichtiemchung.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/admin/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/admin/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/customer/capnhatthongtin.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/customer/capnhatthongtin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/pages/customer/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/customer/chat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/customer/dangkytiemchung.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/customer/dangkytiemchung.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/customer/lichdadangky.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/customer/lichdadangky.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/customer/taikhoan.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/customer/taikhoan.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/customer/thanhcong.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/customer/thanhcong.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/customer/thongbao.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/customer/thongbao.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/customer/xacnhandangky.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/customer/xacnhandangky.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/public/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/public/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/public/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/public/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/chat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/customerSchedule/CustomerSchedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/customerSchedule/CustomerSchedule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/vaccine/modal/modalHandle.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/vaccine/modal/modalHandle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/vaccine/vaccine.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/vaccine/vaccine.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/vaccineInventory/VaccineInventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/vaccineInventory/VaccineInventory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/services/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/services/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/services/staff/CustomerSchedule.api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/services/staff/CustomerSchedule.api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/services/staff/VaccineSchedule.api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/services/staff/VaccineSchedule.api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/staff/staffChat.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/staff/staffChat.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/CustomerProfileApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/CustomerProfileApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/CustomerScheduleApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/CustomerScheduleApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/DoctorApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/DoctorApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/NurseApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/NurseApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/UserApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/UserApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/api/VaccineScheduleApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/api/VaccineScheduleApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/entity/Authority.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/entity/Authority.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/entity/CustomerSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/entity/CustomerSchedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/entity/Vaccine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/entity/Vaccine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/enums/StatusCustomerSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/enums/StatusCustomerSchedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/models/CreateVaccineRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/models/CreateVaccineRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/models/CreateVaccineResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/models/CreateVaccineResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/models/ListCustomerScheduleRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/models/ListCustomerScheduleRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/models/ListCustomerScheduleResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/models/ListCustomerScheduleResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/models/ListVaccineRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/models/ListVaccineRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/models/UpdateVaccineRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/models/UpdateVaccineRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/models/UpdateVaccineResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/models/UpdateVaccineResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/AuthorityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/AuthorityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/CenterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/CenterRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/CustomerProfileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/CustomerProfileRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/CustomerScheduleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/CustomerScheduleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/DoctorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/DoctorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/NurseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/NurseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/dto/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/dto/ErrorResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/VaccineScheduleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/VaccineScheduleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/repository/VaccineScheduleTimeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/repository/VaccineScheduleTimeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/CustomerProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/CustomerProfileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/CustomerScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/CustomerScheduleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/DoctorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/NurseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/NurseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineScheduleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineScheduleTimeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineScheduleTimeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/service/VaccineService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/web/utils/MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/web/utils/MailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vaxms-update.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vaxms.iml" beforeDir="false" afterPath="$PROJECT_DIR$/vaxms.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vaxms.sql" beforeDir="false" afterPath="$PROJECT_DIR$/vaxms.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/environment.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/environment.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
