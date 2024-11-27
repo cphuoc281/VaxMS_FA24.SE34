@@ -13,12 +13,12 @@ import {
   uploadSingleFile,
 } from "../../services/request";
 const StaffChat = () => {
-  const [message, setMessage] = useState("");
-  const [chatMessages, setChatMessages] = useState([]);
+  // const [message, setMessage] = useState("");
+  // const [chatMessages, setChatMessages] = useState([]);
   const [client, setClient] = useState(null);
   const [itemUser, setItemUser] = useState([]);
   const [itemChat, setItemChat] = useState([]);
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const [email, setEmail] = useState(null);
   const [newMessagesCount, setNewMessagesCount] = useState({});
 
@@ -73,16 +73,16 @@ const StaffChat = () => {
             }
           }
         });
-        stompClient.subscribe("/users/queue/seen", (msg) => {
-          const senderId = msg.headers.sender;
-          var uls = new URL(document.URL);
-          var currentUserId = uls.searchParams.get("user");
+        // stompClient.subscribe("/users/queue/seen", (msg) => {
+        //   const senderId = msg.headers.sender;
+        //   var uls = new URL(document.URL);
+        //   var currentUserId = uls.searchParams.get("user");
 
-          if (senderId === currentUserId) {
-            // Thêm trạng thái "Đã xem" vào giao diện
-            addSeenStatusToMessages();
-          }
-        });
+        //   if (senderId === currentUserId) {
+        //     // Thêm trạng thái "Đã xem" vào giao diện
+        //     addSeenStatusToMessages();
+        //   }
+        // });
 
       },
       connectHeaders: {
@@ -141,17 +141,17 @@ const StaffChat = () => {
     }
   };
 
-  function addSeenStatusToMessages() {
-    // Giả sử bạn thêm lớp CSS 'seen' vào tin nhắn cuối cùng của bạn
-    var messages = document.querySelectorAll(`.${styles.adminchat}`);
-    if (messages.length > 0) {
-      var lastMessage = messages[messages.length - 1];
-      var seenElement = document.createElement("span");
-      seenElement.className = styles.seenStatus;
-      seenElement.textContent = "Đã xem";
-      lastMessage.appendChild(seenElement);
-    }
-  }
+  // function addSeenStatusToMessages() {
+  //   // Giả sử bạn thêm lớp CSS 'seen' vào tin nhắn cuối cùng của bạn
+  //   var messages = document.querySelectorAll(`.${styles.adminchat}`);
+  //   if (messages.length > 0) {
+  //     var lastMessage = messages[messages.length - 1];
+  //     var seenElement = document.createElement("span");
+  //     seenElement.className = styles.seenStatus;
+  //     seenElement.textContent = "Đã xem";
+  //     lastMessage.appendChild(seenElement);
+  //   }
+  // }
 
   function append() {
     const newChatElement = document.createElement("div");
@@ -160,12 +160,12 @@ const StaffChat = () => {
     const messageContent = document.createElement("p");
     messageContent.textContent = document.getElementById("contentmess").value;
 
-    const messageTime = document.createElement("span");
-    messageTime.className = "messageTime"; // Sử dụng tên class toàn cục
-    messageTime.textContent = new Date().toLocaleString();
+    // const messageTime = document.createElement("span");
+    // messageTime.className = "messageTime"; // Sử dụng tên class toàn cục
+    // messageTime.textContent = new Date().toLocaleString();
 
     newChatElement.appendChild(messageContent);
-    newChatElement.appendChild(messageTime);
+    // newChatElement.appendChild(messageTime);
 
     document.getElementById("listchatadmin").appendChild(newChatElement);
     var scroll_to_bottom = document.getElementById("listchatadmin");
@@ -201,11 +201,11 @@ const StaffChat = () => {
       return newState;
     });
 
-    // Gửi thông báo "Đã xem" tới server
-    client.publish({
-      destination: "/app/seen/" + u.id,
-      body: "", // Nội dung có thể để trống
-    });
+    // // Gửi thông báo "Đã xem" tới server
+    // client.publish({
+    //   destination: "/app/seen/" + u.id,
+    //   body: "", // Nội dung có thể để trống
+    // });
 
     // Tải tin nhắn và cập nhật giao diện
     window.location.href = "chat?user=" + u.id + "&email=" + u.email;
@@ -225,12 +225,12 @@ const StaffChat = () => {
     const messageContent = document.createElement("p");
     messageContent.textContent = mess;
 
-    const messageTime = document.createElement("span");
-    messageTime.className = "messageTime";
-    messageTime.textContent = new Date().toLocaleString();
+    // const messageTime = document.createElement("span");
+    // messageTime.className = "messageTime";
+    // messageTime.textContent = new Date().toLocaleString();
 
     newChatElement.appendChild(messageContent);
-    newChatElement.appendChild(messageTime);
+    // newChatElement.appendChild(messageTime);
 
     document.getElementById("listchatadmin").appendChild(newChatElement);
     var scroll_to_bottom = document.getElementById("listchatadmin");
