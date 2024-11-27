@@ -87,7 +87,7 @@ function Header({ children }) {
                 <div class="listmenumain">
                     <a href="index">Trang chủ</a>
                     <a href="user">Tài khoản</a>
-                    <a href="category">Danh mục</a>
+                    {/* <a href="category">Danh mục</a> */}
                     <a href="nhanvien">Lịch nhân viên</a>
                     <a href="lich-tiem-chung">Lịch tiêm chủng</a>
                     <a href="khach-hang">Quản lý khách hàng</a>
