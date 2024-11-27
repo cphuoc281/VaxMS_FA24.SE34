@@ -36,7 +36,7 @@ return(
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   </ul>
                   <div class="d-flex">
-                      <a href="" class="itemheader itemtopheader"><i class="fa fa-map-marker"></i> Tìm trung tâm VNVC</a>
+                      {/* <a href="" class="itemheader itemtopheader"><i class="fa fa-map-marker"></i> Tìm trung tâm</a> */}
                       <a href="/dang-ky-tiem-chung" class="itemheader itemtopheader"><i class="fa fa-calendar"></i> Đăng ký tiêm</a>
                       <a href="tel:02871026595" class="itemheader itemtopheader hotlineheader">Hotline: 028 7102 6595</a>
                       {auth}
