@@ -55,15 +55,25 @@ function ModalHandle({ modalHandle, setModalHandle, setVaccines }) {
             formHandle.price &&
             formHandle.vaccineTypeId &&
             formHandle.manufacturerId &&
-            formHandle.ageGroupId;
+            formHandle.ageGroupId &&
+            formHandle.description &&
+            formHandle.inventory > 0;
 
         if (!isValid) {
             const errors = {
                 name: !formHandle.name ? "Trường bắt buộc" : "",
                 price: !formHandle.price ? "Trường bắt buộc" : "",
+                inventory: !formHandle.inventory
+                ? "Số lượng phải lớn hơn 0"
+                : formHandle.inventory <= 0
+                ? "Số lượng phải là số dương"
+                : "",
+                description: !formHandle.description ? "Trường bắt buộc" : "",
                 vaccineTypeId: !formHandle.vaccineTypeId ? "Trường bắt buộc" : "",
                 manufacturerId: !formHandle.manufacturerId ? "Trường bắt buộc" : "",
                 ageGroupId: !formHandle.ageGroupId ? "Trường bắt buộc" : "",
+                
+
             };
             await setFormErrors(errors);
             return;

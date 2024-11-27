@@ -105,6 +105,7 @@ public class VaccineService {
                 .createdDate(e.getCreatedDate())
                 .vaccineType(e.getVaccineType())
                 .manufacturer(e.getManufacturer())
+                .expirationDate(e.getExpirationDate())
                 .ageGroup(e.getAgeGroup())
                 .build()
         ).toList();

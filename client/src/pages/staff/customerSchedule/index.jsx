@@ -111,7 +111,7 @@ export default function CustomerScheduleView() {
         { label: "Tất cả", value: "" },
         { label: "Đang diễn ra", value: "ACTIVE" },
         { label: "Đã kết thúc", value: "INACTIVE" },
-        { label: "Chưa bắt đầu", value: "UPCOMING" }, // Thêm trạng thái "Chưa bắt đầu"
+        { label: "Chưa bắt đầu", value: "UPCOMING" }, 
     ];
 
     const columns = [

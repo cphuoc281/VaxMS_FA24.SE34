@@ -2,6 +2,7 @@ import { axios } from "./Vaccine.api";
 
 export class CustomerScheduleApi {
   static customerSchedules = (data) => {
+    console.log("Dữ liệu gửi lên server:", data);
     return axios({
       method: "POST",
       url: `/api/customer-schedule/customer/list`,

@@ -31,6 +31,8 @@ public class ListVaccineResponse {
 
     private Timestamp createdDate;
 
+    private Timestamp expirationDate;
+
     private String status;
 
     private VaccineType vaccineType;

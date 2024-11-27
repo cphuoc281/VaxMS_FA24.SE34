@@ -1,14 +1,11 @@
 package com.web.service;
+import com.web.enums.*;
 import com.web.models.UpdateCustomerSchedule;
 import com.web.config.Environment;
 import com.web.constants.LogUtils;
 import com.web.dto.CustomerScheduleVnpay;
 import com.web.dto.PaymentRequest;
 import com.web.entity.*;
-import com.web.enums.CustomerSchedulePay;
-import com.web.enums.PayType;
-import com.web.enums.StatusCustomerSchedule;
-import com.web.enums.UserType;
 import com.web.exception.MessageException;
 import com.web.models.ApproveCustomerScheduleRequest;
 import com.web.models.ApproveCustomerScheduleResponse;
@@ -33,6 +30,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +44,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.Predicate;
+import java.security.SecureRandom;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
@@ -65,7 +65,8 @@ public class CustomerScheduleService {
 
     @Autowired
     private UserUtils userUtils;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private PaymentRepository paymentRepository;
 
@@ -160,6 +161,7 @@ public class CustomerScheduleService {
                 {
                     Optional<User> user = userRepository.findById(e.getUser().getId());
                     Optional<VaccineScheduleTime> vaccineScheduleTime = vaccineScheduleTimeRepository.findById(e.getVaccineScheduleTime().getId());
+
                     return ListCustomerScheduleResponse.builder()
                             .id(e.getId())
                             .status(e.getStatusCustomerSchedule().name())
@@ -168,6 +170,9 @@ public class CustomerScheduleService {
                             .vaccineScheduleTime(vaccineScheduleTime.orElse(null))
                             .user(user.orElse(null))
                             .note(e.getNote())
+                            .payStatus(e.getCustomerSchedulePay() != null &&
+                                    (e.getCustomerSchedulePay() == CustomerSchedulePay.THANH_TOAN_MOMO ||
+                                            e.getCustomerSchedulePay() == CustomerSchedulePay.THANH_TOAN_VNPAY))
                             .healthStatusAfter(e.getHealthStatusAfter())
                             .healthStatusBefore(e.getHealthStatusBefore())
                             .build();
@@ -199,39 +204,63 @@ public class CustomerScheduleService {
     @Transactional(rollbackFor = Exception.class)
     public CreateScheduleGuestResponse createScheduleGuest(CreateScheduleGuestRequest request) {
         if (ObjectUtils.isEmpty(request)) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Đã có lỗi");
+            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Thông tin đăng ký không hợp lệ");
         }
+
         Optional<User> optionalUser = userRepository.findByEmail(request.getEmail());
+        User user;
+        boolean isNewUser = false;
+
+
+        String generatedPassword = null;
         if (optionalUser.isPresent()) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Email đã tồn tại");
+            user = optionalUser.get();
+        } else {
+            Optional<User> optionalUserPhone = userRepository.findByPhoneNumber(request.getPhone());
+            if (optionalUserPhone.isPresent()) {
+                throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Số điện thoại đã được sử dụng");
+            }
+
+            isNewUser = true;
+            generatedPassword = generateRandomPassword();
+            String encodedPassword = passwordEncoder.encode(generatedPassword);
+
+            user = User.builder()
+                    .email(request.getEmail())
+                    .createdDate(new Date(System.currentTimeMillis()))
+                    .phoneNumber(request.getPhone())
+                    .authorities(authorityRepository.findById(4L).get())
+                    .password(encodedPassword)
+                    .userType(UserType.standard)
+                    .actived(true)
+                    .build();
+            userRepository.save(user);
         }
-        Optional<User> optionalUserPhone = userRepository.findByPhoneNumber(request.getPhone());
-        if (optionalUserPhone.isPresent()) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Số điện thoại đã tồn tại");
-        }
-        User user = User.builder()
-                .email(request.getEmail())
-                .createdDate(new Date(System.currentTimeMillis()))
-                .phoneNumber(request.getPhone())
-                .password("123")
-                .userType(UserType.standard)
-                .build();
-        userRepository.save(user);
-        Optional<VaccineScheduleTime> optionalVaccineScheduleTime = vaccineScheduleTimeRepository.findById(request.getVaccineScheduleId());
+
+        VaccineScheduleTime vaccineScheduleTime = findAvailableVaccineScheduleTime(request.getVaccineScheduleId());
 
         CustomerSchedule customerSchedule = CustomerSchedule.builder()
                 .statusCustomerSchedule(StatusCustomerSchedule.pending)
                 .fullName(request.getFullName())
-                .vaccineScheduleTime(optionalVaccineScheduleTime.orElse(null))
+                .vaccineScheduleTime(vaccineScheduleTime)
                 .phone(request.getPhone())
+                .customerSchedulePay(CustomerSchedulePay.CHUA_THANH_TOAN)
                 .address(request.getAddress())
                 .createdDate(new Timestamp(System.currentTimeMillis()))
                 .user(user)
                 .build();
         customerScheduleRepository.save(customerSchedule);
-        sendEmailToCustomer(customerSchedule);
+
+        sendScheduleAndAccountNotificationEmail(
+                user,
+                isNewUser,
+                generatedPassword,
+                customerSchedule,
+                vaccineScheduleTime
+        );
+
         return CreateScheduleGuestResponse.builder()
-                .vaccineScheduleTime(optionalVaccineScheduleTime.orElse(null))
+                .vaccineScheduleTime(vaccineScheduleTime)
                 .createdDate(customerSchedule.getCreatedDate())
                 .fullName(customerSchedule.getFullName())
                 .id(customerSchedule.getId())
@@ -246,7 +275,7 @@ public class CustomerScheduleService {
         }
         Optional<CustomerSchedule> optionalVaccineSchedule = customerScheduleRepository.findById(request.getCustomerScheduleId());
         if (ObjectUtils.isEmpty(optionalVaccineSchedule)) {
-            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Lịch tiêm cảu khách không tồn tại");
+            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Lịch tiêm của khách không tồn tại");
         }
         CustomerSchedule customerSchedule = optionalVaccineSchedule.get();
         customerSchedule.setStatusCustomerSchedule(request.getStatus().equals("confirmed") ? StatusCustomerSchedule.confirmed : StatusCustomerSchedule.cancelled);
@@ -288,6 +317,96 @@ public class CustomerScheduleService {
             throw new RuntimeException(e);
         }
     }
+//    private VaccineScheduleTime findOrCreateVaccineScheduleTime(Long vaccineScheduleId) {
+//        VaccineScheduleTime vaccineScheduleTime = vaccineScheduleTimeRepository.findFirstByVaccineScheduleId(vaccineScheduleId);
+//        if (vaccineScheduleTime == null) {
+//            VaccineSchedule vaccineSchedule = vaccineScheduleRepository.findById(vaccineScheduleId)
+//                    .orElseThrow(() -> new MessageException(HttpStatus.BAD_REQUEST.value(), "Không tìm thấy lịch tiêm"));
+//
+//            // Tạo khung giờ sáng
+//            vaccineScheduleTime = createVaccineScheduleTime(vaccineSchedule, "08:00:00", "12:00:00");
+//
+//            // Tạo khung giờ chiều
+//            createVaccineScheduleTime(vaccineSchedule, "13:00:00", "17:00:00");
+//        }
+//        return vaccineScheduleTime;
+//    }
+    private VaccineScheduleTime createVaccineScheduleTime(VaccineSchedule vaccineSchedule, String startTime, String endTime) {
+        VaccineScheduleTime scheduleTime = new VaccineScheduleTime();
+        scheduleTime.setInjectDate(new Date(System.currentTimeMillis()));
+        scheduleTime.setStart(Time.valueOf(startTime));
+        scheduleTime.setEnd(Time.valueOf(endTime));
+        scheduleTime.setLimitPeople(100);
+        scheduleTime.setVaccineSchedule(vaccineSchedule);
+        return vaccineScheduleTimeRepository.save(scheduleTime);
+    }
+    private void sendScheduleAndAccountNotificationEmail(
+            User user,
+            boolean isNewUser,
+            String generatedPassword,
+            CustomerSchedule customerSchedule,
+            VaccineScheduleTime vaccineScheduleTime) {
+
+        String subject = "Thông Báo Lịch Tiêm Và Tài Khoản";
+        StringBuilder emailBody = new StringBuilder();
+
+        emailBody.append("Kính chào ").append(customerSchedule.getFullName()).append(",\n\n");
+
+        if (isNewUser) {
+            emailBody.append("Tài khoản của bạn đã được tạo thành công.\n")
+                    .append("Thông tin đăng nhập:\n")
+                    .append("Tài khoản: ").append(user.getEmail()).append("\n")
+                    .append("Mật khẩu: ").append(generatedPassword).append("\n\n");
+        }
+
+        emailBody.append("Thông tin lịch tiêm:\n")
+                .append("Ngày tiêm: ").append(vaccineScheduleTime.getInjectDate()).append("\n")
+                .append("Thời gian: Từ ").append(vaccineScheduleTime.getStart())
+                .append(" đến ").append(vaccineScheduleTime.getEnd()).append("\n")
+                .append("Trạng thái: Đang chờ xác nhận\n\n")
+                .append("Vui lòng đăng nhập để xem chi tiết lịch tiêm.");
+
+        mailService.sendEmail(
+                user.getEmail(),
+                subject,
+                emailBody.toString(),
+                false,  // isMultipart
+                false   // isHtml
+        );
+    }
+
+    private String generateRandomPassword() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
+        StringBuilder password = new StringBuilder();
+        SecureRandom random = new SecureRandom();
+
+        for (int i = 0; i < 12; i++) {
+            password.append(characters.charAt(random.nextInt(characters.length())));
+        }
+
+        return password.toString();
+    }
+
+
+    private VaccineScheduleTime findAvailableVaccineScheduleTime(Long vaccineScheduleId) {
+        List<VaccineScheduleTime> availableSlots = vaccineScheduleTimeRepository.findAllByVaccineScheduleId(vaccineScheduleId);
+
+        if (availableSlots == null || availableSlots.isEmpty()) {
+            throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Lịch tiêm này chưa cập nhập slot.");
+        }
+
+        // Kiểm tra từng slot để tìm slot còn chỗ
+        for (VaccineScheduleTime slot : availableSlots) {
+            Long currentRegistrations = customerScheduleRepository.countByVaccineScheduleTimeId(slot.getId());
+            if (currentRegistrations < slot.getLimitPeople()) {
+                return slot; // Slot còn chỗ, trả về slot này
+            }
+        }
+
+        // Nếu không tìm được slot nào còn chỗ
+        throw new MessageException(HttpStatus.BAD_REQUEST.value(), "Tất cả các slot trong lịch tiêm đã hết chỗ.");
+    }
+
 
     public CustomerSchedule createNotPay(CustomerSchedule customerSchedule) {
         CustomerSchedule result = save(customerSchedule, null, null);

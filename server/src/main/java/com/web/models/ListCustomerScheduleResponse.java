@@ -1,5 +1,6 @@
 package com.web.models;
 
+import com.web.entity.Payment;
 import com.web.entity.User;
 import com.web.entity.VaccineSchedule;
 import com.web.entity.VaccineScheduleTime;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,4 +29,5 @@ public class ListCustomerScheduleResponse {
     private String fullName;
     private String healthStatusBefore;
     private String healthStatusAfter;
+
 }

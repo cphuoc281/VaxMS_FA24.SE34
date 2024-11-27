@@ -2,6 +2,7 @@ package com.web.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.web.enums.CustomerSchedulePay;
+import com.web.enums.PayStatus;
 import com.web.enums.StatusCustomerSchedule;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.mail.MailSessionDefinition;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -43,7 +45,9 @@ public class CustomerSchedule {
     private String healthStatusAfter;
 
     private Integer counterChange;
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "pay_status")
+    private PayStatus payStatus;
     @Enumerated(EnumType.STRING)
     private CustomerSchedulePay customerSchedulePay;
 
@@ -58,5 +62,6 @@ public class CustomerSchedule {
     @ManyToOne
     @JoinColumn(name = "vaccine_schedule_time_id")
     private VaccineScheduleTime vaccineScheduleTime;
+
 
 }

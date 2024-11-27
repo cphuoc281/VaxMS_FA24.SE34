@@ -367,6 +367,8 @@
     /* This ensures the modal doesn't exceed 90% of the viewport height */
     overflow-y: auto;
     /* Add scroll for longer content if needed */
+    margin-left: -170px;
+    width: 1000px;
 }
 
 .login-container {

@@ -17,6 +17,7 @@ public class ListVaccineRequest {
     private Integer price;
     private String status;
     private String manufacturer;
+
     private int page;
     private int limit;
 

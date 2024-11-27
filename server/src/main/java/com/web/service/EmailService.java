@@ -11,6 +11,8 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
+
+
     public void sendVaccinationScheduleNotification(String to, String customerName, String appointmentDate, String username, String password) {
         String subject = "Thông báo lịch tiêm chủng";
         String body = "Xin chào " + customerName + ",\n\n"

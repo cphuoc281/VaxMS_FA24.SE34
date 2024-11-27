@@ -36,4 +36,6 @@ public class Payment {
     @ManyToOne
     @JoinColumn(name = "created_by")
     private User createdBy;
+
+
 }

@@ -207,11 +207,7 @@ CREATE TABLE `customer_profile` (
   `contact_relationship` varchar(50) NOT NULL,
   `contact_phone` varchar(15) NOT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
-<<<<<<< HEAD
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-=======
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
->>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `customer_profile`

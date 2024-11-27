@@ -1,4 +1,4 @@
-import {handleChangePass} from '../../services/auth'
+import { handleChangePass } from '../../services/auth'
 import lich from '../../assest/images/lich.png'
 import avatar from '../../assest/images/user.svg'
 import { useState, useEffect } from 'react'
@@ -7,114 +7,83 @@ function Header({ children }) {
     const [isCssLoaded, setCssLoaded] = useState(false);
     useEffect(() => {
         import('../admin/layout.scss').then(() => setCssLoaded(true));
-        getDateTime();
     }, []);
-    function getDateTime() {
-        var now = new Date();
-        var year = now.getFullYear();
-        var month = now.getMonth() + 1;
-        var day = now.getDate();
-        var hour = now.getHours();
-        var minute = now.getMinutes();
-        var second = now.getSeconds(); //
-        var a = 0;
-        //
-        if (month.toString().length == 1) {
-            month = '0' + month;
-        }
-        if (day.toString().length == 1) {
-            day = '0' + day;
-        }
-        if (hour.toString().length == 1) {
-            hour = '0' + hour;
-        }
-        if (minute.toString().length == 1) {
-            minute = '0' + minute;
-        }
-        if (second.toString().length == 1) {
-            second = '0' + second;
-        }
-        var dateTime = year + '/' + month + '/' + day + ' ' + hour + ':' +
-            minute + ':' + second;
-        return dateTime;
-    }
-    setInterval(function () {
-        var currentTime = getDateTime();
-        try {
-            document.getElementById("digital-clock").innerHTML = currentTime;
-        } catch (error) {
 
-        }
-    }, 1000);
 
-    var date = new Date();
-
-    var current_day = date.getDay();
-
-    var day_name = '';
-
-    switch (current_day) {
-        case 0:
-            day_name = "Chủ nhật";
-            break;
-        case 1:
-            day_name = "Thứ hai";
-            break;
-        case 2:
-            day_name = "Thứ ba";
-            break;
-        case 3:
-            day_name = "Thứ tư";
-            break;
-        case 4:
-            day_name = "Thứ năm";
-            break;
-        case 5:
-            day_name = "Thứ sáu";
-            break;
-        case 6:
-            day_name = "Thứ bảy";
-    }
-    if (!isCssLoaded) {
-        return <></>
-    }
     return (
         <>
-            <div class="navleft" id="navleft">
-                <div class="divroot">
-                    <h3>Quản trị</h3>
+            {/* Left Navigation Bar */}
+            <div className="navleft">
+                <div className="divroot">
+                    <img src={avatar} alt="Avatar" className="admin-avatar" />
+                    <div className="name-status">
+                        <h4>Admin</h4>
+                        <span className="online-status">
+                            <i className="fa fa-circle"></i> Online
+                        </span>
+                    </div>
                 </div>
-                <div class="listmenumain">
-                    <a href="index">Trang chủ</a>
-                    <a href="user">Tài khoản</a>
-                    <a href="category">Danh mục</a>
-                    <a href="nhanvien">Lịch nhân viên</a>
-                    <a href="lich-tiem-chung">Lịch tiêm chủng</a>
-                    <a href="khach-hang">Quản lý khách hàng</a>
-                    <a href="nhan-vien">Quản lý bác sỹ, y tá</a>
-                    <a href="#" onClick={() => logout()}>Đăng xuất</a>
+                <div className="listmenumain">
+                    <a href="#">
+                        <i className="fa fa-home"></i> Trang chủ
+                    </a>
+                    <a href="user">
+                        <i className="fa fa-user"></i> Quản lí quyền
+                    </a>
+                    <a href="#">
+                        <i className="fa fa-list"></i> Danh mục
+                    </a>
+                    <a href="nhanvien">
+                        <i className="fa fa-calendar"></i> Lịch nhân viên
+                    </a>
+                    <a href="lich-tiem-chung">
+                        <i className="fa fa-calendar-check-o"></i> Lịch tiêm chủng
+                    </a>
+                    <a href="khach-hang">
+                        <i className="fa fa-users"></i> Quản lý khách hàng
+                    </a>
+                    <a href="nhan-vien">
+                        <i className="fa fa-user-md"></i> Quản lý bác sỹ, y tá
+                    </a>
+                    <a href="#" onClick={() => logout()}>
+                        <i className="fa fa-sign-out"></i> Đăng xuất
+                    </a>
                 </div>
             </div>
-            <div class="contentadminweb">
-                <div class="headerwebadmin" id="headerwebadmin">
-                    <div class="lichheader">
-                        <img class="iconlich" src={lich} />
-                        <p class="text-gray fst-italic mb-0">
-                            <p id="digital-clock"></p>
-                        </p>
-                    </div>
-                    <div class="userheader-admin">
-                        <a class="nav-link dropdown-toggle menucha" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="tendangnhap">hieu</span>
-                            <img src={avatar} className="userlogo-admin" />
+
+            {/* Header Section */}
+            <div className="header">
+                <div className="header-left">
+
+                </div>
+                <div className="header-right">
+                    <div className="profile">
+                        <a
+                            className="nav-link dropdown-toggle menucha"
+                            href="#"
+                            id="navbarDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <span className="tendangnhap">Admin</span>
+                            <img src={avatar} className="userlogo-admin" alt="Avatar" />
                         </a>
-                        <ul class="dropdown-menu listitemtk" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" onClick={() => logout()} href="#"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+                        <ul className="dropdown-menu listitemtk" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a className="dropdown-item" onClick={() => logout()} href="#">
+                                    <i className="fa fa-sign-out"></i> Đăng xuất
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
-                <div class="contentmain">
-                    {children}
+            </div>
+
+            {/* Content Section */}
+            <div className="contentadminweb">
+                <div className="contentmain">
+                    <div className="table-section">{children}</div>
                 </div>
             </div>
         </>
@@ -135,7 +104,7 @@ async function checkAdmin() {
 }
 
 
-function logout(){
+function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     window.location.replace('../')
