@@ -266,21 +266,21 @@ $border-color: #dcdcdc;
                 border-radius: 10px;
             }
 
-            :global(.messageTime) {
-                font-size: 12px;
-                color: #999;
-                margin-top: 5px;
-                text-align: right;
-                display: block;
-            }
+            // :global(.messageTime) {
+            //     font-size: 12px;
+            //     color: #999;
+            //     margin-top: 5px;
+            //     text-align: right;
+            //     display: block;
+            // }
 
-            :global(.seenStatus) {
-                font-size: 12px;
-                color: $primary-color;
-                margin-top: 5px;
-                display: block;
-                text-align: right;
-            }
+            // :global(.seenStatus) {
+            //     font-size: 12px;
+            //     color: $primary-color;
+            //     margin-top: 5px;
+            //     display: block;
+            //     text-align: right;
+            // }
         }
 
         /* Chat Footer */
