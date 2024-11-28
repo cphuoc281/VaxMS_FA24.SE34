@@ -3,7 +3,8 @@ import ReactPaginate from 'react-paginate';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
 import { getMethod, postMethodPayload } from '../../services/request';
-import logomini from '../../assest/images/logomini.svg';
+import logomini from '../../assest/images/vaxmslogo3.png'
+
 import momo from '../../assest/images/momo.webp';
 import vnpay from '../../assest/images/vnpay.jpg';
 import {formatMoney} from '../../services/money';

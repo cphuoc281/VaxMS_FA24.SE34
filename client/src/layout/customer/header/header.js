@@ -1,4 +1,4 @@
-import logo from '../../../assest/images/vnvc-logo.png';
+import logo from '../../../assest/images/vaxmslogo3.png';
 import { useState, useEffect } from 'react'
 import {getMethod,getMethodByToken} from '../../../services/request'
 import React, { createContext, useContext } from 'react';

@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
 import { getMethod, postMethodPayload } from '../../services/request';
-import logomini from '../../assest/images/logomini.svg';
+import logomini from '../../assest/images/vaxmslogo3.png'
 
 function DangKyTiem() {
   const [vacxinType, setVacxinType] = useState([]);
@@ -134,7 +134,7 @@ function DangKyTiem() {
           <div className='row'>
             <div className='col-sm-9'>
               <p className='link-head-section'>
-                <a href="https://vnvc.vn/">Trang chủ</a>
+                <a href="/">Trang chủ</a>
                 <span class="separator"> » </span>
                 <span class="last">Đăng ký thông tin tiêm chủng</span>
               </p>

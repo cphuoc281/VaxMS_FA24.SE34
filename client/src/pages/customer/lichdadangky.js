@@ -1,5 +1,6 @@
 import Footer from '../../layout/customer/footer/footer'
-import logomini from '../../assest/images/logomini.svg'
+import logomini from '../../assest/images/vaxmslogo3.png'
+
 import { useState, useEffect } from 'react'
 import { Parser } from "html-to-react";
 import ReactPaginate from 'react-paginate';
