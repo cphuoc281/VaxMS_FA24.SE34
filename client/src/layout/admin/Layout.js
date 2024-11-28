@@ -1,14 +1,14 @@
-import { handleChangePass } from '../../services/auth'
-import lich from '../../assest/images/lich.png'
-import avatar from '../../assest/images/user.svg'
-import { useState, useEffect } from 'react'
+import { handleChangePass } from '../../services/auth';
+import lich from '../../assest/images/lich.png';
+import avatar from '../../assest/images/user.svg';
+import { useState, useEffect } from 'react';
 
 function Header({ children }) {
     const [isCssLoaded, setCssLoaded] = useState(false);
+
     useEffect(() => {
         import('../admin/layout.scss').then(() => setCssLoaded(true));
     }, []);
-
 
     return (
         <>
@@ -48,23 +48,12 @@ function Header({ children }) {
                     <a href="#" onClick={() => logout()}>
                         <i className="fa fa-sign-out"></i> Đăng xuất
                     </a>
-                <div class="listmenumain">
-                    <a href="index">Trang chủ</a>
-                    <a href="user">Tài khoản</a>
-                    {/* <a href="category">Danh mục</a> */}
-                    <a href="nhanvien">Lịch nhân viên</a>
-                    <a href="lich-tiem-chung">Lịch tiêm chủng</a>
-                    <a href="khach-hang">Quản lý khách hàng</a>
-                    <a href="nhan-vien">Quản lý bác sỹ, y tá</a>
-                    <a href="#" onClick={() => logout()}>Đăng xuất</a>
                 </div>
             </div>
 
             {/* Header Section */}
             <div className="header">
-                <div className="header-left">
-
-                </div>
+                <div className="header-left"></div>
                 <div className="header-right">
                     <div className="profile">
                         <a
@@ -104,19 +93,18 @@ async function checkAdmin() {
     var url = 'http://localhost:8080/api/admin/check-role-admin';
     const response = await fetch(url, {
         headers: new Headers({
-            'Authorization': 'Bearer ' + token
-        })
+            'Authorization': 'Bearer ' + token,
+        }),
     });
     if (response.status > 300) {
-        window.location.replace('../')
+        window.location.replace('../');
     }
 }
 
-
 function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    window.location.replace('../')
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.replace('../');
 }
 
 export default Header;

@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65592ccc-93a4-45c1-bcb2-c0568ed54dd6" name="Changes" comment="" />
+    <list default="true" id="65592ccc-93a4-45c1-bcb2-c0568ed54dd6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../client/src/layout/admin/Layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/layout/admin/Layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vaxms.sql" beforeDir="false" afterPath="$PROJECT_DIR$/vaxms.sql" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +48,7 @@
     "JUnit.All in vaxms.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Merging main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/cphuo/OneDrive/Desktop/New folder (11)/VaxMS_FA24.SE34/server",
     "node.js.detected.package.eslint": "true",
@@ -126,7 +129,7 @@
       <updated>1732187291718</updated>
       <workItem from="1732493133207" duration="11838000" />
       <workItem from="1732641804747" duration="824000" />
-      <workItem from="1732671442409" duration="28366000" />
+      <workItem from="1732671442409" duration="28729000" />
     </task>
     <servers />
   </component>
