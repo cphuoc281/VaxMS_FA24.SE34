@@ -48,6 +48,15 @@ function Header({ children }) {
                     <a href="#" onClick={() => logout()}>
                         <i className="fa fa-sign-out"></i> Đăng xuất
                     </a>
+                <div class="listmenumain">
+                    <a href="index">Trang chủ</a>
+                    <a href="user">Tài khoản</a>
+                    {/* <a href="category">Danh mục</a> */}
+                    <a href="nhanvien">Lịch nhân viên</a>
+                    <a href="lich-tiem-chung">Lịch tiêm chủng</a>
+                    <a href="khach-hang">Quản lý khách hàng</a>
+                    <a href="nhan-vien">Quản lý bác sỹ, y tá</a>
+                    <a href="#" onClick={() => logout()}>Đăng xuất</a>
                 </div>
             </div>
 

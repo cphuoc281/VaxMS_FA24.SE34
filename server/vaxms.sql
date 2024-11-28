@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: localhost:3307
--- Thời gian đã tạo: Th9 09, 2024 lúc 09:47 AM
--- Phiên bản máy phục vụ: 8.0.30
--- Phiên bản PHP: 8.1.10
+-- Host: localhost:3307
+-- Generation Time: Nov 27, 2024 at 06:29 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `vaxms`
+-- Database: `vaxms`
 --
 
 -- --------------------------------------------------------
@@ -207,7 +207,11 @@ CREATE TABLE `customer_profile` (
   `contact_relationship` varchar(50) NOT NULL,
   `contact_phone` varchar(15) NOT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+>>>>>>> feature-admin-code
 
 --
 -- Đang đổ dữ liệu cho bảng `customer_profile`
