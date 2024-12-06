@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f0726d01.css",
+    "main.js": "/static/js/main.39095941.js",
+    "static/css/693.766a9a53.chunk.css": "/static/css/693.766a9a53.chunk.css",
+    "static/js/693.fca955ff.chunk.js": "/static/js/693.fca955ff.chunk.js",
+    "static/css/803.2ab81afa.chunk.css": "/static/css/803.2ab81afa.chunk.css",
+    "static/js/803.40e6826a.chunk.js": "/static/js/803.40e6826a.chunk.js",
+    "static/css/92.1aadee1d.chunk.css": "/static/css/92.1aadee1d.chunk.css",
+    "static/js/92.188df86b.chunk.js": "/static/js/92.188df86b.chunk.js",
+    "static/css/632.761f08ec.chunk.css": "/static/css/632.761f08ec.chunk.css",
+    "static/js/632.31023919.chunk.js": "/static/js/632.31023919.chunk.js",
+    "static/js/453.b9351a5e.chunk.js": "/static/js/453.b9351a5e.chunk.js",
+    "static/media/banner2.jpg": "/static/media/banner2.d76a7e903f93ea497473.jpg",
+    "static/media/banner1.png": "/static/media/banner1.8bb68fc7f03c74af096c.png",
+    "static/media/banner.jpg": "/static/media/banner.066a9c473438eecdf461.jpg",
+    "static/media/vnpay.jpg": "/static/media/vnpay.5bbe05a434534fd56b90.jpg",
+    "static/media/logologin.jpg": "/static/media/logologin.c768adf83034ab18183b.jpg",
+    "static/media/dc-tracuu.jpg": "/static/media/dc-tracuu.a935e510937640f74043.jpg",
+    "static/media/vnvc-logo.png": "/static/media/vnvc-logo.f6aa3cb7e140fc0b0aad.png",
+    "static/media/logomini.svg": "/static/media/logomini.800c529421a8e2d5a3f895e0389a9b85.svg",
+    "static/media/user.svg": "/static/media/user.28817a9a525894d99d681c82d5f3a257.svg",
+    "static/media/momo.webp": "/static/media/momo.6267a321e9453a97390e.webp",
+    "index.html": "/index.html",
+    "main.f0726d01.css.map": "/static/css/main.f0726d01.css.map",
+    "main.39095941.js.map": "/static/js/main.39095941.js.map",
+    "693.766a9a53.chunk.css.map": "/static/css/693.766a9a53.chunk.css.map",
+    "693.fca955ff.chunk.js.map": "/static/js/693.fca955ff.chunk.js.map",
+    "803.2ab81afa.chunk.css.map": "/static/css/803.2ab81afa.chunk.css.map",
+    "803.40e6826a.chunk.js.map": "/static/js/803.40e6826a.chunk.js.map",
+    "92.1aadee1d.chunk.css.map": "/static/css/92.1aadee1d.chunk.css.map",
+    "92.188df86b.chunk.js.map": "/static/js/92.188df86b.chunk.js.map",
+    "632.761f08ec.chunk.css.map": "/static/css/632.761f08ec.chunk.css.map",
+    "632.31023919.chunk.js.map": "/static/js/632.31023919.chunk.js.map",
+    "453.b9351a5e.chunk.js.map": "/static/js/453.b9351a5e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f0726d01.css",
+    "static/js/main.39095941.js"
+  ]
+}

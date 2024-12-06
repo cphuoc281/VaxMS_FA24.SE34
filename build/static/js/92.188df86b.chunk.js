@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkbooking_frontend=self.webpackChunkbooking_frontend||[]).push([[92],{7092:(n,e,o)=>{o.r(e),o.d(e,{default:()=>k});const k={}}}]);
+//# sourceMappingURL=92.188df86b.chunk.js.map
